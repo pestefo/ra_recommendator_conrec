@@ -1,3 +1,22 @@
+##Experiment #1: 
+Testing the approach of “Who Will be Interested in? A Contributor Recommendation Approach for Open Source Projects” ([Xunhui Zhang et al., 2017](http://ksiresearchorg.ipage.com/seke/seke17paper/seke17paper_67.pdf)
+
+####Rationale
+This approach is very simple to understand and to implement. It works under three entities: developers, projects and terms. Developers and Projects are in GitHub, and Terms are strings associated to Developers and Projects. In our case, we replace Developers for Users and Projects for Questions, both in the context of the ROS Answers website. Terms are the tags associated to them.
+
+Their approach is based on the idea that: “People who know each other are more likely to collaborate with each other”. I am not sure that this is the case of ROS Answers, but it is worth to test due to the small size of the community. Although simple, It also uses a Content-Based approach by using the tags of questions and users.
+
+Adapting the approach, the formulas look like this:
+
+- Activity(u,q) = {number of answers/comments made by u in q, + 1 if u is the asker of that question} 
+- $$ U_{q} := \{ \forall q \in Q, u \in U, \textrm{Activity}(u,q) > 0\} $$
+- $$ Q_{a} := \{ \forall u \in U, q \in Q, \textrm{Activity}(u,q) > 0\} $$
+
+- $$ R_{uq}(u,q) = \dfrac{\textrm{Activity}(u,q)}{\sum^{U_q}_{i=1} \textrm{Activity}(U_{q}[i],q) } $$ 
+
+- $$ R_{uu}(u_a , u_b) = \dfrac{\sum_{q:\,\{Q_a \cap Q_b\}} R_{uq}(u_a,q) \cdot R_{uq}(u_b,q) }{\sqrt{\sum_{q:\,Q_a} R^2_{uq}(u_a,q) \cdot \sum_{q:\,Q_b} R^2_{uq}(u_b,q) }} $$ 
+
+- $$ \textrm{result}(u_a,q) = \sum_{U_q} R_{uq}(u,q) \cdot R_{uu}(u_a,u) $$ 
 
 
 ```python
