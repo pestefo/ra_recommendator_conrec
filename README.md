@@ -27,7 +27,7 @@ from
 left join ros_question as rq on questions.q_id = rq.id
 ```
 
-### Table for Answering/Commenting activities for certain question
+### Table for Answering/Commenting activities for question _q_=9045
 ```sqlite
 select *
 from
@@ -39,4 +39,35 @@ from
 where q_id = 9045 
 ```
 
+### Table for Questions in which user _u_=3 has participated
 
+```sqlite
+select distinct rqa.ros_question_id 
+from 
+(
+	select *
+	from ros_answer
+	where author = 3
+) as ra
+left join ros_question_answer as rqa 
+	on ra.id = rqa.ros_answer_id
+```
+
+### Table for Questions asked by _u_=3 and there's been any participation
+```sqlite
+select distinct rqa.ros_question_id 
+from 
+(
+	select *
+	from ros_question
+	where author = 3
+) as rq
+left join ros_question_answer as rqa on rq.id = rqa.ros_question_id
+```
+
+### Table for Question asked by _u_=3
+```sqlite
+select * 
+from ros_question
+where author = 3
+```
