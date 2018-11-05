@@ -187,7 +187,7 @@ class ConRec:
 
 
     def example(self):
-
+    
         # Tests for activity_ans_comm
         # print("\nTests: activity_ans_comm")
         # print("-----")
