@@ -16,19 +16,21 @@ class ConRec:
     act_ask = None
     total_activities = None
     r_uq_table = None
+    r_uq_table_file = 'data/r_uq_2.json'
+    db_file = 'data/v1.db'
 
     def __init__(self):
         self.extract_data_from_db()
         # Importing R_uq table
         # r_uq.csv to JSON from: http://www.convertcsv.com/csv-to-json.htm
-        with open('r_uq_2.json') as json_data:
+        with open(r_uq_table_file) as json_data:
             ConRec.r_uq_table = json.load(json_data)
             print("r_uq_table DONE")
         
 
     def extract_data_from_db(self):
         import sqlite3
-        conn = sqlite3.connect("v1.db")
+        conn = sqlite3.connect("db_file")
 
         # Activity: asking and commenting a question
         query_activity_ans_comm = """

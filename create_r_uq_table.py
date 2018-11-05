@@ -5,6 +5,10 @@ act_ask = None
 act_ans_comm = None
 total_activities = None
 
+r_uq_table_file = 'data/r_uq_2.json'
+db_file = 'data/v1.db'
+r_uq_csv_output_file = 'data/r_uq.csv'
+
 
 def main():
 
@@ -53,7 +57,7 @@ def main():
             return 0
         return activity(user, question) / question_activities(question)
 
-    conn = sqlite3.connect("v1.db")
+    conn = sqlite3.connect(db_file)
 
     # Activity: asking and commenting a question
     query_activity_ans_comm = """
@@ -94,13 +98,14 @@ def main():
     questions = all_questions()
     # users = all_users()
     import csv
-    with open('r_uq.csv', 'w', newline='') as csvfile:
+    with open(r_uq_csv_output_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
         for q in questions:
             for u in participants_of_question(q):
                 r = r_uq(u, q)
                 print("u:" + str(u) + "\tq:" + str(q) + "\t" + str(r))
                 writer.writerow([u, q, r])
+
 
 if __name__ == '__main__':
     main()
