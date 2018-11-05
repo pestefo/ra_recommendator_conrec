@@ -7,10 +7,14 @@ from math import sqrt
 from operator import itemgetter, attrgetter
 import json
 
+'''
+NOTES:
+Be careful because some WCFAlgorithm's functions return dataframes as output
+and TBMAAlgorithm's return list of strings!!!
+'''
 
-class ConRec:
 
-    path_to_db = "v1.db"
+class WCFAlgorithm:
 
     act_ans_comm = None
     act_ask = None
@@ -23,14 +27,13 @@ class ConRec:
         self.extract_data_from_db()
         # Importing R_uq table
         # r_uq.csv to JSON from: http://www.convertcsv.com/csv-to-json.htm
-        with open(r_uq_table_file) as json_data:
-            ConRec.r_uq_table = json.load(json_data)
+        with open(WCFAlgorithm.r_uq_table_file) as json_data:
+            WCFAlgorithm.r_uq_table = json.load(json_data)
             print("r_uq_table DONE")
-        
 
     def extract_data_from_db(self):
         import sqlite3
-        conn = sqlite3.connect("db_file")
+        conn = sqlite3.connect(WCFAlgorithm.db_file)
 
         # Activity: asking and commenting a question
         query_activity_ans_comm = """
@@ -63,42 +66,42 @@ class ConRec:
         """
 
         # Running queries
-        ConRec.act_ask = pd.read_sql_query(query_activity_ask, conn)
+        WCFAlgorithm.act_ask = pd.read_sql_query(query_activity_ask, conn)
         print("act_ask DONE")
 
-        ConRec.act_ans_comm = pd.read_sql_query(query_activity_ans_comm, conn)
+        WCFAlgorithm.act_ans_comm = pd.read_sql_query(
+            query_activity_ans_comm, conn)
         print("act_ans_comm DONE")
 
-        ConRec.total_activities = pd.read_sql_query(
+        WCFAlgorithm.total_activities = pd.read_sql_query(
             query_total_activities, conn)
         print("total_activities DONE")
 
         conn.close()
 
-
     def activity_ans_comm(self, user_id, question_id):
-        val = ConRec.act_ans_comm[(ConRec.act_ans_comm['u_id'] == user_id) & (
-            ConRec.act_ans_comm['q_id'] == question_id)]["activity"]
+        val = WCFAlgorithm.act_ans_comm[(WCFAlgorithm.act_ans_comm['u_id'] == user_id) & (
+            WCFAlgorithm.act_ans_comm['q_id'] == question_id)]["activity"]
         if val.empty:
             return 0
         return val.values[0]
 
     def activity_ask(self, user_id, question_id):
-        val = ConRec.act_ask[(ConRec.act_ask['u_id'] == user_id) & (
-            ConRec.act_ask['q_id'] == question_id)]["activity"]
+        val = WCFAlgorithm.act_ask[(WCFAlgorithm.act_ask['u_id'] == user_id) & (
+            WCFAlgorithm.act_ask['q_id'] == question_id)]["activity"]
         if val.empty:
             return 0
         return val.values[0]
 
     def question_activities(self, question_id):
-        return ConRec.total_activities[
-            ConRec.total_activities['ros_question_id'] ==
+        return WCFAlgorithm.total_activities[
+            WCFAlgorithm.total_activities['ros_question_id'] ==
             question_id
         ]["total_activities"].values[0]
 
     def all_users(self,):
-        return pd.concat([ConRec.act_ans_comm['u_id'],
-                          ConRec.act_ask['u_id']]).drop_duplicates()
+        return pd.concat([WCFAlgorithm.act_ans_comm['u_id'],
+                          WCFAlgorithm.act_ask['u_id']]).drop_duplicates()
 
     # Activity
 
@@ -108,21 +111,21 @@ class ConRec:
     # List of participants in a question - U_{q}
 
     def participants_of_question(self, question_id):
-        answerers = ConRec.act_ans_comm[
-            (ConRec.act_ans_comm['q_id'] == question_id) &
-            (ConRec.act_ans_comm['activity'] > 0)
+        answerers = WCFAlgorithm.act_ans_comm[
+            (WCFAlgorithm.act_ans_comm['q_id'] == question_id) &
+            (WCFAlgorithm.act_ans_comm['activity'] > 0)
         ]["u_id"]
-        askers = ConRec.act_ask[(ConRec.act_ask['q_id'] == question_id) &
-                                (ConRec.act_ask['activity'] > 0)]["u_id"]
+        askers = WCFAlgorithm.act_ask[(WCFAlgorithm.act_ask['q_id'] == question_id) &
+                                      (WCFAlgorithm.act_ask['activity'] > 0)]["u_id"]
         return pd.concat([answerers, askers]).drop_duplicates()
 
     def questions_for_user(self, user):
-        questions_answered = ConRec.act_ans_comm[
-            (ConRec.act_ans_comm['u_id'] == user) &
-            (ConRec.act_ans_comm['activity'] > 0)
+        questions_answered = WCFAlgorithm.act_ans_comm[
+            (WCFAlgorithm.act_ans_comm['u_id'] == user) &
+            (WCFAlgorithm.act_ans_comm['activity'] > 0)
         ]["q_id"]
-        questions_asked = ConRec.act_ask[(ConRec.act_ask['u_id'] == user) & (
-            ConRec.act_ask['activity'] > 0)]["q_id"]
+        questions_asked = WCFAlgorithm.act_ask[(WCFAlgorithm.act_ask['u_id'] == user) & (
+            WCFAlgorithm.act_ask['activity'] > 0)]["q_id"]
         return set(pd.concat([questions_answered,
                               questions_asked]).drop_duplicates())
 
@@ -139,7 +142,7 @@ class ConRec:
         # val = r_uq_table[(r_uq_table['u'] ==
         #                   user) & (r_uq_table['q'] == question)]['r']
         try:
-            return ConRec.r_uq_table[str(question)][str(user)]
+            return WCFAlgorithm.r_uq_table[str(question)][str(user)]
         except KeyError as e:
             cause = e.args[0]
             if cause == str(question):
@@ -188,8 +191,9 @@ class ConRec:
         return sorted(results, key=itemgetter(1), reverse=True)[:limit]
 
 
+'''
     def example(self):
-    
+
         # Tests for activity_ans_comm
         # print("\nTests: activity_ans_comm")
         # print("-----")
@@ -260,3 +264,59 @@ class ConRec:
             print(str(ranking))
             for result in ranking:
                 print(str(result[0]) + " - " + str(result[1]))
+'''
+
+
+class TBMAAlgorithm:
+
+    user_tags = None
+    question_tags = None
+    tag_names = None
+    r_ut_table = None
+
+    # Data files
+    user_tags_file = 'data/ros_user_tag.json'
+    question_tags_file = 'data/ros_question_tag.json'
+    tags_file = 'data/ros_tag.json'
+
+    def __init__(self):
+
+        with open(TBMAAlgorithm.user_tags_file) as json_data:
+            TBMAAlgorithm.user_tags = json.load(json_data)
+            print("user_tags DONE")
+
+        with open(TBMAAlgorithm.question_tags_file) as json_data:
+            TBMAAlgorithm.question_tags = json.load(json_data)
+            print("question_tags DONE")
+
+        with open(TBMAAlgorithm.tags_file) as json_data:
+            TBMAAlgorithm.tag_names = json.load(json_data)
+            print("tag_names DONE")
+
+    def tags_for_user(self, user_id):
+        return list(map(lambda pair: pair['tag'], TBMAAlgorithm.user_tags[str(user_id)]))
+
+    def tags_for_question(self, question_id):
+        return TBMAAlgorithm.question_tags[str(question_id)]
+
+    def r_ut(self, user, tag):
+        pass
+
+    def matching_tags(self, user, question):
+        t_u = self.tags_for_user(user)
+        t_q = self.tags_for_question(question)
+        return set(t_u) & set(t_q)
+
+    def result(self, user, question):
+        matching_tags = self.matching_tags(user, question)
+        return user, len(matching_tags) * sum(map(lambda t: self.r_ut(user, t),
+                                                  matching_tags))
+
+    # Ranking
+    # Top 15 candidates over 300 users
+    def ranking_for_question(self, question):
+        limit = 15  # let's work with 15 the top results only
+        nb_of_users = 300
+        results = map(lambda u: self.result(
+            u, question), self.all_users()[:nb_of_users])
+        return sorted(results, key=itemgetter(1), reverse=True)[:limit]
