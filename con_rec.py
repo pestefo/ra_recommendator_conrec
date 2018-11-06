@@ -121,6 +121,10 @@ class WCFAlgorithm:
     # List of participants in a question - U_{q}
 
     def participants_of_question(self, question_id):
+        return list(map(lambda u: int(u),
+                        WCFAlgorithm.r_uq_table[str(question_id)].keys()))
+
+    def participants_of_question2(self, question_id):
         answerers = WCFAlgorithm.act_ans_comm[
             (WCFAlgorithm.act_ans_comm['q_id'] == question_id) &
             (WCFAlgorithm.act_ans_comm['activity'] > 0)
