@@ -2,9 +2,17 @@
 Data of ros_user_tag.csv, ros_tag.csv and ros_question_tag.csv
 were extracted from with simple SELECT * FROM table queries
 
+NOTE:
+This tables have question-tag and user-tag associations given
+from ROS Answers.
+I would like to enrich this user and question tag characterization
+by adding tags extracted as keywords of question body or title, or
+GitHub repositories description of users,
+
 '''
 import csv
 import json
+from con_rec import TBMAAlgorithm
 """
 From
 2,3,5
@@ -14,8 +22,8 @@ From
 4,6,7
 
 To:
-2: [(3,5),(4,6)], 
-3:[2,1], 
+2: [(3,5),(4,6)],
+3:[2,1],
 4:[(5,6).(6,7)],...
 """
 
@@ -30,6 +38,8 @@ ros_tag_csv = 'data/ros_tag.csv'
 ros_user_tag_json = 'data/ros_user_tag.json'
 ros_question_tag_json = 'data/ros_question_tag.json'
 ros_tag_json = 'data/ros_tag.json'
+r_ut_csv_output_file = 'data/r_ut.csv'
+
 
 def generate_list_of_tags_per_user():
     with open(ros_user_tag_csv, 'r') as csvfile:
@@ -78,7 +88,7 @@ def generate_tag_name_dictionary():
     return tag_dict
 
 
-def main():
+def generate_all_json_files():
     u = generate_list_of_tags_per_user()
     q = generate_list_of_tags_per_question()
     tag_dict = generate_tag_name_dictionary()
@@ -100,6 +110,29 @@ def main():
     # print(tag_dict['63'] + ', ' + tag_dict['1465'] +
     # ', ' + tag_dict['66'] + ', ' + tag_dict['5392'])
     # Should say: kinetic, offline, install, dvd
+
+
+def main():
+    import datetime
+
+    # if you encounter a "year is out of range" error the timestamp
+    # may be in milliseconds, try `ts /= 1000` in that case
+    # Create table of R_ut
+    tbma = TBMAAlgorithm()
+    users = tbma.all_users()
+    with open(r_ut_csv_output_file, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
+        for u in users:
+            print("------- start -------")
+            print("user: " + str(u))
+            now = datetime.datetime.now()
+            print(now.strftime('%Y-%m-%d %H:%M:%S'))
+            for t in tbma.tags_of_user(u):
+                r = tbma.calculate_r_ut(u, t)
+                # print("u:" + str(u) + "\tt:" + str(t) + "\t" + str(r))
+                writer.writerow([u, t, r])
+            print("\n" + str((datetime.datetime.now() - now).seconds) + " seconds")
+            print("------- end -------\n\n")
 
 
 if __name__ == '__main__':

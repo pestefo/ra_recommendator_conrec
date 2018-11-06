@@ -3,7 +3,7 @@
 
 
 import pandas as pd
-from math import sqrt
+from math import sqrt, log
 from operator import itemgetter, attrgetter
 import json
 
@@ -11,6 +11,8 @@ import json
 NOTES:
 Be careful because some WCFAlgorithm's functions return dataframes as output
 and TBMAAlgorithm's return list of strings!!!
+
+THERE ARE TAGS THAT ARE ONLY REFERRED IN USERS BUT NOT IN QUESTIONS
 '''
 
 
@@ -19,9 +21,10 @@ class WCFAlgorithm:
     act_ans_comm = None
     act_ask = None
     total_activities = None
+    all_questions = None
     r_uq_table = None
-    r_uq_table_file = 'data/r_uq_2.json'
-    db_file = 'data/v1.db'
+    r_uq_table_file = './data/r_uq_2.json'
+    db_file = 'v1.db'
 
     def __init__(self):
         self.extract_data_from_db()
@@ -30,6 +33,9 @@ class WCFAlgorithm:
         with open(WCFAlgorithm.r_uq_table_file) as json_data:
             WCFAlgorithm.r_uq_table = json.load(json_data)
             print("r_uq_table DONE")
+        WCFAlgorithm.all_questions = list(map(lambda q: int(q),
+                                              WCFAlgorithm.r_uq_table.keys()))
+        print("all_questions DONE")
 
     def extract_data_from_db(self):
         import sqlite3
@@ -103,6 +109,10 @@ class WCFAlgorithm:
         return pd.concat([WCFAlgorithm.act_ans_comm['u_id'],
                           WCFAlgorithm.act_ask['u_id']]).drop_duplicates()
 
+    def all_questions(self,):
+        return pd.concat([WCFAlgorithm.act_ans_comm['u_id'],
+                          WCFAlgorithm.act_ask['u_id']]).drop_duplicates()
+
     # Activity
 
     def activity(self, user_id, question_id):
@@ -138,19 +148,14 @@ class WCFAlgorithm:
         return questions
 
     # R_uq - Relation between a user and a question
-    def r_uq(self, user, question):
+    def r_uq(self, user_id, question_id):
         # val = r_uq_table[(r_uq_table['u'] ==
-        #                   user) & (r_uq_table['q'] == question)]['r']
+        #                   user_id) & (r_uq_table['q'] == question)]['r']
         try:
-            return WCFAlgorithm.r_uq_table[str(question)][str(user)]
-        except KeyError as e:
-            cause = e.args[0]
-            if cause == str(question):
-                print("Question " + str(cause) + " doesn't exist.")
-                return -1
+            return WCFAlgorithm.r_uq_table[str(question_id)][str(user_id)]
 
-            print("User " + str(cause) +
-                  " hasn't any activity in question " + str(question) + ".")
+        except KeyError:
+            # WE SUPPOSE THAT user_id and question_id are valid ids
             return 0
 
     # Old implementation for calculating r_uq
@@ -273,6 +278,9 @@ class TBMAAlgorithm:
     question_tags = None
     tag_names = None
     r_ut_table = None
+    nb_of_tags = None
+    nb_of_questions = None
+    wcfa = WCFAlgorithm()
 
     # Data files
     user_tags_file = 'data/ros_user_tag.json'
@@ -287,36 +295,80 @@ class TBMAAlgorithm:
 
         with open(TBMAAlgorithm.question_tags_file) as json_data:
             TBMAAlgorithm.question_tags = json.load(json_data)
+            TBMAAlgorithm.nb_of_questions = len(
+                TBMAAlgorithm.question_tags.keys())
             print("question_tags DONE")
 
         with open(TBMAAlgorithm.tags_file) as json_data:
             TBMAAlgorithm.tag_names = json.load(json_data)
+            TBMAAlgorithm.nb_of_tags = len(list(map(lambda pair: pair[0],
+                                                    TBMAAlgorithm.tag_names)))
             print("tag_names DONE")
 
-    def tags_for_user(self, user_id):
-        return list(map(lambda pair: pair['tag'], TBMAAlgorithm.user_tags[str(user_id)]))
+    def all_users(self):
+        return list(map(lambda k: int(k),
+                        TBMAAlgorithm.user_tags.keys()))
 
-    def tags_for_question(self, question_id):
+    def tags_of_user(self, user_id):
+        return list(map(lambda pair: pair['tag'],
+                        TBMAAlgorithm.user_tags[str(user_id)]))
+
+    def tags_of_question(self, question_id):
         return TBMAAlgorithm.question_tags[str(question_id)]
 
-    def r_ut(self, user, tag):
+    def valid_questions(self, questions):
+        all_questions = TBMAAlgorithm.wcfa.all_questions
+        return list(set(all_questions) & set(questions))
+
+    def all_questions(self):
+        return list(map(lambda q: int(q),
+                        TBMAAlgorithm.question_tags.keys()))
+
+    def questions_with_tag(self, tag_id):
+        questions = list(map(lambda q: int(q),
+                             filter(lambda q: str(tag_id) in
+                                    self.tags_of_question(q),
+                                    self.all_questions())))
+        return questions
+        # return self.valid_questions(questions)
+
+    def nb_of_tags(self):
+        return TBMAAlgorithm.nb_of_tags
+
+    def nb_of_tags_of_question(self, question_id):
+        return len(self.tags_of_question(question_id))
+
+    def calculate_r_ut(self, user_id, tag_id):
+        w = TBMAAlgorithm.wcfa
+        questions = self.questions_with_tag(tag_id)
+
+        # TODO: In theory, this should never happen
+        if len(questions) == 0:
+            return 0
+
+        log_of_ratio = log(TBMAAlgorithm.nb_of_questions / len(questions))
+        return log_of_ratio * sum(map(lambda q: w.r_uq(user_id, q),
+                                      questions))
+
+    def r_ut(self, user_id, tag):
         pass
 
-    def matching_tags(self, user, question):
-        t_u = self.tags_for_user(user)
-        t_q = self.tags_for_question(question)
+    def tags_in_common(self, user_id, question_id):
+        t_u = self.tags_of_user(user_id)
+        t_q = self.tags_of_question(question_id)
         return set(t_u) & set(t_q)
 
-    def result(self, user, question):
-        matching_tags = self.matching_tags(user, question)
-        return user, len(matching_tags) * sum(map(lambda t: self.r_ut(user, t),
-                                                  matching_tags))
+    def result(self, user_id, question_id):
+        tags_in_common = self.tags_in_common(user_id, question_id)
+        return user_id, len(tags_in_common) * sum(map(lambda t:
+                                                      self.r_ut(user_id, t),
+                                                      tags_in_common))
 
     # Ranking
     # Top 15 candidates over 300 users
-    def ranking_for_question(self, question):
+    def ranking_for_question(self, question_id):
         limit = 15  # let's work with 15 the top results only
         nb_of_users = 300
         results = map(lambda u: self.result(
-            u, question), self.all_users()[:nb_of_users])
+            u, question_id), self.all_users()[:nb_of_users])
         return sorted(results, key=itemgetter(1), reverse=True)[:limit]
