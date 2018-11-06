@@ -188,11 +188,11 @@ class WCFAlgorithm:
 
     # Ranking
     # Top 15 candidates over 300 users
-    def ranking_for_question(self, question):
-        limit = 15  # let's work with 15 the top results only
-        nb_of_users = 300
+    def ranking_for_question(self, question, limit):
+        # if limit = 50  # let's work with 15 the top results only
+        # nb_of_users = 300
         results = map(lambda u: self.result(
-            u, question), self.all_users()[:nb_of_users])
+            u, question), self.all_users())
         return sorted(results, key=itemgetter(1), reverse=True)[:limit]
 
 
