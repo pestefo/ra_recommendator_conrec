@@ -167,7 +167,8 @@ class WCFAlgorithm:
     def calculate_r_uq(self, user, question):
         if self.activity(user, question) == 0:
             return 0
-        return self.activity(user, question) / self.question_activities(question)
+        return self.activity(user, question) / \
+            self.question_activities(question)
 
     # R_uu - Relation between two users
     def r_uu(self, user_a, user_b):
@@ -192,12 +193,13 @@ class WCFAlgorithm:
 
     # Ranking
     # Top 15 candidates over 300 users
-    def ranking_for_question(self, question, limit):
-        # if limit = 50  # let's work with 15 the top results only
-        # nb_of_users = 300
+    def ranking_for_question(self, question, limit_of_results):
         results = map(lambda u: self.result(
             u, question), self.all_users())
-        return sorted(results, key=itemgetter(1), reverse=True)[:limit]
+
+        return sorted(results,
+                      key=itemgetter(1),
+                      reverse=True)[:limit_of_results]
 
 
 '''
