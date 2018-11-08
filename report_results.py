@@ -5,10 +5,20 @@ from con_rec import *
 import json
 import csv
 
-t = TBMAAlgorithm()
+t = TMBAlgorithm()
 w = t.wcfa
-path_to_results = 'data/wcfa_5_participants/'
-breaks = list(range(5, 55, 5))  # top5, top10, ..., top50
+# path_to_results = 'data/wcfa_100q_5p/'
+# report_filename = 'results_wcfa_100q_5p.csv'
+# path_to_results = 'data/tmba_100q_5p/'
+# report_filename = 'results_tmba_100q_5p.csv'
+path_to_results = 'data/tmba_100q_1p/'
+report_filename = 'results_tmba_100q_1p.csv'
+# sample_file_path = 'data/questions_with_5_participants.json'
+sample_file_path = 'data/questions_with_1_participant.json'
+sample_size = 100
+
+limit_of_results = 150  # defined in con_rec_sanity_check.py
+breaks = list(range(5, limit_of_results + 5, 5))  # top5, top10, ..., top50
 
 # Return the list of pairs (user,score) in order from higher to lower score
 
@@ -46,13 +56,12 @@ def percentage_of_coverage(question_id):
 
 
 def main():
-    sample_file_path = path_to_results + 'questions_with_5_participants.json'
-    sample_size = 100
+
     with open(sample_file_path, 'r') as sample_file:
         sample = json.load(sample_file)[:sample_size]
 
     # Read results, get coverage and print it
-    with open(path_to_results + 'results_wcfa_100q_5p.csv', 'w'
+    with open(path_to_results + report_filename, 'w'
               ) as csvfile:
         writer = csv.writer(csvfile, delimiter='\t')
         header = ['q_id'] + list(map(lambda b: 'top ' + str(b), breaks))
