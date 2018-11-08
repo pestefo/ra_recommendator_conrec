@@ -12,7 +12,7 @@ GitHub repositories description of users,
 '''
 import csv
 import json
-from con_rec import TBMAAlgorithm
+from con_rec import TMBAlgorithm
 """
 From
 2,3,5
@@ -118,8 +118,8 @@ def main():
     # if you encounter a "year is out of range" error the timestamp
     # may be in milliseconds, try `ts /= 1000` in that case
     # Create table of R_ut
-    tbma = TBMAAlgorithm()
-    users = tbma.all_users()
+    tmba = TMBAlgorithm()
+    users = tmba.all_users()
     with open(r_ut_csv_output_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
         for u in users:
@@ -127,8 +127,8 @@ def main():
             print("user: " + str(u))
             now = datetime.datetime.now()
             print(now.strftime('%Y-%m-%d %H:%M:%S'))
-            for t in tbma.tags_of_user(u):
-                r = tbma.calculate_r_ut(u, t)
+            for t in tmba.tags_of_user(u):
+                r = tmba.calculate_r_ut(u, t)
                 # print("u:" + str(u) + "\tt:" + str(t) + "\t" + str(r))
                 writer.writerow([u, t, r])
             print("\n" + str((datetime.datetime.now() - now).seconds) + " seconds")
