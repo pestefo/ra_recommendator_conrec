@@ -21,33 +21,33 @@ B. **Cold Start**: There is not activity in the questions besides its publicatio
 
 ## Weighted Collaborative Filtering Algorithm (WCFA)
 
-Let $U$ the set of all users registered in ROS Answers, $Q$ the set of all questions posted in ROS Answers, we define the relationshio between a user $u \in U$ and a question $q \in Q$ as:
+Let <img src="/tex/6bac6ec50c01592407695ef84f457232.svg?invert_in_darkmode&sanitize=true" align=middle width=13.01596064999999pt height=22.465723500000017pt/> the set of all users registered in ROS Answers, <img src="/tex/1afcdb0f704394b16fe85fb40c45ca7a.svg?invert_in_darkmode&sanitize=true" align=middle width=12.99542474999999pt height=22.465723500000017pt/> the set of all questions posted in ROS Answers, we define the relationshio between a user <img src="/tex/b99229d16d8abc14e14acbb99bbccfae.svg?invert_in_darkmode&sanitize=true" align=middle width=42.51737159999999pt height=22.465723500000017pt/> and a question <img src="/tex/15e1f565287c20880b8df7292f1755b9.svg?invert_in_darkmode&sanitize=true" align=middle width=41.01465059999999pt height=22.465723500000017pt/> as:
 
-$$ R_{uq}(u,q) = \dfrac{Activity(u,q)}{\sum_{i=1}^{|U_q|} Activity(U_q[i],q)}, \quad U_q = \{u \in U, Activity(u,q)>0\} $$ 
+<p align="center"><img src="/tex/e3ce2458de5775d451aea4363c4a132c.svg?invert_in_darkmode&sanitize=true" align=middle width=512.15675115pt height=43.8784632pt/></p> 
 
-We can see that $\sum_{i=1}^{|U_q|} Activity(U_q[i],q)$ is the sum of comments, answers + 1 (the activity of having published the question). 
+We can see that <img src="/tex/e3a4d206f15d05ffe567fd31f7d89594.svg?invert_in_darkmode&sanitize=true" align=middle width=165.35567894999997pt height=35.06841029999999pt/> is the sum of comments, answers + 1 (the activity of having published the question). 
 
-We define also the relationshio between two users $a, b \in U$ as:
+We define also the relationshio between two users <img src="/tex/0985970f68fecf6dbb54faa79ec8ad4b.svg?invert_in_darkmode&sanitize=true" align=middle width=56.15693324999999pt height=22.831056599999986pt/> as:
 
-$$R_{uu}(a,b) = \dfrac{\sum_{q \in Q_a \cap Q_b} R_{uq}(a,q) \cdot R_{uq}(b,q) }{\sqrt{\sum_{q \in Q_a} R_{uq}(a,q)^2 \cdot \sum_{q \in Q_b} R_{uq}(b,q)^2}}$$ 
+<p align="center"><img src="/tex/80dfc61617c6bb214d6937634ecbb887.svg?invert_in_darkmode&sanitize=true" align=middle width=364.78036319999995pt height=54.3471885pt/></p> 
 
-$$Q_a = \{q \in Q, Activity(a,q) > 0\}, \quad Q_b = \{q \in Q, Activity(b,q) > 0\}$$
+<p align="center"><img src="/tex/bae510edcde4971e8ed1932fbfa71c54.svg?invert_in_darkmode&sanitize=true" align=middle width=489.39634259999997pt height=16.438356pt/></p>
 
-The score for a candidate $a$ for participating in question $q$ is:
+The score for a candidate <img src="/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode&sanitize=true" align=middle width=8.68915409999999pt height=14.15524440000002pt/> for participating in question <img src="/tex/d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode&sanitize=true" align=middle width=7.928106449999989pt height=14.15524440000002pt/> is:
 
-$$wcfa\_score(a,q) = \sum_{u \in U_q}  R_{uq}(u,q) \cdot R_{uu}(a,u)$$
+<p align="center"><img src="/tex/27bf870bb72dd0ab7cded20720e5ef33.svg?invert_in_darkmode&sanitize=true" align=middle width=319.40076465pt height=40.14634635pt/></p>
 
 ## Tag Map Based Algorithm (TBMA)
 
-As there is no previous activity, this approach is content based. It makes use of the tags that are associated to users and questions. Let $T$ be the set of all tags defined in ROS Answers, $Q_t$ the set of all questions tagged under the $t$ tag, and $T_{uq}$ the set of all tags that match the user $u$ and the question $q$. 
+As there is no previous activity, this approach is content based. It makes use of the tags that are associated to users and questions. Let <img src="/tex/2f118ee06d05f3c2d98361d9c30e38ce.svg?invert_in_darkmode&sanitize=true" align=middle width=11.889314249999991pt height=22.465723500000017pt/> be the set of all tags defined in ROS Answers, <img src="/tex/025b11cd28d6c936d3062a554bbaf0b5.svg?invert_in_darkmode&sanitize=true" align=middle width=17.96121689999999pt height=22.465723500000017pt/> the set of all questions tagged under the <img src="/tex/4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode&sanitize=true" align=middle width=5.936097749999991pt height=20.221802699999984pt/> tag, and <img src="/tex/ca3b1156ca87c35b6cf1b4ab852bf22a.svg?invert_in_darkmode&sanitize=true" align=middle width=23.81617589999999pt height=22.465723500000017pt/> the set of all tags that match the user <img src="/tex/6dbb78540bd76da3f1625782d42d6d16.svg?invert_in_darkmode&sanitize=true" align=middle width=9.41027339999999pt height=14.15524440000002pt/> and the question <img src="/tex/d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode&sanitize=true" align=middle width=7.928106449999989pt height=14.15524440000002pt/>. 
 
-We define the relationship between a user $u$ and a tag $t$ : 
+We define the relationship between a user <img src="/tex/6dbb78540bd76da3f1625782d42d6d16.svg?invert_in_darkmode&sanitize=true" align=middle width=9.41027339999999pt height=14.15524440000002pt/> and a tag <img src="/tex/4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode&sanitize=true" align=middle width=5.936097749999991pt height=20.221802699999984pt/> : 
 
-$$ R_{ut}(u,t) = \sum_{q \in Q_t} R_{uq}(u,q) \cdot log \dfrac{|\bigcup_{x \in T} Q_x|}{|Q_t|} $$
+<p align="center"><img src="/tex/5d0a65fc96e4aa5abc98b8b858aaa1ba.svg?invert_in_darkmode&sanitize=true" align=middle width=293.9047419pt height=46.423454549999995pt/></p>
 
-And the score for a candidate $a$ for participating in a question $q$ is:
+And the score for a candidate <img src="/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode&sanitize=true" align=middle width=8.68915409999999pt height=14.15524440000002pt/> for participating in a question <img src="/tex/d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode&sanitize=true" align=middle width=7.928106449999989pt height=14.15524440000002pt/> is:
 
-$$tmba\_score(a,q) = |T_{uq}| \cdot  \sum_{t \in T_{uq}} R_{ut}(u,t)$$ 
+<p align="center"><img src="/tex/916948e29aad279e074ac5c1fa6a7f92.svg?invert_in_darkmode&sanitize=true" align=middle width=283.9078704pt height=40.14634635pt/></p> 
 
 
 
