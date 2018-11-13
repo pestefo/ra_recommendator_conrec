@@ -37,9 +37,9 @@ The score for a candidate $a$ for participating in question $q$ is:
 
 $$wcfa\_score(a,q) = \sum_{u \in U_q} R_{uq}(u,q) \cdot R_{uu}(a,u)$$
 
-## Tag Map Based Algorithm
+## Tag Map Based Algorithm (TBMA)
 
-As there is no previous activity, this approach is content based. It makes use of the tags that are associated to users and questions. Let $T​$ be the set of all tags defined in ROS Answers, $Q_t​$ the set of all questions tagged under the $t​$ tag, and $T_{uq}​$ the set of all tags that match the user $u​$ and the question $q​$. 
+As there is no previous activity, this approach is content based. It makes use of the tags that are associated to users and questions. Let $T$ be the set of all tags defined in ROS Answers, $Q_t$ the set of all questions tagged under the $t$ tag, and $T_{uq}$ the set of all tags that match the user $u$ and the question $q$. 
 
 We define the relationship between a user $u$ and a tag $t$ : 
 
@@ -48,6 +48,16 @@ $$ R_{ut}(u,t) = \sum_{q \in Q_t} R_{uq}(u,q) \cdot log \dfrac{|\bigcup_{x \in T
 And the score for a candidate $a$ for participating in a question $q$ is:
 
 $$tmba\_score(a,q) = |T_{uq}| \cdot  \sum_{t \in T_{uq}} R_{ut}(u,t)$$ 
+
+
+
+Our focus should be on the TMBA approach which is when a questions hasn't any activity.
+
+Considerations for improving TMBA approach:
+
+1. Ponderation for tags: users have a counter for tags (ej: Turtlebot x 45, Kinetic x 20, Navigation x 5, etc.). Currently are not making use of it, it's information we are ignoring
+2. Questions may be better described if we consider the tags present in their title and body
+3. Users can be also be better profiled considering tags in the repositories they participate and their activity on them: e.g. commiting into kinetic branches may increase its counter for *kinetic* tag, a high number of commits in launchfiles may increase the counter for *launch*, *configuration* and *deployment* tags, etc.
 
 
 
