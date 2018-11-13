@@ -35,7 +35,7 @@ $$Q_a = \{q \in Q, Activity(a,q) > 0\}, \quad Q_b = \{q \in Q, Activity(b,q) > 0
 
 The score for a candidate $a$ for participating in question $q$ is:
 
-$$wcfa\_score(a,q) = \sum_{u \in U_q} R_{uq}(u,q) \cdot R_{uu}(a,u)$$
+$$wcfa\_score(a,q) = \sum_{u \in U_q}  R_{uq}(u,q) \cdot R_{uu}(a,u)$$
 
 ## Tag Map Based Algorithm (TBMA)
 
