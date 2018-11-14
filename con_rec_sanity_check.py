@@ -7,9 +7,10 @@ import datetime
 import time
 
 # path_to_results = 'data/tmba_100q_5p'
-# sample_file_path = 'data/questions_with_5_participants.json'
-path_to_results = 'data/tmba_100q_1p'
-sample_file_path = 'data/questions_with_1_participant.json'
+sample_file_path = 'data/questions_with_5_participants.json'
+# path_to_results = 'data/tmba_100q_1p'
+# sample_file_path = 'data/questions_with_1_participant.json'
+path_to_results = 'data/wcfa_100q_5p_2nd_exp'
 
 
 def print_header(question_id):

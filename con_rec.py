@@ -16,26 +16,58 @@ THERE ARE TAGS THAT ARE ONLY REFERRED IN USERS BUT NOT IN QUESTIONS
 '''
 
 
-class WCFAlgorithm:
+class ConRecAlgorithm:
+
+    r_uq_table = None
+    r_uq_table_file = './data/r_uq_2.json'
+    all_questions = None
+
+    def __init__(self):
+        # Importing R_uq table
+        # r_uq.csv to JSON from: http://www.convertcsv.com/csv-to-json.htm
+        with open(ConRecAlgorithm.r_uq_table_file) as json_data:
+            ConRecAlgorithm.r_uq_table = json.load(json_data)
+            print("r_uq_table DONE")
+        ConRecAlgorithm.all_questions = list(
+            map(lambda q: int(q),
+                ConRecAlgorithm.r_uq_table.keys()))
+        print("all_questions DONE")
+
+    # R_uq - Relation between a user and a question
+    def r_uq(self, user_id, question_id):
+        # val = r_uq_table[(r_uq_table['u'] ==
+        #                   user_id) & (r_uq_table['q'] == question)]['r']
+        try:
+            return ConRecAlgorithm.r_uq_table[str(question_id)][str(user_id)]
+
+        except KeyError:
+            # WE SUPPOSE THAT user_id and question_id are valid ids
+            return 0
+
+    def all_questions(self):
+        return ConRecAlgorithm.all_questions
+
+    # Ranking
+    # Top 15 candidates over 300 users
+    def ranking_for_question(self, question, limit_of_results):
+        results = map(lambda u: self.score(
+            u, question), self.all_users())
+
+        return sorted(results,
+                      key=itemgetter(1),
+                      reverse=True)[:limit_of_results]
+
+
+class WCFAlgorithm(ConRecAlgorithm):
 
     act_ans_comm = None
     act_ask = None
     total_activities = None
-    all_questions = None
-    r_uq_table = None
-    r_uq_table_file = './data/r_uq_2.json'
+
     db_file = 'v1.db'
 
     def __init__(self):
         self.extract_data_from_db()
-        # Importing R_uq table
-        # r_uq.csv to JSON from: http://www.convertcsv.com/csv-to-json.htm
-        with open(WCFAlgorithm.r_uq_table_file) as json_data:
-            WCFAlgorithm.r_uq_table = json.load(json_data)
-            print("r_uq_table DONE")
-        WCFAlgorithm.all_questions = list(map(lambda q: int(q),
-                                              WCFAlgorithm.r_uq_table.keys()))
-        print("all_questions DONE")
 
     def extract_data_from_db(self):
         import sqlite3
@@ -114,10 +146,6 @@ class WCFAlgorithm:
         return pd.concat([WCFAlgorithm.act_ans_comm['u_id'],
                           WCFAlgorithm.act_ask['u_id']]).drop_duplicates()
 
-    def all_questions(self,):
-        return pd.concat([WCFAlgorithm.act_ans_comm['u_id'],
-                          WCFAlgorithm.act_ask['u_id']]).drop_duplicates()
-
     # Activity
 
     def activity(self, user_id, question_id):
@@ -165,19 +193,7 @@ class WCFAlgorithm:
                 return set()
         return questions
 
-    # R_uq - Relation between a user and a question
-    def r_uq(self, user_id, question_id):
-        # val = r_uq_table[(r_uq_table['u'] ==
-        #                   user_id) & (r_uq_table['q'] == question)]['r']
-        try:
-            return WCFAlgorithm.r_uq_table[str(question_id)][str(user_id)]
-
-        except KeyError:
-            # WE SUPPOSE THAT user_id and question_id are valid ids
-            return 0
-
     # Old implementation for calculating r_uq
-
     def calculate_r_uq(self, user, question):
         if self.activity(user, question) == 0:
             return 0
@@ -200,20 +216,10 @@ class WCFAlgorithm:
         return a / b
 
     # Score of a user to be a suitable for a question
-    def result(self, user, question):
+    def score(self, user, question):
         return user, sum(map(lambda u: self.r_uq(u, question) *
                              self.r_uu(user, u),
                              self.participants_of_question(question)))
-
-    # Ranking
-    # Top 15 candidates over 300 users
-    def ranking_for_question(self, question, limit_of_results):
-        results = map(lambda u: self.result(
-            u, question), self.all_users())
-
-        return sorted(results,
-                      key=itemgetter(1),
-                      reverse=True)[:limit_of_results]
 
 
 ###
@@ -221,7 +227,7 @@ class WCFAlgorithm:
 ###
 
 
-class TMBAlgorithm:
+class TMBAlgorithm(ConRecAlgorithm):
 
     user_tags = None
     question_tags = None
@@ -270,7 +276,7 @@ class TMBAlgorithm:
         return TMBAlgorithm.question_tags[str(question_id)]
 
     def valid_questions(self, questions):
-        all_questions = TMBAlgorithm.wcfa.all_questions
+        all_questions = self.all_questions
         return list(set(all_questions) & set(questions))
 
     def all_questions(self):
@@ -291,16 +297,18 @@ class TMBAlgorithm:
     def nb_of_tags_of_question(self, question_id):
         return len(self.tags_of_question(question_id))
 
+    def nb_of_questions(self):
+        return TMBAlgorithm.nb_of_questions
+
     def calculate_r_ut(self, user_id, tag_id):
-        w = TMBAlgorithm.wcfa
         questions = self.questions_with_tag(tag_id)
 
         # TODO: In theory, this should never happen
         if len(questions) == 0:
             return 0
 
-        log_of_ratio = log(TMBAlgorithm.nb_of_questions / len(questions))
-        return log_of_ratio * sum(map(lambda q: w.r_uq(user_id, q),
+        log_of_ratio = log(self.nb_of_questions / len(questions))
+        return log_of_ratio * sum(map(lambda q: self.r_uq(user_id, q),
                                       questions))
 
     def r_ut(self, user_id, tag_id):
@@ -316,7 +324,7 @@ class TMBAlgorithm:
         t_q = self.tags_of_question(question_id)
         return set(t_u) & set(t_q)
 
-    def result(self, user_id, question_id):
+    def score(self, user_id, question_id):
         tags_in_common = self.tags_in_common(user_id, question_id)
         # print('u:' + str(user_id) + '\tq:' + str(question_id) +
         #       '\ttags_common:' + str(tags_in_common))
@@ -324,12 +332,3 @@ class TMBAlgorithm:
             sum(map(lambda t:
                     self.r_ut(user_id, t),
                     tags_in_common))
-
-    # Ranking
-    # Top 15 candidates over 300 users
-    def ranking_for_question(self, question_id, limit_of_results):
-        results = map(lambda u: self.result(
-            u, question_id), self.all_users())
-        return sorted(results,
-                      key=itemgetter(1),
-                      reverse=True)[:limit_of_results]
