@@ -49,7 +49,7 @@ class ConRecAlgorithm:
 
     # Ranking
     # Top 15 candidates over 300 users
-    def ranking_for_question(self, question, limit_of_results):
+    def ranking_for_question(self, question, limit_of_results=150):
         results = map(lambda u: self.score(
             u, question), self.all_users())
 
@@ -67,6 +67,7 @@ class WCFAlgorithm(ConRecAlgorithm):
     db_file = 'v1.db'
 
     def __init__(self):
+        ConRecAlgorithm.__init__(self)
         self.extract_data_from_db()
 
     def extract_data_from_db(self):
@@ -216,10 +217,10 @@ class WCFAlgorithm(ConRecAlgorithm):
         return a / b
 
     # Score of a user to be a suitable for a question
-    def score(self, user, question):
-        return user, sum(map(lambda u: self.r_uq(u, question) *
-                             self.r_uu(user, u),
-                             self.participants_of_question(question)))
+    def score(self, candidate, question):
+        return candidate, sum(map(lambda u: self.r_uq(u, question) *
+                                  self.r_uu(candidate, u),
+                                  self.participants_of_question(question)))
 
 
 ###
@@ -244,6 +245,7 @@ class TMBAlgorithm(ConRecAlgorithm):
     tags_file = 'data/ros_tag.json'
 
     def __init__(self):
+        ConRecAlgorithm.__init__(self)
         with open(TMBAlgorithm.r_ut_table_file) as json_data:
             TMBAlgorithm.r_ut_table = json.load(json_data)
             print("r_ut_table DONE")
@@ -332,3 +334,64 @@ class TMBAlgorithm(ConRecAlgorithm):
             sum(map(lambda t:
                     self.r_ut(user_id, t),
                     tags_in_common))
+
+
+class WCFAlgorithmNoMemory(WCFAlgorithm):
+
+    def get_asker_of_question(self, question_id):
+        asker = WCFAlgorithm.act_ask[
+            (WCFAlgorithm.act_ask['q_id'] == question_id) &
+            (WCFAlgorithm.act_ask['activity'] > 0)
+        ]["u_id"].drop_duplicates()
+
+        if len(asker) > 1:
+            raise BaseException('More than one asker.')
+
+        return list(asker)[0]
+
+    # We return the asker only
+    def participants_of_question(self, question_id):
+        return list([self.get_asker_of_question(question_id)])
+
+    def questions_for_user_except(self, user_id, question_id_to_ignore):
+        return self.questions_for_user(user_id) - set([question_id_to_ignore])
+
+    # R_uu - Relation between two users
+    def r_uu(self, candidate, user_b, target_question):
+        q_in_common = self.questions_in_common([candidate, user_b]) -\
+            set([target_question])
+
+        q_a = self.questions_for_user_except(candidate, target_question)
+        q_b = self.questions_for_user(user_b)
+
+        a = sum(map(lambda q: self.r_uq(candidate, q, target_question) *
+                    self.r_uq(user_b, q, target_question),
+                    q_in_common))
+        b = sqrt(sum(map(lambda q: self.r_uq(candidate, q, target_question)**2,
+                         q_a)) *
+                 sum(map(lambda q: self.r_uq(user_b, q, target_question)**2,
+                         q_b)))
+        if a == 0:
+            return 0
+        return a / b
+
+    # R_uq - Relation between a user and a question
+    def r_uq(self, user_id, question_id, target_question):
+        # In case of the target question,
+        if question_id == target_question:
+            if self.get_asker_of_question(question_id) == user_id:
+                return 1
+            # if the user is not the asker, it has 0 in R_uq
+            return 0
+
+        return super(WCFAlgorithm, self).r_uq(user_id, question_id)
+
+    # score(c,q) = R_uu(c, asker(q)) 
+    # Target question has only the asker as a participant
+    def score(self, candidate, question):
+        asker = self.get_asker_of_question(question)
+        return candidate, self.r_uu(candidate, asker, question)
+
+
+w = WCFAlgorithm()
+w2 = WCFAlgorithmNoMemory()
