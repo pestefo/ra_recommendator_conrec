@@ -7,9 +7,13 @@ import datetime
 import time
 
 # path_to_results = 'data/tmba_100q_5p'
-# sample_file_path = 'data/questions_with_5_participants.json'
-path_to_results = 'data/tmba_100q_1p'
-sample_file_path = 'data/questions_with_1_participant.json'
+sample_file_path = 'data/questions_with_5_participants.json'
+# path_to_results = 'data/tmba_100q_1p'
+# sample_file_path = 'data/questions_with_1_participant.json'
+path_to_results = 'data/wcfa_100q_5p_2nd_exp'
+algorithm = WCFAlgorithmNoMemory()
+default_sample_size = 100
+default_nb_of_results = 150
 
 
 def print_header(question_id):
@@ -41,15 +45,12 @@ def run_experiment(question_id, algorithm, nb_of_results):
 
 
 def main():
-    # Algorithms
-    tmba = TMBAlgorithm()
-    # wcfa = tmba.wcfa
 
     # Get sample of questions
     with open(sample_file_path, 'r') as sample_file:
         sample = json.load(sample_file)
-        sample_size = 100
-        nb_of_results = 150
+        sample_size = default_sample_size
+        nb_of_results = default_nb_of_results
 
     # Start clicking
     start_time = datetime.datetime.now()
@@ -60,7 +61,7 @@ def main():
         now = print_header(question_id)
 
         # Process and write results
-        run_experiment(question_id, tmba, nb_of_results)
+        run_experiment(question_id, algorithm, nb_of_results)
 
         print_footer(start_time, now)
 
