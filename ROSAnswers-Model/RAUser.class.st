@@ -5,7 +5,8 @@ Class {
 		'userid',
 		'name',
 		'upVotes',
-		'downVotes'
+		'downVotes',
+		'tags'
 	],
 	#category : #'ROSAnswers-Model-Core'
 }
@@ -63,6 +64,12 @@ RAUser >> printOn: aStream [
 		nextPutAll: 'User(';
 		nextPutAll: userid asString;
 		nextPutAll: ')'.
+]
+
+{ #category : #accessing }
+RAUser >> tags [
+
+	^ tags ifNil: [ tags := RAUserTagRelation uniqueInstance  tagsForUser: self]
 ]
 
 { #category : #accessing }
