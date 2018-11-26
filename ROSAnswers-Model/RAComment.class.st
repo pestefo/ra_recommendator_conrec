@@ -14,3 +14,15 @@ RAComment class >> comment: commentId [
 RAComment >> isAccepted [
 	^ false
 ]
+
+{ #category : #accessing }
+RAComment >> isAnswer [
+
+	^ false
+]
+
+{ #category : #accessing }
+RAComment >> isComment [
+
+	^ true
+]

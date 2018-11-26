@@ -38,3 +38,20 @@ RAQuestionTest >> testParticipants [
 
 
 ]
+
+{ #category : #tests }
+RAQuestionTest >> testPopulation [
+	"Assert that a question has its participants correctly"
+
+	| mi |
+
+	mi := RAModelInitializer reset uniqueInstance populateModels.
+	
+	self assert: [mi usersCount >= 21388 ].
+	self assert: [mi questionsCount >= 40995].
+	self assert: [mi answersCount >= 128433].
+	self assert: [mi tagsCount >= 14253].
+	self assert: [ mi pureAnswersCount = 39932 ].
+	self assert: [ mi commentsCount = 88501 ].	
+
+]

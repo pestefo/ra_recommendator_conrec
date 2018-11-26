@@ -69,6 +69,18 @@ RAAnswer >> isAccepted: anObject [
 	isAccepted := anObject
 ]
 
+{ #category : #initialization }
+RAAnswer >> isAnswer [
+
+	^ true
+]
+
+{ #category : #initialization }
+RAAnswer >> isComment [
+
+	^ false
+]
+
 { #category : #accessing }
 RAAnswer >> votes [
 	^ votes

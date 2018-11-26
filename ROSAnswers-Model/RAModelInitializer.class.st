@@ -52,12 +52,25 @@ RAModelInitializer class >> user: anUserId [
 RAModelInitializer >> answer: anAnswerId [
 
  	^ answers detect: [ :a | a answerid = anAnswerId  ]
+	
+]
+
+{ #category : #'as yet unclassified' }
+RAModelInitializer >> answersCount [
+
+	^ answers size
 ]
 
 { #category : #files }
 RAModelInitializer >> answersDataFile [
 
 	^ (self pathToDataFiles , '/ros_answer.csv') asFileReference 
+]
+
+{ #category : #'as yet unclassified' }
+RAModelInitializer >> commentsCount [
+
+	^ (answers select: #isComment) size
 ]
 
 { #category : #initialization }
@@ -118,6 +131,12 @@ RAModelInitializer >> populateUsers [
 		users add: (RAUser new initializeFromRosUserTable: row)   ]
 ]
 
+{ #category : #'as yet unclassified' }
+RAModelInitializer >> pureAnswersCount [
+
+	^ (answers select: #isAnswer) size
+]
+
 { #category : #accessing }
 RAModelInitializer >> question: aQuestionId [
 	^ questions
@@ -132,16 +151,34 @@ RAModelInitializer >> question: aQuestionId [
 							' was not found. I created a RAQuestion instance with an incomplete profile'}) ]
 ]
 
+{ #category : #'as yet unclassified' }
+RAModelInitializer >> questionsCount [
+
+	^ questions size
+]
+
 { #category : #files }
 RAModelInitializer >> questionsDataFile [
 
 	^ (self pathToDataFiles , '/ros_question.csv') asFileReference 
 ]
 
+{ #category : #'as yet unclassified' }
+RAModelInitializer >> questionsFullProfileCount [
+
+	^ (questions select: #profileComplete) size
+]
+
 { #category : #accessing }
 RAModelInitializer >> tag: aTagId [ 
 
  	^ tags detect: [ :t | t tagid = aTagId  ]
+]
+
+{ #category : #'as yet unclassified' }
+RAModelInitializer >> tagsCount [
+
+	^ tags size
 ]
 
 { #category : #files }
@@ -164,8 +201,20 @@ RAModelInitializer >> user: anUserId [
 							' was not found. I created a RAUser instance with an incomplete profile'}) ]
 ]
 
+{ #category : #'as yet unclassified' }
+RAModelInitializer >> usersCount [
+
+	^ users size
+]
+
 { #category : #files }
 RAModelInitializer >> usersDataFile [
 
 	^ (self pathToDataFiles , '/ros_user.csv') asFileReference 
+]
+
+{ #category : #'as yet unclassified' }
+RAModelInitializer >> usersFullProfileCount [
+
+	^ (users select: #profileComplete) size
 ]
