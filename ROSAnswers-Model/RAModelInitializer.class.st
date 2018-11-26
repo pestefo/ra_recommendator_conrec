@@ -85,7 +85,7 @@ RAModelInitializer >> commentsCount [
 { #category : #initialization }
 RAModelInitializer >> initialize [
 	"initialize all the models"
-
+	super initialize. 
 	users := OrderedCollection new.
 	questions := OrderedCollection new.	
 	answers := OrderedCollection new.	
@@ -124,6 +124,13 @@ RAModelInitializer >> populateQuestions [
 
 	(NeoCSVReader on: self questionsDataFile readStream) do: [ :row |
 		questions add: (RAQuestion new initializeFromRosQuestionTable: row)   ]
+]
+
+{ #category : #initialization }
+RAModelInitializer >> populateRelationUserTag [
+
+	((NeoCSVReader on: self relationUserTagDataFile readStream) separator: Character tab) skipHeader do: [ :row |
+		RAUserTagRelation uniqueInstance at: (row at: 1) asInteger put: (row at: 2) asInteger  withValue: (row at: 3) asFloat]
 ]
 
 { #category : #initialization }
@@ -176,6 +183,12 @@ RAModelInitializer >> questionsDataFile [
 RAModelInitializer >> questionsFullProfileCount [
 
 	^ (questions select: #profileComplete) size
+]
+
+{ #category : #initialization }
+RAModelInitializer >> relationUserTagDataFile [
+
+	^ (self pathToDataFiles , '/r_ut.csv') asFileReference 
 ]
 
 { #category : #accessing }
