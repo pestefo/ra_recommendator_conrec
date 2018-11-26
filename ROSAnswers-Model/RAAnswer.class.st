@@ -18,6 +18,13 @@ RAAnswer class >> answer: answerId [
 ]
 
 { #category : #accessing }
+RAAnswer >> = anObject [
+	^ super = anObject
+		ifTrue: [ true ]
+		ifFalse: [ self class = anObject class and: [ self answerid = anObject answerid ] ]
+]
+
+{ #category : #accessing }
 RAAnswer >> answerid [
 	^ answerid
 ]
@@ -54,9 +61,9 @@ RAAnswer >> initializeFromRosAnswerTable: anArray [
 	
 	self answerid: (anArray at: 1).
 	self author: (RAUser user: (anArray at: 2)).
-	self date: (DateAndTime fromString: (anArray at: 5)).
+	self date: (DateAndTime fromString: (anArray at: 4)).
 	self votes: (anArray at: 5).
-	self isAccepted: (anArray at: 6) asBoolean.
+	self isAccepted: (anArray at: 6) asInteger asBoolean.
 ]
 
 { #category : #accessing }

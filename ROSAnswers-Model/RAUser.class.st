@@ -17,6 +17,13 @@ RAUser class >> user: anUserId [
 ]
 
 { #category : #accessing }
+RAUser >> = anObject [
+	^ super = anObject
+		ifTrue: [ true ]
+		ifFalse: [ self class = anObject class and: [ self userid = anObject userid ] ]
+]
+
+{ #category : #accessing }
 RAUser >> downVotes [
 	^ downVotes
 ]
@@ -45,6 +52,17 @@ RAUser >> name [
 { #category : #accessing }
 RAUser >> name: anObject [
 	name := anObject
+]
+
+{ #category : #accessing }
+RAUser >> printOn: aStream [
+
+	| title |
+	title := self class name.
+	aStream
+		nextPutAll: 'User(';
+		nextPutAll: userid asString;
+		nextPutAll: ')'.
 ]
 
 { #category : #accessing }

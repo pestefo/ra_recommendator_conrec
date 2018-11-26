@@ -67,6 +67,15 @@ RAModelInitializer >> answersDataFile [
 	^ (self pathToDataFiles , '/ros_answer.csv') asFileReference 
 ]
 
+{ #category : #accessing }
+RAModelInitializer >> clean [ 
+	
+	users removeDuplicates.
+	questions removeDuplicates.
+	answers removeDuplicates.
+	tags removeDuplicates.
+]
+
 { #category : #'as yet unclassified' }
 RAModelInitializer >> commentsCount [
 

@@ -14,6 +14,13 @@ RATag class >> tag: aTagId [
 	^ RAModelInitializer tag: aTagId 
 ]
 
+{ #category : #comparing }
+RATag >> = anObject [
+	^ super = anObject
+		ifTrue: [ true ]
+		ifFalse: [ self class = anObject class and: [ self tagid = anObject tagid ] ]
+]
+
 { #category : #initialization }
 RATag >> initializeFromRosTagTable: anArray [
 	"Example:

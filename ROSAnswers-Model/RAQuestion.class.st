@@ -21,6 +21,13 @@ RAQuestion class >> question: aQuestionId [
 	^ RAModelInitializer question: aQuestionId 
 ]
 
+{ #category : #comparing }
+RAQuestion >> = anObject [
+	^ super = anObject
+		ifTrue: [ true ]
+		ifFalse: [ self class = anObject class and: [ self questionid = anObject questionid ] ]
+]
+
 { #category : #accessing }
 RAQuestion >> addedAt [
 	^ addedAt
