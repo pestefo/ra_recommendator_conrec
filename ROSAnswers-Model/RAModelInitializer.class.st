@@ -130,7 +130,7 @@ RAModelInitializer >> populateQuestions [
 RAModelInitializer >> populateRelationUserTag [
 
 	((NeoCSVReader on: self relationUserTagDataFile readStream) separator: Character tab) skipHeader do: [ :row |
-		RAUserTagRelation uniqueInstance at: (row at: 1) asInteger put: (row at: 2) asInteger withValue: (row at: 3) asNumber]
+		RAUserTagRelation uniqueInstance at: (row at: 1) asInteger put: (row at: 2) asInteger  withValue: (row at: 3) asNumber ]
 ]
 
 { #category : #initialization }
