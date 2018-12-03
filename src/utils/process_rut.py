@@ -9,6 +9,13 @@ rutdata = 'data/r_ut.csv'
 path_to_results = 'data/'
 
 
+def passes_threshold(value):
+    upper_threshold = 0.8
+    lower_threshold = 0.2
+
+    return lower_threshold <= value <= upper_threshold
+
+
 def normalize(data):
     max_r = -1
     for d in data:
@@ -28,7 +35,7 @@ def get_tag_table():
     with open('data/ros_tag.csv') as csvfile:
         tag_table = dict()
         reader = csv.reader(csvfile, delimiter=',')
-        next(reader, None) #skipping header
+        next(reader, None)  # skipping header
         for row in reader:
             print(row)
             tag_table[row[0]] = row[1]
@@ -55,11 +62,10 @@ def main():
     data['nodes'] = list()
     data['links'] = list()
 
-    threshold = 0.45
     filtered_rut = list()
 
     for row in rut_normalizado:
-        if row[2] >= threshold:
+        if passes_threshold(row[2]):
             print(str(row[2]) + " -- YES")
             filtered_rut.append(row)
         else:
@@ -86,7 +92,7 @@ def main():
              'value': row[2]})
 
     # Read results, get coverage and print it
-    with open(path_to_results + 'rut_procesado_50percent.json', 'w'
+    with open(path_to_results + 'rut_procesado_80_20.json', 'w'
               ) as outfile:
         json.dump(data, outfile)
 

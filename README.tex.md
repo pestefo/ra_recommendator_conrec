@@ -37,6 +37,28 @@ The score for a candidate $a$ for participating in question $q$ is:
 
 $$wcfa\_score(a,q) = \sum_{u \in U_q}  R_{uq}(u,q) \cdot R_{uu}(a,u)$$
 
+### How to run
+
+```python
+from src/algorithms/weighted_collaborative_filtering_algorithm import WCFAlgorithm
+
+w = WCFAlgorithm()
+
+# Candidatec user
+candiate_id = 7
+
+# Target question
+question_id = 9045
+
+# Get the score of user 7 for question 9045
+w.score(candidate_id,question_id)
+
+# Get a list of top 100 users recommended for question 9045
+w.ranking(9045,100)
+
+```
+
+
 ## Tag Map Based Algorithm (TBMA)
 
 As there is no previous activity, this approach is content based. It makes use of the tags that are associated to users and questions. Let $T$ be the set of all tags defined in ROS Answers, $Q_t$ the set of all questions tagged under the $t$ tag, and $T_{uq}$ the set of all tags that match the user $u$ and the question $q$. 
@@ -59,7 +81,34 @@ Considerations for improving TMBA approach:
 2. Questions may be better described if we consider the tags present in their title and body
 3. Users can be also be better profiled considering tags in the repositories they participate and their activity on them: e.g. commiting into kinetic branches may increase its counter for *kinetic* tag, a high number of commits in launchfiles may increase the counter for *launch*, *configuration* and *deployment* tags, etc.
 
+```python
+from src/algorithms/tag_map_based_algorithm import TMBAlgorithm
 
+t = TMBAlgorithm()
+
+# Candidatec user
+candiate_id = 7
+
+# Target question
+question_id = 9045
+
+# Get the score of user 7 for question 9045
+t.score(candidate_id,question_id)
+
+# Get a list of top 100 users recommended for question 9045
+t.ranking(9045,100)
+```
+
+
+## Closeness to Asker Algorithm (WCFA)
+
+This approach is similar to the Weighted Collaborative Filtering Algorithm, but it works forcing a _Cold Start_ 
+situation: the score of the candidate is weithed by the relationship between he/she and the asker only. 
+In the case of a question without answers it works exactly as WCFA. 
+
+The score for a candidate $a$ for participating in question $q$ is:
+
+$$wcfa\_score(a,q) =  R_{uq}(\textrm{asker},q) \cdot R_{uu}(a,\textrm{asker})$$
 
 ## Implementation Notes
 
