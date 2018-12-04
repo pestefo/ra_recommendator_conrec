@@ -2,7 +2,7 @@ from weighted_collaborative_filtering_algorithm import WCFAlgorithm
 from math import sqrt
 
 
-class WCFAlgorithmNoMemory(WCFAlgorithm):
+class C2AAlgorithm(WCFAlgorithm):
 
     def get_asker_of_question(self, question_id):
         asker = WCFAlgorithm.act_ask[
