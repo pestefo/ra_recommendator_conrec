@@ -44,7 +44,7 @@ from src/algorithms/weighted_collaborative_filtering_algorithm import WCFAlgorit
 
 w = WCFAlgorithm()
 
-# Candidatec user
+# Candidate user
 candiate_id = 7
 
 # Target question
@@ -86,7 +86,7 @@ from src/algorithms/tag_map_based_algorithm import TMBAlgorithm
 
 t = TMBAlgorithm()
 
-# Candidatec user
+# Candidate user
 candiate_id = 7
 
 # Target question
@@ -100,7 +100,7 @@ t.ranking(9045,100)
 ```
 
 
-## Closeness to Asker Algorithm (WCFA)
+## Closeness to Asker Algorithm (C2AA)
 
 This approach is similar to the Weighted Collaborative Filtering Algorithm, but it works forcing a _Cold Start_ 
 situation: the score of the candidate is weithed by the relationship between he/she and the asker only. 
@@ -108,7 +108,56 @@ In the case of a question without answers it works exactly as WCFA.
 
 The score for a candidate <img src="/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode&sanitize=true" align=middle width=8.68915409999999pt height=14.15524440000002pt/> for participating in question <img src="/tex/d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode&sanitize=true" align=middle width=7.928106449999989pt height=14.15524440000002pt/> is:
 
-<p align="center"><img src="/tex/a17279c76575fffb8b66b5dd134a4247.svg?invert_in_darkmode&sanitize=true" align=middle width=339.0559953pt height=17.031940199999998pt/></p>
+<p align="center"><img src="/tex/b960568364e200c13ff8dfc5fad0b60f.svg?invert_in_darkmode&sanitize=true" align=middle width=333.93609975pt height=17.031940199999998pt/></p>
+
+```python
+from src/algorithms/closeness_to_asker_algorithm import C2AAlgorithm
+
+c = C2AAlgorithm()
+
+# Candidate user
+candiate_id = 7
+
+# Target question
+question_id = 9045
+
+# Get the score of user 7 for question 9045
+c.score(candidate_id,question_id)
+
+# Get a list of top 100 users recommended for question 9045
+c.ranking(9045,100)
+```
+
+## Ranking by (Pseudo)Karma (RPK)
+
+The probably simplest approach to obtain a list of recommended users to answer
+a question is to go to the [user's list](http://answers.ros.org/users) and contact
+users according to their karma level (they are sorted by their karma/reputation points).
+The karma system is based on the up/down votes of a user and it's accepted answers.
+It is calculated regarding also the historical activity of a user (there are day limit point
+increments), then with the data we have (answers, accepted answers, up votes, down votes) we
+can only get an approximation of it.
+The pseudo-karma is calculated by:
+
+<p align="center"><img src="/tex/a99d36616a4cc4420eec02dd20e9f2f1.svg?invert_in_darkmode&sanitize=true" align=middle width=319.13252745pt height=16.438356pt/></p>
+
+The list of the first 150 users sorted by the pseudokarma was got with this query:
+
+```sqlite
+select *, 
+       ( up_votes - down_votes ) * resp_acc as pseudokarma 
+from   (select author, 
+               Count(*) as resp_acc 
+        from   ros_answer 
+        where  is_accepted = 1 /*type='answer'*/ 
+        group  by author 
+        order  by resp_acc desc) as A 
+       join ros_user 
+         on ros_user.id = A.author 
+order  by pseudokarma desc 
+limit  150 
+
+```
 
 ## Implementation Notes
 
