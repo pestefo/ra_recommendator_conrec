@@ -108,7 +108,7 @@ In the case of a question without answers it works exactly as WCFA.
 
 The score for a candidate <img src="/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode&sanitize=true" align=middle width=8.68915409999999pt height=14.15524440000002pt/> for participating in question <img src="/tex/d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode&sanitize=true" align=middle width=7.928106449999989pt height=14.15524440000002pt/> is:
 
-<p align="center"><img src="/tex/b960568364e200c13ff8dfc5fad0b60f.svg?invert_in_darkmode&sanitize=true" align=middle width=333.93609975pt height=17.031940199999998pt/></p>
+<p align="center"><img src="/tex/e8cba981dc51c54fe4620bd265367840.svg?invert_in_darkmode&sanitize=true" align=middle width=229.8646383pt height=16.438356pt/></p>
 
 ```python
 from src/algorithms/closeness_to_asker_algorithm import C2AAlgorithm
