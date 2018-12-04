@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 from con_rec import AbstractConRecAlgorithm
 from weighted_collaborative_filtering_algorithm import WCFAlgorithm
 import json

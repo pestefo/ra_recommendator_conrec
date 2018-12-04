@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# coding: utf-8
 from weighted_collaborative_filtering_algorithm import WCFAlgorithm
 from math import sqrt
 

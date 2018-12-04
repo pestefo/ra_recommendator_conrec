@@ -1,15 +1,16 @@
-from con_rec import AbstractConRecAlgorithm
+from algorithms.con_rec import AbstractConRecAlgorithm
 import pandas as pd
 from math import sqrt
 
 
 class WCFAlgorithm(AbstractConRecAlgorithm):
 
+    dir_preffix = '/home/pestefo/projects/experiment_1/'
     act_ans_comm = None
     act_ask = None
     total_activities = None
 
-    db_file = 'v1.db'
+    db_file = dir_preffix + 'data/v1.db'
 
     def __init__(self):
         AbstractConRecAlgorithm.__init__(self)
