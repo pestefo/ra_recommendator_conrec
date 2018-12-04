@@ -108,7 +108,7 @@ In the case of a question without answers it works exactly as WCFA.
 
 The score for a candidate $a$ for participating in question $q$ is:
 
-$$c2aa\_score(a,q) =  R_{uq}(\textrm{asker},q) \cdot R_{uu}(a,\textrm{asker})$$
+$$c2aa\_score(a,q) = R_{uu}(a,\textrm{asker})$$
 
 ```python
 from src/algorithms/closeness_to_asker_algorithm import C2AAlgorithm
