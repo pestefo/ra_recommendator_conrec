@@ -37,6 +37,28 @@ The score for a candidate <img src="/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?in
 
 <p align="center"><img src="/tex/27bf870bb72dd0ab7cded20720e5ef33.svg?invert_in_darkmode&sanitize=true" align=middle width=319.40076465pt height=40.14634635pt/></p>
 
+### How to run
+
+```python
+from src/algorithms/weighted_collaborative_filtering_algorithm import WCFAlgorithm
+
+w = WCFAlgorithm()
+
+# Candidatec user
+candiate_id = 7
+
+# Target question
+question_id = 9045
+
+# Get the score of user 7 for question 9045
+w.score(candidate_id,question_id)
+
+# Get a list of top 100 users recommended for question 9045
+w.ranking(9045,100)
+
+```
+
+
 ## Tag Map Based Algorithm (TBMA)
 
 As there is no previous activity, this approach is content based. It makes use of the tags that are associated to users and questions. Let <img src="/tex/2f118ee06d05f3c2d98361d9c30e38ce.svg?invert_in_darkmode&sanitize=true" align=middle width=11.889314249999991pt height=22.465723500000017pt/> be the set of all tags defined in ROS Answers, <img src="/tex/025b11cd28d6c936d3062a554bbaf0b5.svg?invert_in_darkmode&sanitize=true" align=middle width=17.96121689999999pt height=22.465723500000017pt/> the set of all questions tagged under the <img src="/tex/4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode&sanitize=true" align=middle width=5.936097749999991pt height=20.221802699999984pt/> tag, and <img src="/tex/ca3b1156ca87c35b6cf1b4ab852bf22a.svg?invert_in_darkmode&sanitize=true" align=middle width=23.81617589999999pt height=22.465723500000017pt/> the set of all tags that match the user <img src="/tex/6dbb78540bd76da3f1625782d42d6d16.svg?invert_in_darkmode&sanitize=true" align=middle width=9.41027339999999pt height=14.15524440000002pt/> and the question <img src="/tex/d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode&sanitize=true" align=middle width=7.928106449999989pt height=14.15524440000002pt/>. 
@@ -59,7 +81,34 @@ Considerations for improving TMBA approach:
 2. Questions may be better described if we consider the tags present in their title and body
 3. Users can be also be better profiled considering tags in the repositories they participate and their activity on them: e.g. commiting into kinetic branches may increase its counter for *kinetic* tag, a high number of commits in launchfiles may increase the counter for *launch*, *configuration* and *deployment* tags, etc.
 
+```python
+from src/algorithms/tag_map_based_algorithm import TMBAlgorithm
 
+t = TMBAlgorithm()
+
+# Candidatec user
+candiate_id = 7
+
+# Target question
+question_id = 9045
+
+# Get the score of user 7 for question 9045
+t.score(candidate_id,question_id)
+
+# Get a list of top 100 users recommended for question 9045
+t.ranking(9045,100)
+```
+
+
+## Closeness to Asker Algorithm (WCFA)
+
+This approach is similar to the Weighted Collaborative Filtering Algorithm, but it works forcing a _Cold Start_ 
+situation: the score of the candidate is weithed by the relationship between he/she and the asker only. 
+In the case of a question without answers it works exactly as WCFA. 
+
+The score for a candidate <img src="/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode&sanitize=true" align=middle width=8.68915409999999pt height=14.15524440000002pt/> for participating in question <img src="/tex/d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode&sanitize=true" align=middle width=7.928106449999989pt height=14.15524440000002pt/> is:
+
+<p align="center"><img src="/tex/a17279c76575fffb8b66b5dd134a4247.svg?invert_in_darkmode&sanitize=true" align=middle width=339.0559953pt height=17.031940199999998pt/></p>
 
 ## Implementation Notes
 
