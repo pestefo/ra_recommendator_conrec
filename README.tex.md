@@ -40,7 +40,7 @@ $$wcfa\_score(a,q) = \sum_{u \in U_q}  R_{uq}(u,q) \cdot R_{uu}(a,u)$$
 ### How to run
 
 ```python
-from src/algorithms/weighted_collaborative_filtering_algorithm import WCFAlgorithm
+from algorithms.weighted_collaborative_filtering_algorithm import WCFAlgorithm
 
 w = WCFAlgorithm()
 
@@ -82,7 +82,7 @@ Considerations for improving TMBA approach:
 3. Users can be also be better profiled considering tags in the repositories they participate and their activity on them: e.g. commiting into kinetic branches may increase its counter for *kinetic* tag, a high number of commits in launchfiles may increase the counter for *launch*, *configuration* and *deployment* tags, etc.
 
 ```python
-from src/algorithms/tag_map_based_algorithm import TMBAlgorithm
+from algorithms.tag_map_based_algorithm import TMBAlgorithm
 
 t = TMBAlgorithm()
 
@@ -111,7 +111,7 @@ The score for a candidate $a$ for participating in question $q$ is:
 $$c2aa\_score(a,q) = R_{uu}(a,\textrm{asker}(q) )$$
 
 ```python
-from src/algorithms/closeness_to_asker_algorithm import C2AAlgorithm
+from algorithms.closeness_to_asker_algorithm import C2AAlgorithm
 
 c = C2AAlgorithm()
 
@@ -141,7 +141,7 @@ The pseudo-karma is calculated by:
 
 $$ \textrm{# accepted answers} \cdot ( \textrm{# up votes} - \textrm{# down votes} ) $$
 
-The list of the first 150 users sorted by the pseudokarma was got with this query:
+The list of the first 150 users sorted by the *pseudokarma* was got with this query:
 
 ```sqlite
 select *, 
@@ -158,6 +158,21 @@ order  by pseudokarma desc
 limit  150 
 
 ```
+
+## Ranking by Karma (RK)
+
+The v1.2 of the dump from ROS Answers includes the information regarding the karma score of users.
+
+The list of the first 150 users sorted by the *karma* was got with this query:
+
+```sqlite
+select id, name, karma, up_votes, down_votes
+from ros_user 
+order by karma desc
+limit 150
+```
+
+
 
 ## Implementation Notes
 

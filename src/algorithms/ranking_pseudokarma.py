@@ -14,6 +14,8 @@ class RankingPseudoKarma():
         with open(RankingPseudoKarma.ranking_file) as csv_data:
             reader = csv.reader(csv_data)
             reader.__next__()   # skip header
+
+            # author,resp_acc,id,name,up_votes,down_votes,pseudokarma
             for row in reader:
                 # id , pseudokarma
                 RankingPseudoKarma.ranking.append((int(row[0]), int(row[-1])))
