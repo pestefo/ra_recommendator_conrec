@@ -40,7 +40,7 @@ The score for a candidate <img src="/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?in
 ### How to run
 
 ```python
-from src/algorithms/weighted_collaborative_filtering_algorithm import WCFAlgorithm
+from algorithms.weighted_collaborative_filtering_algorithm import WCFAlgorithm
 
 w = WCFAlgorithm()
 
@@ -82,7 +82,7 @@ Considerations for improving TMBA approach:
 3. Users can be also be better profiled considering tags in the repositories they participate and their activity on them: e.g. commiting into kinetic branches may increase its counter for *kinetic* tag, a high number of commits in launchfiles may increase the counter for *launch*, *configuration* and *deployment* tags, etc.
 
 ```python
-from src/algorithms/tag_map_based_algorithm import TMBAlgorithm
+from algorithms.tag_map_based_algorithm import TMBAlgorithm
 
 t = TMBAlgorithm()
 
@@ -111,7 +111,7 @@ The score for a candidate <img src="/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?in
 <p align="center"><img src="/tex/5b7bf3d2d9282da74efab5638ece68b9.svg?invert_in_darkmode&sanitize=true" align=middle width=250.57815915pt height=16.438356pt/></p>
 
 ```python
-from src/algorithms/closeness_to_asker_algorithm import C2AAlgorithm
+from algorithms.closeness_to_asker_algorithm import C2AAlgorithm
 
 c = C2AAlgorithm()
 
@@ -141,7 +141,7 @@ The pseudo-karma is calculated by:
 
 <p align="center"><img src="/tex/a99d36616a4cc4420eec02dd20e9f2f1.svg?invert_in_darkmode&sanitize=true" align=middle width=319.13252745pt height=16.438356pt/></p>
 
-The list of the first 150 users sorted by the pseudokarma was got with this query:
+The list of the first 150 users sorted by the *pseudokarma* was got with this query:
 
 ```sqlite
 select *, 
@@ -158,6 +158,21 @@ order  by pseudokarma desc
 limit  150 
 
 ```
+
+## Ranking by Karma (RK)
+
+The v1.2 of the dump from ROS Answers includes the information regarding the karma score of users.
+
+The list of the first 150 users sorted by the *karma* was got with this query:
+
+```sqlite
+select id, name, karma, up_votes, down_votes
+from ros_user 
+order by karma desc
+limit 150
+```
+
+
 
 ## Implementation Notes
 
