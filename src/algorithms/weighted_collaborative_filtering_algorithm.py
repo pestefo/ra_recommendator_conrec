@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 from algorithms.con_rec import AbstractConRecAlgorithm
 import pandas as pd
 from math import sqrt
