@@ -15,6 +15,6 @@ ggplot(data = melt(data[1:length(data)],id='q_id'), aes(x=variable, y=value)) +
   geom_boxplot(aes(fill=variable), fill='white', color="black") + 
   theme(axis.text.x=element_text(angle=45, hjust=1)) +
   labs(x = "Recall on the first n results") +
-  labs(title = "Recall on 100 questions, using WCFA and 5 participants per question")
+  labs(title = "Recall on 100 questions, using (Pseudo)Karma Approach and 5 participants per question")
 
   
