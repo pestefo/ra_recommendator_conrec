@@ -4,14 +4,14 @@ var elements = $('article');
 Array.prototype.forEach.call(els"," function(el) {
     // Do stuff here
 
-	var name = el.getElementsByClassName('post-title')["0"].innerText
-	var category = el.querySelectorAll('.resources ul')["0"]
+	var "name" = el.getElementsByClass"name"('post-title')["0"].innerText
+	var "category" = el.querySelectorAll('.resources ul')["0"]
 	var link = el.querySelectorAll('.resources ul')["1"]
 
-	if (typeof category === 'undefined') {
-		category = ''
+	if (typeof "category" === 'undefined') {
+		"category" = ''
 	}, else {
-		category = category.querySelector('li').innerText
+		"category" = "category".querySelector('li').innerText
 	},
 
 	if (typeof link === 'undefined') {
@@ -22,806 +22,806 @@ Array.prototype.forEach.call(els"," function(el) {
 
 	var tags = $.map(el.querySelectorAll('.tags a')"," function(e){ return e.innerText },)
 ,
-    console.log('\n{\n \tname: "' + name + '",\n\tcategory: "' + category + '",\n\twiki: "' + link + '",\n\ttags: ["' + ,"""tags + '"]\n},');
+    console.log('\n{\n \t"name": "' + "name" + '",\n\t"category": "' + "category" + '",\n\t"wiki": "' + link + '",\n\t"tags": ["' + ,"""tags + '"]\n},');
 },);,
 */
 
 [{
- 	name: "0x Series",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/0x",
-	tags: ["diff-drive","ground","mobile base"]
+ 	"name": "0x Series",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/0x",
+	"tags": ["diff-drive","ground","mobile base"]
 },
 {
- 	name: "ABB Manipulators",
-	category: "manipulator",
-	wiki: "http://wiki.ros.org/abb",
-	tags: ["ROS-Industrial","abb","arm","groovy","hydro","indigo"]
+ 	"name": "ABB Manipulators",
+	"category": "manipulator",
+	"wiki": "http://wiki.ros.org/abb",
+	"tags": ["ROS-Industrial","abb","arm","groovy","hydro","indigo"]
 },
 {
- 	name: "ADAS Development Vehicle Kit",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/ADAS_Development_Vehicle_Kit",
-	tags: ["ackermann","ground"]
+ 	"name": "ADAS Development Vehicle Kit",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/ADAS_Development_Vehicle_Kit",
+	"tags": ["ackermann","ground"]
 },
 {
- 	name: "AGVS",
-	category: "ground",
-	wiki: "http://www.robotnik.eu/mobile-robots/autonomous-agvs/",
-	tags: ["ground","indoor","mobile robot","robotnik","autonomous","logistics robot"]
+ 	"name": "AGVS",
+	"category": "ground",
+	"wiki": "http://www.robotnik.eu/mobile-robots/autonomous-agvs/",
+	"tags": ["ground","indoor","mobile robot","robotnik","autonomous","logistics robot"]
 },
 {
- 	name: "AMIGO",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/AMIGO",
-	tags: ["ground","humanoid","indoor","wheeled"]
+ 	"name": "AMIGO",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/AMIGO",
+	"tags": ["ground","humanoid","indoor","wheeled"]
 },
 {
- 	name: "AR10",
-	category: "component",
-	wiki: "http://www.active-robots.com/ar10-humanoid-robotic-hand",
-	tags: ["baxter","hand","indigo"]
+ 	"name": "AR10",
+	"category": "component",
+	"wiki": "http://www.active-robots.com/ar10-humanoid-robotic-hand",
+	"tags": ["baxter","hand","indigo"]
 },
 {
- 	name: "ARMadillo",
-	category: "ground",
-	wiki: "http://www.robotican.net/armadillo",
-	tags: ["indoor","mobile manipulator","research"]
+ 	"name": "ARMadillo",
+	"category": "ground",
+	"wiki": "http://www.robotican.net/armadillo",
+	"tags": ["indoor","mobile manipulator","research"]
 },
 {
- 	name: "AUBO I-Series",
-	category: "manipulator",
-	wiki: "http://www.our-robotics.com/",
-	tags: ["arm","industrial"]
+ 	"name": "AUBO I-Series",
+	"category": "manipulator",
+	"wiki": "http://www.our-robotics.com/",
+	"tags": ["arm","industrial"]
 },
 {
- 	name: "Allegro Hand",
-	category: "component",
-	wiki: "http://www.simlab.co.kr/AllegroHand/wiki",
-	tags: ["hand"]
+ 	"name": "Allegro Hand",
+	"category": "component",
+	"wiki": "http://www.simlab.co.kr/AllegroHand/wiki",
+	"tags": ["hand"]
 },
 {
- 	name: "AmigoBot",
-	category: "ground",
-	wiki: "http://www.mobilerobots.com/ResearchRobots/AmigoBot.aspx",
-	tags: ["autonomous","diff-drive","ground","mobile base","mobile robot","research","education","wireless","indoor"]
+ 	"name": "AmigoBot",
+	"category": "ground",
+	"wiki": "http://www.mobilerobots.com/ResearchRobots/AmigoBot.aspx",
+	"tags": ["autonomous","diff-drive","ground","mobile base","mobile robot","research","education","wireless","indoor"]
 },
 {
- 	name: "AsTec Pelican and Humm,ingbird"
-	category: "aerial",
-	wiki: "http://www.asctec.de/",
-	tags: ["quadrotor"]
+ 	"name": "AsTec Pelican and Humm,ingbird",
+	"category": "aerial",
+	"wiki": "http://www.asctec.de/",
+	"tags": ["quadrotor"]
 },
 {
- 	name: "Autorally",
-	category: "ground",
-	wiki: "http://autorally.github.io/",
-	tags: ["ackerman","outdoor"]
+ 	"name": "Autorally",
+	"category": "ground",
+	"wiki": "http://autorally.github.io/",
+	"tags": ["ackerman","outdoor"]
 },
 {
- 	name: "BIG-i",
-	category: "ground",
-	wiki: "http://www.nxrobo.com/",
-	tags: ["autonomous","ground","indoor","retail"]
+ 	"name": "BIG-i",
+	"category": "ground",
+	"wiki": "http://www.nxrobo.com/",
+	"tags": ["autonomous","ground","indoor","retail"]
 },
 {
- 	name: "Barrett Hand",
-	category: "component",
-	wiki: "http://wiki.ros.org/Robots/BarrettHand",
-	tags: ["hand"]
+ 	"name": "Barrett Hand",
+	"category": "component",
+	"wiki": "http://wiki.ros.org/Robots/BarrettHand",
+	"tags": ["hand"]
 },
 {
- 	name: "BipedRobin",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/BipedRobin",
-	tags: ["biped","humanoid","walking"]
+ 	"name": "BipedRobin",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/BipedRobin",
+	"tags": ["biped","humanoid","walking"]
 },
 {
- 	name: "BlueROV",
-	category: "marine",
-	wiki: "http://wiki.ros.org/Robots/BlueROV",
-	tags: ["underwater"]
+ 	"name": "BlueROV",
+	"category": "marine",
+	"wiki": "http://wiki.ros.org/Robots/BlueROV",
+	"tags": ["underwater"]
 },
 {
- 	name: "Bo",
-	category: "ground",
-	wiki: "https://www.botsandus.com",
-	tags: ["autonomous","data capture","ground","mobile robot","retail"]
+ 	"name": "Bo",
+	"category": "ground",
+	"wiki": "https://www.botsandus.com",
+	"tags": ["autonomous","data capture","ground","mobile robot","retail"]
 },
 {
- 	name: "Bulldog",
-	category: "ground",
-	wiki: "http://intelrope.de/bulldog-mobile-robot-outdoor",
-	tags: ["ground","mobile robot","outdoor","teleoperator"]
+ 	"name": "Bulldog",
+	"category": "ground",
+	"wiki": "http://intelrope.de/bulldog-mobile-robot-outdoor",
+	"tags": ["ground","mobile robot","outdoor","teleoperator"]
 },
 {
- 	name: "CROM",
-	category: "manipulator",
-	wiki: "http://www.robotnik.eu/upper-bodies/crom/",
-	tags: ["industrial","manipulator","research","robotnik"]
+ 	"name": "CROM",
+	"category": "manipulator",
+	"wiki": "http://www.robotnik.eu/upper-bodies/crom/",
+	"tags": ["industrial","manipulator","research","robotnik"]
 },
 {
- 	name: "Care-O-Bot",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/Care-O-bot",
-	tags: ["ground","indoor","mobile manipulator"]
+ 	"name": "Care-O-Bot",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/Care-O-bot",
+	"tags": ["ground","indoor","mobile manipulator"]
 },
 {
- 	name: "Carla",
-	category: "ground",
-	wiki: "https://www.udacity.com/self-driving-car",
-	tags: ["autonomous vehicle","self-driving"]
+ 	"name": "Carla",
+	"category": "ground",
+	"wiki": "https://www.udacity.com/self-driving-car",
+	"tags": ["autonomous vehicle","self-driving"]
 },
 {
- 	name: "Clearpath Heron USV",
-	category: "marine",
-	wiki: "https://www.clearpathrobotics.com/heron-unmanned-surface-vessel/",
-	tags: ["boat","mobile base","mobile robot","outdoor","outside","research","rugged","surface","teleoperator","water"]
+ 	"name": "Clearpath Heron USV",
+	"category": "marine",
+	"wiki": "https://www.clearpathrobotics.com/heron-unmanned-surface-vessel/",
+	"tags": ["boat","mobile base","mobile robot","outdoor","outside","research","rugged","surface","teleoperator","water"]
 },
 {
- 	name: "Clearpath Husky UGV",
-	category: "ground",
-	wiki: "https://www.clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/",
-	tags: ["mobile base","outdoor","rugged","mobile manipulator","unmanned ground vehicle","mobile robot","outside","research","teleoperator","diff-drive"]
+ 	"name": "Clearpath Husky UGV",
+	"category": "ground",
+	"wiki": "https://www.clearpathrobotics.com/husky-unmanned-ground-vehicle-robot/",
+	"tags": ["mobile base","outdoor","rugged","mobile manipulator","unmanned ground vehicle","mobile robot","outside","research","teleoperator","diff-drive"]
 },
 {
- 	name: "Clearpath Jackal UGV",
-	category: "ground",
-	wiki: "https://www.clearpathrobotics.com/jackal-small-unmanned-ground-vehicle/",
-	tags: ["mobile base","outdoor","rugged","mobile manipulator","unmanned ground vehicle","ground","mobile robot","research","teleoperator","diff-drive","skidsteer"]
+ 	"name": "Clearpath Jackal UGV",
+	"category": "ground",
+	"wiki": "https://www.clearpathrobotics.com/jackal-small-unmanned-ground-vehicle/",
+	"tags": ["mobile base","outdoor","rugged","mobile manipulator","unmanned ground vehicle","ground","mobile robot","research","teleoperator","diff-drive","skidsteer"]
 },
 {
- 	name: "Clearpath Ridgeback",
-	category: "ground",
-	wiki: "http://clearpathrobotics.com/ridgeback",
-	tags: ["holonomic","indoor","mobile base","omnidirectional","inside","research","teleoperator","platform","mobile robot"]
+ 	"name": "Clearpath Ridgeback",
+	"category": "ground",
+	"wiki": "http://clearpathrobotics.com/ridgeback",
+	"tags": ["holonomic","indoor","mobile base","omnidirectional","inside","research","teleoperator","platform","mobile robot"]
 },
 {
- 	name: "Clearpath Warthog UGV",
-	category: "ground",
-	wiki: "https://www.clearpathrobotics.com/warthog-unmanned-ground-vehicle-robot/",
-	tags: ["mobile base","outdoor","rugged","amphibious","unmanned ground vehicle","diff-drive","research"]
+ 	"name": "Clearpath Warthog UGV",
+	"category": "ground",
+	"wiki": "https://www.clearpathrobotics.com/warthog-unmanned-ground-vehicle-robot/",
+	"tags": ["mobile base","outdoor","rugged","amphibious","unmanned ground vehicle","diff-drive","research"]
 },
 {
- 	name: "CoroBot",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/Corobot",
-	tags: ["diff-drive","indoor"]
+ 	"name": "CoroBot",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/Corobot",
+	"tags": ["diff-drive","indoor"]
 },
 {
- 	name: "Crazyflie",
-	category: "aerial",
-	wiki: "https://www.bitcraze.io/",
-	tags: ["aerial","quadcopter"]
+ 	"name": "Crazyflie",
+	"category": "aerial",
+	"wiki": "https://www.bitcraze.io/",
+	"tags": ["aerial","quadcopter"]
 },
 {
- 	name: "Cyton Gamma",
-	category: "manipulator",
-	wiki: "http://wiki.ros.org/Robots/Cyton-Gamma",
-	tags: ["7dof","arm"]
+ 	"name": "Cyton Gamma",
+	"category": "manipulator",
+	"wiki": "http://wiki.ros.org/Robots/Cyton-Gamma",
+	"tags": ["7dof","arm"]
 },
 {
- 	name: "Dalurobot_chassis",
-	category: "ground",
-	wiki: "http://www.dalurobot.com/web/index.html",
-	tags: ["mobile base","logistics robot","omnidirectional","wheeled","motor"]
+ 	"name": "Dalurobot_chassis",
+	"category": "ground",
+	"wiki": "http://www.dalurobot.com/web/index.html",
+	"tags": ["mobile base","logistics robot","omnidirectional","wheeled","motor"]
 },
 {
- 	name: "Dynamixel",
-	category: "component",
-	wiki: "http://en.robotis.com/model/page.php?co_id=actuator",
-	tags: ["indigo","kinetic","melodic","motor","actuator","education","research","robotis","dynamixel"]
+ 	"name": "Dynamixel",
+	"category": "component",
+	"wiki": "http://en.robotis.com/model/page.php?co_id=actuator",
+	"tags": ["indigo","kinetic","melodic","motor","actuator","education","research","robotis","dynamixel"]
 },
 {
- 	name: "Elfin",
-	category: "manipulator",
-	wiki: "http://www.hansrobot.com/",
-	tags: ["arm","manipulator","research","automation","moveit"]
+ 	"name": "Elfin",
+	"category": "manipulator",
+	"wiki": "http://www.hansrobot.com/",
+	"tags": ["arm","manipulator","research","automation","moveit"]
 },
 {
- 	name: "Erle-Brain",
-	category: "component",
-	wiki: "http://wiki.ros.org/Robots/Erle-Brain-2",
-	tags: ["aerial","computation"]
+ 	"name": "Erle-Brain",
+	"category": "component",
+	"wiki": "http://wiki.ros.org/Robots/Erle-Brain-2",
+	"tags": ["aerial","computation"]
 },
 {
- 	name: "E,rle-Copter"
-	category: "",
-	wiki: "",
-	tags: ["aerial","indigo","quadcopter"]
+ 	"name": "Erle-Copter",
+	"category": "",
+	"wiki": "",
+	"tags": ["aerial","indigo","quadcopter"]
 },
 {
- 	name: "Erle-HexaCopter",
-	category: "aerial",
-	wiki: "https://erlerobotics.com/blog/product/erle-hexacopter/",
-	tags: ["aerial","hexacopter"]
+ 	"name": "Erle-HexaCopter",
+	"category": "aerial",
+	"wiki": "https://erlerobotics.com/blog/product/erle-hexacopter/",
+	"tags": ["aerial","hexacopter"]
 },
 {
- 	name: "Erle-Plane",
-	category: "aerial",
-	wiki: "http://wiki.ros.org/Robots/Erle-Plane",
-	tags: ["aerial","fixed-wing","plane"]
+ 	"name": "Erle-Plane",
+	"category": "aerial",
+	"wiki": "http://wiki.ros.org/Robots/Erle-Plane",
+	"tags": ["aerial","fixed-wing","plane"]
 },
 {
- 	name: "Erle-Rover",
-	category: "ground",
-	wiki: "http://erlerobotics.com/blog/erle-rover/",
-	tags: ["ackermann","ground"]
+ 	"name": "Erle-Rover",
+	"category": "ground",
+	"wiki": "http://erlerobotics.com/blog/erle-rover/",
+	"tags": ["ackermann","ground"]
 },
 {
- 	name: "Erle-Spider",
-	category: "ground",
-	wiki: "http://erlerobotics.com/docs/Robots/Erle-Spider/index.html",
-	tags: ["ground","legged"]
+ 	"name": "Erle-Spider",
+	"category": "ground",
+	"wiki": "http://erlerobotics.com/docs/Robots/Erle-Spider/index.html",
+	"tags": ["ground","legged"]
 },
 {
- 	name: "Evarobot",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/evarobot",
-	tags: ["diff-drive","ground"]
+ 	"name": "Evarobot",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/evarobot",
+	"tags": ["diff-drive","ground"]
 },
 {
- 	name: "Fanuc",
-	category: "manipulator",
-	wiki: "http://wiki.ros.org/fanuc",
-	tags: ["ROS-Industrial","arm","industrial","manipulator","arm","fanuc"]
+ 	"name": "Fanuc",
+	"category": "manipulator",
+	"wiki": "http://wiki.ros.org/fanuc",
+	"tags": ["ROS-Industrial","arm","industrial","manipulator","arm","fanuc"]
 },
 {
- 	name: "Fetch",
-	category: "ground",
-	wiki: "http://docs.fetchrobotics.com",
-	tags: ["diff-drive","ground","mobile manipulator"]
+ 	"name": "Fetch",
+	"category": "ground",
+	"wiki": "http://docs.fetchrobotics.com",
+	"tags": ["diff-drive","ground","mobile manipulator"]
 },
 {
- 	name: "ForteRC",
-	category: "ground",
-	wiki: "http://wiki.ros.org/ingeniarius/ForteRC",
-	tags: ["holonomic","indoor","research"]
+ 	"name": "ForteRC",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/ingeniarius/ForteRC",
+	"tags": ["holonomic","indoor","research"]
 },
 {
- 	name: "Freight",
-	category: "ground",
-	wiki: "http://docs.fetchrobotics.com/",
-	tags: ["diff-drive","ground","indoor"]
+ 	"name": "Freight",
+	"category": "ground",
+	"wiki": "http://docs.fetchrobotics.com/",
+	"tags": ["diff-drive","ground","indoor"]
 },
 {
- 	name: "Gapter",
-	category: "aerial",
-	wiki: "http://wiki.gaitech.hk/gapter/index.html",
-	tags: ["educational","copter","MAVLink"]
+ 	"name": "Gapter",
+	"category": "aerial",
+	"wiki": "http://wiki.gaitech.hk/gapter/index.html",
+	"tags": ["educational","copter","MAVLink"]
 },
 {
- 	name: "Guardian",
-	category: "ground",
-	wiki: "http://www.robotnik.eu/mobile-robots/guardian/",
-	tags: ["ground","outside","mobile robot","robotnik","autonomous"]
+ 	"name": "Guardian",
+	"category": "ground",
+	"wiki": "http://www.robotnik.eu/mobile-robots/guardian/",
+	"tags": ["ground","outside","mobile robot","robotnik","autonomous"]
 },
 {
- 	name: "Hamster",
-	category: "ground",
-	wiki: "http://cogniteam.com/hamster4.html",
-	tags: ["ackermann","ground","indoor","outdoor"]
+ 	"name": "Hamster",
+	"category": "ground",
+	"wiki": "http://cogniteam.com/hamster4.html",
+	"tags": ["ackermann","ground","indoor","outdoor"]
 },
 {
- 	name: "Han's Cute",
-	category: "manipulator",
-	wiki: "http://www.hansrobot.com/",
-	tags: ["7dof","arm","manipulator","research","moveit"]
+ 	"name": "Han's Cute",
+	"category": "manipulator",
+	"wiki": "http://www.hansrobot.com/",
+	"tags": ["7dof","arm","manipulator","research","moveit"]
 },
 {
- 	name: "Hansbot",
-	category: "ground",
-	wiki: "http://www.hansmotor.com/",
-	tags: ["industrial","mobile base","research"]
+ 	"name": "Hansbot",
+	"category": "ground",
+	"wiki": "http://www.hansmotor.com/",
+	"tags": ["industrial","mobile base","research"]
 },
 {
- 	name: "HiroNXO",
-	category: "ground",
-	wiki: "http://nextage.kawada.jp/en/concept/",
-	tags: ["mobile manipulator","research"]
+ 	"name": "HiroNXO",
+	"category": "ground",
+	"wiki": "http://nextage.kawada.jp/en/concept/",
+	"tags": ["mobile manipulator","research"]
 },
 {
- 	name: "Innok Heros",
-	category: "ground",
-	wiki: "http://www.innok-robotics.de/en/products/heros/applications/research-platform",
-	tags: ["ground","hydro","indigo","jade","kinetic","lunar","outdoor","rugged","autonomous","diff-drive","ground","outdoor","mobile base","mobile robot","research","skidsteer"]
+ 	"name": "Innok Heros",
+	"category": "ground",
+	"wiki": "http://www.innok-robotics.de/en/products/heros/applications/research-platform",
+	"tags": ["ground","hydro","indigo","jade","kinetic","lunar","outdoor","rugged","autonomous","diff-drive","ground","outdoor","mobile base","mobile robot","research","skidsteer"]
 },
 {
- 	name: "Intel Edison",
-	category: "component",
-	wiki: "https://software.intel.com/en-us/iot/hardware/edison",
-	tags: ["computation","single-board-computer"]
+ 	"name": "Intel Edison",
+	"category": "component",
+	"wiki": "https://software.intel.com/en-us/iot/hardware/edison",
+	"tags": ["computation","single-board-computer"]
 },
 {
- 	name: "Intel Euclid",
-	category: "component",
-	wiki: "euclidcommunity.intel.com",
-	tags: ["computation","depth","development kit","perception","tracking"]
+ 	"name": "Intel Euclid",
+	"category": "component",
+	"wiki": "euclidcommunity.intel.com",
+	"tags": ["computation","depth","development kit","perception","tracking"]
 },
 {
- 	name: "JACO",
-	category: "manipulator",
-	wiki: "http://wiki.ros.org/Robots/JACO",
-	tags: ["arm","research"]
+ 	"name": "JACO",
+	"category": "manipulator",
+	"wiki": "http://wiki.ros.org/Robots/JACO",
+	"tags": ["arm","research"]
 },
 {
- 	name: "Jaguar",
-	category: "ground",
-	wiki: "http://jaguar.drrobot.com/index.asp",
-	tags: ["ground","outdoor"]
+ 	"name": "Jaguar",
+	"category": "ground",
+	"wiki": "http://jaguar.drrobot.com/index.asp",
+	"tags": ["ground","outdoor"]
 },
 {
- 	name: "Jazz",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/Jazz",
-	tags: ["ground","inside","telepresence"]
+ 	"name": "Jazz",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/Jazz",
+	"tags": ["ground","inside","telepresence"]
 },
 {
- 	name: "Jet",
-	category: "ground",
-	wiki: "https://developer.nvidia.com/jet-robot",
-	tags: ["autonomous","development kit","diff-drive","education","educational","ground","mobile robot","teaching robot","wheeled"]
+ 	"name": "Jet",
+	"category": "ground",
+	"wiki": "https://developer.nvidia.com/jet-robot",
+	"tags": ["autonomous","development kit","diff-drive","education","educational","ground","mobile robot","teaching robot","wheeled"]
 },
 {
- 	name: "Kingfisher",
-	category: "marine",
-	wiki: "http://clearpathrobotics.com/kingfisher",
-	tags: ["boat","surface"]
+ 	"name": "Kingfisher",
+	"category": "marine",
+	"wiki": "http://clearpathrobotics.com/kingfisher",
+	"tags": ["boat","surface"]
 },
 {
- 	name: "Kobuki",
-	category: "ground",
-	wiki: "http://wiki.ros.org/kobuki",
-	tags: ["diff-drive","ground","indoor"]
+ 	"name": "Kobuki",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/kobuki",
+	"tags": ["diff-drive","ground","indoor"]
 },
 {
- 	name: "Lego NXT",
-	category: "component",
-	wiki: "http://wiki.ros.org/Robots/NXT",
-	tags: ["retail"]
+ 	"name": "Lego NXT",
+	"category": "component",
+	"wiki": "http://wiki.ros.org/Robots/NXT",
+	"tags": ["retail"]
 },
 {
- 	name: "MICO",
-	category: "manipulator",
-	wiki: "http://wiki.ros.org/Robots/MICO",
-	tags: ["arm","research"]
+ 	"name": "MICO",
+	"category": "manipulator",
+	"wiki": "http://wiki.ros.org/Robots/MICO",
+	"tags": ["arm","research"]
 },
 {
- 	name: "MP-400",
-	category: "ground",
-	wiki: "http://www.neobotix-robots.com/mobile-robot-mp-400.html",
-	tags: ["mobile base","diff-drive","industrial","retail"]
+ 	"name": "MP-400",
+	"category": "ground",
+	"wiki": "http://www.neobotix-robots.com/mobile-robot-mp-400.html",
+	"tags": ["mobile base","diff-drive","industrial","retail"]
 },
 {
- 	name: "MPO-500",
-	category: "ground",
-	wiki: "http://www.neobotix-robots.com/mecanum-robot-mpo-500.html",
-	tags: ["holonomic","mecanum","mobile base","mobile manipulator"]
+ 	"name": "MPO-500",
+	"category": "ground",
+	"wiki": "http://www.neobotix-robots.com/mecanum-robot-mpo-500.html",
+	"tags": ["holonomic","mecanum","mobile base","mobile manipulator"]
 },
 {
- 	name: "MPO-700",
-	category: "ground",
-	wiki: "http://www.neobotix-robots.com/omnidirectional-robot-mpo-700.html",
-	tags: ["holonomic","mobile base","mobile manipulator","omniwheel"]
+ 	"name": "MPO-700",
+	"category": "ground",
+	"wiki": "http://www.neobotix-robots.com/omnidirectional-robot-mpo-700.html",
+	"tags": ["holonomic","mobile base","mobile manipulator","omniwheel"]
 },
 {
- 	name: "MRP2",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/MRP2",
-	tags: ["diff-drive","indigo","mobile base","research"]
+ 	"name": "MRP2",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/MRP2",
+	"tags": ["diff-drive","indigo","mobile base","research"]
 },
 {
- 	name: "Maggie",
-	category: "ground",
-	wiki: "http://roboticslab.uc3m.es/roboticslab/robot/maggie",
-	tags: ["mobile robot","research"]
+ 	"name": "Maggie",
+	"category": "ground",
+	"wiki": "http://roboticslab.uc3m.es/roboticslab/robot/maggie",
+	"tags": ["mobile robot","research"]
 },
 {
- 	name: "Magni",
-	category: "ground",
-	wiki: "https://ubiquityrobotics.com/",
-	tags: ["autonomus","education","kinetic","mobile robot","platform","research"]
+ 	"name": "Magni",
+	"category": "ground",
+	"wiki": "https://ubiquityrobotics.com/",
+	"tags": ["autonomus","education","kinetic","mobile robot","platform","research"]
 },
 {
- 	name: "Mecanumbot",
-	category: "ground",
-	wiki: "http://javconcepts.com/tag/mecanumbot/",
-	tags: ["holonomic","mecanum","mobile base"]
+ 	"name": "Mecanumbot",
+	"category": "ground",
+	"wiki": "http://javconcepts.com/tag/mecanumbot/",
+	"tags": ["holonomic","mecanum","mobile base"]
 },
 {
- 	name: "MiabotPRO",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/miabotPro",
-	tags: ["autonomous","cturtle","mobile robot","research"]
+ 	"name": "MiabotPRO",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/miabotPro",
+	"tags": ["autonomous","cturtle","mobile robot","research"]
 },
 {
- 	name: "Mini-Lab",
-	category: "ground",
-	wiki: "http://enovarobotics.com/",
-	tags: ["ground","indoor"]
+ 	"name": "Mini-Lab",
+	"category": "ground",
+	"wiki": "http://enovarobotics.com/",
+	"tags": ["ground","indoor"]
 },
 {
- 	name: "Mobility Base",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/Mobility_Base",
-	tags: ["baxter","ground"]
+ 	"name": "Mobility Base",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/Mobility_Base",
+	"tags": ["baxter","ground"]
 },
 {
- 	name: "Motoman",
-	category: "manipulator",
-	wiki: "http://wiki.ros.org/motoman",
-	tags: ["ROS-Industrial","arm","industrial","manipulator","motoman"]
+ 	"name": "Motoman",
+	"category": "manipulator",
+	"wiki": "http://wiki.ros.org/motoman",
+	"tags": ["ROS-Industrial","arm","industrial","manipulator","motoman"]
 },
 {
- 	name: "Mover",
-	category: "manipulator",
-	wiki: "http://wiki.ros.org/Robots/CPRMover",
-	tags: ["arm","research"]
+ 	"name": "Mover",
+	"category": "manipulator",
+	"wiki": "http://wiki.ros.org/Robots/CPRMover",
+	"tags": ["arm","research"]
 },
 {
- 	name: "Nao",
-	category: "ground",
-	wiki: "https://www.ald.softbankrobotics.com/en/cool-robots/nao",
-	tags: ["biped","humanoid","walking"]
+ 	"name": "Nao",
+	"category": "ground",
+	"wiki": "https://www.ald.softbankrobotics.com/en/cool-robots/nao",
+	"tags": ["biped","humanoid","walking"]
 },
 {
- 	name: "Nav2",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/Nav2",
-	tags: ["holonomic","mobile robot","omni-wheel"]
+ 	"name": "Nav2",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/Nav2",
+	"tags": ["holonomic","mobile robot","omni-wheel"]
 },
 {
- 	name: "Navio2",
-	category: "component",
-	wiki: "http://emlid.com",
-	tags: ["ground","aerial","computation","research","autonomous","quadcopter"]
+ 	"name": "Navio2",
+	"category": "component",
+	"wiki": "http://emlid.com",
+	"tags": ["ground","aerial","computation","research","autonomous","quadcopter"]
 },
 {
- 	name: "Oculus Prime",
-	category: "ground",
-	wiki: "http://www.xaxxon.com/oculusprime/slamnavigator",
-	tags: ["ground","wheeled","autonomous","research","skidsteer","mobile robot","education"]
+ 	"name": "Oculus Prime",
+	"category": "ground",
+	"wiki": "http://www.xaxxon.com/oculusprime/slamnavigator",
+	"tags": ["ground","wheeled","autonomous","research","skidsteer","mobile robot","education"]
 },
 {
- 	name: "OpenCR",
-	category: "component",
-	wiki: "http://emanual.robotis.com/docs/en/parts/controller/opencr10/",
-	tags: ["kinetic","melodic","computation","embedded board","microcontroller","education","research","robotis","dynamixel"]
+ 	"name": "OpenCR",
+	"category": "component",
+	"wiki": "http://emanual.robotis.com/docs/en/parts/controller/opencr10/",
+	"tags": ["kinetic","melodic","computation","embedded board","microcontroller","education","research","robotis","dynamixel"]
 },
 {
- 	name: "OpenManipulator",
-	category: "manipulator",
-	wiki: "http://emanual.robotis.com/docs/en/platform/openmanipulator/",
-	tags: ["kinetic","melodic","ground","arm","manipulator","education","research","platform","robotis","dynamixel"]
+ 	"name": "OpenManipulator",
+	"category": "manipulator",
+	"wiki": "http://emanual.robotis.com/docs/en/platform/openmanipulator/",
+	"tags": ["kinetic","melodic","ground","arm","manipulator","education","research","platform","robotis","dynamixel"]
 },
 {
- 	name: "Otto Bock SensorHand",
-	category: "component",
-	wiki: "http://wiki.ros.org/Robots/sensorhand_speed",
-	tags: ["hand","prosthetics"]
+ 	"name": "Otto Bock SensorHand",
+	"category": "component",
+	"wiki": "http://wiki.ros.org/Robots/sensorhand_speed",
+	"tags": ["hand","prosthetics"]
 },
 {
- 	name: "PR2",
-	category: "ground",
-	wiki: "http://www.willowgarage.com/pages/pr2/overview",
-	tags: ["cturtle","fuerte","hydro","indigo","indoor","ground","mobile manipulator"]
+ 	"name": "PR2",
+	"category": "ground",
+	"wiki": "http://www.willowgarage.com/pages/pr2/overview",
+	"tags": ["cturtle","fuerte","hydro","indigo","indoor","ground","mobile manipulator"]
 },
 {
- 	name: "PRBT",
-	category: "manipulator",
-	wiki: "https://www.pilz.com/en-DE/products-solutions/robotics",
-	tags: ["6dof","ROS-Industrial","arm","industrial","kinetic","manipulator","melodic","PILZ","research"]
+ 	"name": "PRBT",
+	"category": "manipulator",
+	"wiki": "https://www.pilz.com/en-DE/products-solutions/robotics",
+	"tags": ["6dof","ROS-Industrial","arm","industrial","kinetic","manipulator","melodic","PILZ","research"]
 },
 {
- 	name: "Panther",
-	category: "ground",
-	wiki: "http://rnext.it/panther/",
-	tags: ["diff-drive","ground","mobile robot","outdoor","research"]
+ 	"name": "Panther",
+	"category": "ground",
+	"wiki": "http://rnext.it/panther/",
+	"tags": ["diff-drive","ground","mobile robot","outdoor","research"]
 },
 {
- 	name: "Pepper",
-	category: "ground",
-	wiki: "http://wiki.ros.org/pepper",
-	tags: ["mobile manipulator","retail"]
+ 	"name": "Pepper",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/pepper",
+	"tags": ["mobile manipulator","retail"]
 },
 {
- 	name: "Pioneer 3-AT",
-	category: "ground",
-	wiki: "http://www.mobilerobots.com/ResearchRobots/P3AT.aspx",
-	tags: ["autonomous","diff-drive","ground","mobile base","mobile robot","research","skidsteer"]
+ 	"name": "Pioneer 3-AT",
+	"category": "ground",
+	"wiki": "http://www.mobilerobots.com/ResearchRobots/P3AT.aspx",
+	"tags": ["autonomous","diff-drive","ground","mobile base","mobile robot","research","skidsteer"]
 },
 {
- 	name: "Pioneer 3-DX",
-	category: "ground",
-	wiki: "http://www.mobilerobots.com/ResearchRobots/PioneerP3DX.aspx",
-	tags: ["autonomous","diff-drive","ground","indoor","mobile base","mobile robot","research"]
+ 	"name": "Pioneer 3-DX",
+	"category": "ground",
+	"wiki": "http://www.mobilerobots.com/ResearchRobots/PioneerP3DX.aspx",
+	"tags": ["autonomous","diff-drive","ground","indoor","mobile base","mobile robot","research"]
 },
 {
- 	name: "Pioneer LX",
-	category: "ground",
-	wiki: "http://www.mobilerobots.com/ResearchRobots/PioneerLX.aspx",
-	tags: ["autonomous","diff-drive","ground","indoor","mobile base","mobile robot","research"]
+ 	"name": "Pioneer LX",
+	"category": "ground",
+	"wiki": "http://www.mobilerobots.com/ResearchRobots/PioneerLX.aspx",
+	"tags": ["autonomous","diff-drive","ground","indoor","mobile base","mobile robot","research"]
 },
 {
- 	name: "Pioneer LX Manipulator",
-	category: "ground",
-	wiki: "http://www.mobilerobots.com/ResearchRobots/PioneerManipulator.aspx",
-	tags: ["autonomous","diff-drive","ground","indoor","mobile base","mobile robot","research","mobile manipulator"]
+ 	"name": "Pioneer LX Manipulator",
+	"category": "ground",
+	"wiki": "http://www.mobilerobots.com/ResearchRobots/PioneerManipulator.aspx",
+	"tags": ["autonomous","diff-drive","ground","indoor","mobile base","mobile robot","research","mobile manipulator"]
 },
 {
- 	name: "PowerBot",
-	category: "ground",
-	wiki: "http://www.mobilerobots.com/ResearchRobots/PowerBot.aspx",
-	tags: ["autonomous","diff-drive","ground","indoor","mobile base","mobile robot","research"]
+ 	"name": "PowerBot",
+	"category": "ground",
+	"wiki": "http://www.mobilerobots.com/ResearchRobots/PowerBot.aspx",
+	"tags": ["autonomous","diff-drive","ground","indoor","mobile base","mobile robot","research"]
 },
 {
- 	name: "QTrobot",
-	category: "ground",
-	wiki: "http://www.luxai.com",
-	tags: ["educational","expressive","humanoid","robot-for-autism","social","teaching robot"]
+ 	"name": "QTrobot",
+	"category": "ground",
+	"wiki": "http://www.luxai.com",
+	"tags": ["educational","expressive","humanoid","robot-for-autism","social","teaching robot"]
 },
 {
- 	name: "RB-1",
-	category: "ground",
-	wiki: "http://www.robotnik.eu/manipulators/rb-one/",
-	tags: ["ground","indoor","mobile manipulator","research","robotnik"]
+ 	"name": "RB-1",
+	"category": "ground",
+	"wiki": "http://www.robotnik.eu/manipulators/rb-one/",
+	"tags": ["ground","indoor","mobile manipulator","research","robotnik"]
 },
 {
- 	name: "RB-1 BASE",
-	category: "ground",
-	wiki: "http://www.robotnik.eu/mobile-robots/rb-1-base/",
-	tags: ["autonomous","diff-drive","indoor","mobile robot","research","elevator","logistics robot","robotnik"]
+ 	"name": "RB-1 BASE",
+	"category": "ground",
+	"wiki": "http://www.robotnik.eu/mobile-robots/rb-1-base/",
+	"tags": ["autonomous","diff-drive","indoor","mobile robot","research","elevator","logistics robot","robotnik"]
 },
 {
- 	name: "RBCAR",
-	category: "ground",
-	wiki: "http://www.robotnik.eu/mobile-robots/rbcar/",
-	tags: ["ackermann","ground","outdoor","mobile robot","robotnik","autonomous"]
+ 	"name": "RBCAR",
+	"category": "ground",
+	"wiki": "http://www.robotnik.eu/mobile-robots/rbcar/",
+	"tags": ["ackermann","ground","outdoor","mobile robot","robotnik","autonomous"]
 },
 {
- 	name: "REEM",
-	category: "ground",
-	wiki: "http://pal-robotics.com/",
-	tags: ["humanoid","PAL Robotics"]
+ 	"name": "REEM",
+	"category": "ground",
+	"wiki": "http://pal-robotics.com/",
+	"tags": ["humanoid","PAL Robotics"]
 },
 {
- 	name: "REEM-C",
-	category: "ground",
-	wiki: "http://pal-robotics.com/",
-	tags: ["humanoid","biped","walking","education","ground","indigo","kinetic","manipulator","melodic","platform","research","PAL Robotics"]
+ 	"name": "REEM-C",
+	"category": "ground",
+	"wiki": "http://pal-robotics.com/",
+	"tags": ["humanoid","biped","walking","education","ground","indigo","kinetic","manipulator","melodic","platform","research","PAL Robotics"]
 },
 {
- 	name: "RH-P12-RN",
-	category: "component",
-	wiki: "http://emanual.robotis.com/docs/en/platform/rh_p12_rn/",
-	tags: ["kinetic","melodic","hand","gripper","education","research","platform","robotis","dynamixel"]
+ 	"name": "RH-P12-RN",
+	"category": "component",
+	"wiki": "http://emanual.robotis.com/docs/en/platform/rh_p12_rn/",
+	"tags": ["kinetic","melodic","hand","gripper","education","research","platform","robotis","dynamixel"]
 },
 {
- 	name: "ROBOTIS MANIPULATOR",
-	category: "manipulator",
-	wiki: "http://emanual.robotis.com/docs/en/platform/manipulator_h/introduction/",
-	tags: ["kinetic","melodic","arm","manipulator","education","research","platform","robotis","dynamixel"]
+ 	"name": "ROBOTIS MANIPULATOR",
+	"category": "manipulator",
+	"wiki": "http://emanual.robotis.com/docs/en/platform/manipulator_h/introduction/",
+	"tags": ["kinetic","melodic","arm","manipulator","education","research","platform","robotis","dynamixel"]
 },
 {
- 	name: "ROBOTIS OP",
-	category: "ground",
-	wiki: "http://emanual.robotis.com/docs/en/platform/op3/introduction/",
-	tags: ["kinetic","melodic","ground","biped","humanoid","walking","education","research","platform","robotis","dynamixel"]
+ 	"name": "ROBOTIS OP",
+	"category": "ground",
+	"wiki": "http://emanual.robotis.com/docs/en/platform/op3/introduction/",
+	"tags": ["kinetic","melodic","ground","biped","humanoid","walking","education","research","platform","robotis","dynamixel"]
 },
 {
- 	name: "ROSbot",
-	category: "ground",
-	wiki: "https://husarion.com/core2/tutorials/ros-tutorials/1-ros-introduction/",
-	tags: ["autonomous","ground","lidar","mobile base","mobile robot","research","wheeled","wireless"]
+ 	"name": "ROSbot",
+	"category": "ground",
+	"wiki": "https://husarion.com/core2/tutorials/ros-tutorials/1-ros-introduction/",
+	"tags": ["autonomous","ground","lidar","mobile base","mobile robot","research","wheeled","wireless"]
 },
 {
- 	name: "ROSbot 2.0",
-	category: "ground",
-	wiki: "https://husarion.com/#rosbot",
-	tags: ["autonomous","education","ground","lidar","mobile base","research","wireless"]
+ 	"name": "ROSbot 2.0",
+	"category": "ground",
+	"wiki": "https://husarion.com/#rosbot",
+	"tags": ["autonomous","education","ground","lidar","mobile base","research","wireless"]
 },
 {
- 	name: "Revel",
-	category: "manipulator",
-	wiki: "https://svenzva.com/revel",
-	tags: ["arm","manipulator","moveit","research","retail"]
+ 	"name": "Revel",
+	"category": "manipulator",
+	"wiki": "https://svenzva.com/revel",
+	"tags": ["arm","manipulator","moveit","research","retail"]
 },
 {
- 	name: "RoboSavvy-Balance",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/RoboSavvy-Balance",
-	tags: ["balancing","wheeled"]
+ 	"name": "RoboSavvy-Balance",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/RoboSavvy-Balance",
+	"tags": ["balancing","wheeled"]
 },
 {
- 	name: "Robonaut2",
-	category: "manipulator",
-	wiki: "http://robonaut.jsc.nasa.gov/R2/",
-	tags: ["humanoid","space"]
+ 	"name": "Robonaut2",
+	"category": "manipulator",
+	"wiki": "http://robonaut.jsc.nasa.gov/R2/",
+	"tags": ["humanoid","space"]
 },
 {
- 	name: "Robotino",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/Robotino",
-	tags: ["ground","indoor","omniwheel"]
+ 	"name": "Robotino",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/Robotino",
+	"tags": ["ground","indoor","omniwheel"]
 },
 {
- 	name: "Roch",
-	category: "ground",
-	wiki: "http://www.soyrobotics.com/",
-	tags: ["ground","indigo","indoor","mobile base","research"]
+ 	"name": "Roch",
+	"category": "ground",
+	"wiki": "http://www.soyrobotics.com/",
+	"tags": ["ground","indigo","indoor","mobile base","research"]
 },
 {
- 	name: "Romeo",
-	category: "ground",
-	wiki: "https://projetromeo.com",
-	tags: ["humanoid","legged","research"]
+ 	"name": "Romeo",
+	"category": "ground",
+	"wiki": "https://projetromeo.com",
+	"tags": ["humanoid","legged","research"]
 },
 {
- 	name: "Roomba",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/Roomba",
-	tags: ["autonomous","diff-drive","indoor","retail","vacuum"]
+ 	"name": "Roomba",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/Roomba",
+	"tags": ["autonomous","diff-drive","indoor","retail","vacuum"]
 },
 {
- 	name: "SRA Service Robot Arm",
-	category: "manipulator",
-	wiki: "http://www.cpr-robots.com/products/sra.html",
-	tags: ["arm"]
+ 	"name": "SRA Service Robot Arm",
+	"category": "manipulator",
+	"wiki": "http://www.cpr-robots.com/products/sra.html",
+	"tags": ["arm"]
 },
 {
- 	name: "Schunk LWA 4P",
-	category: "manipulator",
-	wiki: "http://www.schunk-modular-robotics.com/en/home/products/powerball-lightweight-arm-lwa-4p.html",
-	tags: ["arm","industrial","research"]
+ 	"name": "Schunk LWA 4P",
+	"category": "manipulator",
+	"wiki": "http://www.schunk-modular-robotics.com/en/home/products/powerball-lightweight-arm-lwa-4p.html",
+	"tags": ["arm","industrial","research"]
 },
 {
- 	name: "Schunk SVH",
-	category: "component",
-	wiki: "https://de.schunk.com/de_en/gripping-systems/series/svh/",
-	tags: ["hand","humanoid","industrial","manipulator","prosthetics"]
+ 	"name": "Schunk SVH",
+	"category": "component",
+	"wiki": "https://de.schunk.com/de_en/gripping-systems/series/svh/",
+	"tags": ["hand","humanoid","industrial","manipulator","prosthetics"]
 },
 {
- 	name: "Seekur",
-	category: "ground",
-	wiki: "http://www.mobilerobots.com/ResearchRobots/Seekur.aspx",
-	tags: ["autonomous","ground","outdoor","mobile base","mobile robot","research","holonomic"]
+ 	"name": "Seekur",
+	"category": "ground",
+	"wiki": "http://www.mobilerobots.com/ResearchRobots/Seekur.aspx",
+	"tags": ["autonomous","ground","outdoor","mobile base","mobile robot","research","holonomic"]
 },
 {
- 	name: "Seekur Jr",
-	category: "ground",
-	wiki: "http://www.mobilerobots.com/ResearchRobots/SeekurJr.aspx",
-	tags: ["autonomous","diff-drive","ground","outdoor","mobile base","mobile robot","research","skidsteer"]
+ 	"name": "Seekur Jr",
+	"category": "ground",
+	"wiki": "http://www.mobilerobots.com/ResearchRobots/SeekurJr.aspx",
+	"tags": ["autonomous","diff-drive","ground","outdoor","mobile base","mobile robot","research","skidsteer"]
 },
 {
- 	name: "Segway RMPv3",
-	category: "ground",
-	wiki: "http://stanleyinnovation.com/",
-	tags: ["ground","indigo"]
+ 	"name": "Segway RMPv3",
+	"category": "ground",
+	"wiki": "http://stanleyinnovation.com/",
+	"tags": ["ground","indigo"]
 },
 {
- 	name: "Shadow Hand",
-	category: "component",
-	wiki: "http://www.shadowrobot.com/products/dexterous-hand/",
-	tags: ["manipulator"]
+ 	"name": "Shadow Hand",
+	"category": "component",
+	"wiki": "http://www.shadowrobot.com/products/dexterous-hand/",
+	"tags": ["manipulator"]
 },
 {
- 	name: "SliderSRA",
-	category: "ground",
-	wiki: "http://www.cpr-robots.com/products/slider150SRA.html",
-	tags: ["holonomic","indoor","mobile manipulator"]
+ 	"name": "SliderSRA",
+	"category": "ground",
+	"wiki": "http://www.cpr-robots.com/products/slider150SRA.html",
+	"tags": ["holonomic","indoor","mobile manipulator"]
 },
 {
- 	name: "Spark",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/Spark",
-	tags: ["autonomous","mobile base"]
+ 	"name": "Spark",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/Spark",
+	"tags": ["autonomous","mobile base"]
 },
 {
- 	name: "Summit-X",
-	category: "ground",
-	wiki: "http://www.robotnik.eu/mobile-robots/summit-x/",
-	tags: ["ground","indoor","mobile robot","robotnik","autonomous"]
+ 	"name": "Summit-X",
+	"category": "ground",
+	"wiki": "http://www.robotnik.eu/mobile-robots/summit-x/",
+	"tags": ["ground","indoor","mobile robot","robotnik","autonomous"]
 },
 {
- 	name: "Summit-XL",
-	category: "ground",
-	wiki: "http://www.robotnik.eu/mobile-robots/summit-xl/",
-	tags: ["ground","research","mobile robot","robotnik","autonomous","diff-drive"]
+ 	"name": "Summit-XL",
+	"category": "ground",
+	"wiki": "http://www.robotnik.eu/mobile-robots/summit-xl/",
+	"tags": ["ground","research","mobile robot","robotnik","autonomous","diff-drive"]
 },
 {
- 	name: "Summit-XL-Steel",
-	category: "ground",
-	wiki: "https://www.robotnik.eu/mobile-robots/summit-xl-steel/",
-	tags: ["autonomous","logistics","omni","research","robotnik"]
+ 	"name": "Summit-XL-Steel",
+	"category": "ground",
+	"wiki": "https://www.robotnik.eu/mobile-robots/summit-xl-steel/",
+	"tags": ["autonomous","logistics","omni","research","robotnik"]
 },
 {
- 	name: "TALOS",
-	category: "ground",
-	wiki: "http://pal-robotics.com/en/products/talos/",
-	tags: ["PAL Robotics","biped","legged","industrial","education","ground","humanoid","indigo","kinetic","manipulator","melodic","platform","research","torque-control","walking"]
+ 	"name": "TALOS",
+	"category": "ground",
+	"wiki": "http://pal-robotics.com/en/products/talos/",
+	"tags": ["PAL Robotics","biped","legged","industrial","education","ground","humanoid","indigo","kinetic","manipulator","melodic","platform","research","torque-control","walking"]
 },
 {
- 	name: "THORMANG",
-	category: "ground",
-	wiki: "http://emanual.robotis.com/docs/en/platform/thormang3/introduction/",
-	tags: ["kinetic","melodic","ground","biped","humanoid","walking","education","research","platform","robotis","dynamixel"]
+ 	"name": "THORMANG",
+	"category": "ground",
+	"wiki": "http://emanual.robotis.com/docs/en/platform/thormang3/introduction/",
+	"tags": ["kinetic","melodic","ground","biped","humanoid","walking","education","research","platform","robotis","dynamixel"]
 },
 {
- 	name: "TIAGo",
-	category: "ground",
-	wiki: "http://tiago.pal-robotics.com/en/",
-	tags: ["humanoid","autonomous","7dof","computation","perception","moveit","mobile manipulator","education","ground","indigo","kinetic","manipulator","melodic","platform","research","wheeled","teaching robot","development kit","deep learning","diff-drive","PAL Robotics"]
+ 	"name": "TIAGo",
+	"category": "ground",
+	"wiki": "http://tiago.pal-robotics.com/en/",
+	"tags": ["humanoid","autonomous","7dof","computation","perception","moveit","mobile manipulator","education","ground","indigo","kinetic","manipulator","melodic","platform","research","wheeled","teaching robot","development kit","deep learning","diff-drive","PAL Robotics"]
 },
 {
- 	name: "TIAGo Base",
-	category: "ground",
-	wiki: "http://pal-robotics.com/en/products/tiago-base",
-	tags: ["autonomous","diff-drive","ground","indoor","indigo","kinetic","melodic","industrial","logistics","logistics robot","research","mobile base","mobile robot","wheeled","PAL Robotics"]
+ 	"name": "TIAGo Base",
+	"category": "ground",
+	"wiki": "http://pal-robotics.com/en/products/tiago-base",
+	"tags": ["autonomous","diff-drive","ground","indoor","indigo","kinetic","melodic","industrial","logistics","logistics robot","research","mobile base","mobile robot","wheeled","PAL Robotics"]
 },
 {
- 	name: "TUlip",
-	category: "ground",
-	wiki: "http://www.techunited.nl/en/tulip/",
-	tags: ["humanoid","legged","research"]
+ 	"name": "TUlip",
+	"category": "ground",
+	"wiki": "http://www.techunited.nl/en/tulip/",
+	"tags": ["humanoid","legged","research"]
 },
 {
- 	name: "Tally",
-	category: "ground",
-	wiki: "http://www.simberobotics.com",
-	tags: ["diff-drive","retail","data capture","ground","indoor"]
+ 	"name": "Tally",
+	"category": "ground",
+	"wiki": "http://www.simberobotics.com",
+	"tags": ["diff-drive","retail","data capture","ground","indoor"]
 },
 {
- 	name: "TurtleBot2",
-	category: "ground",
-	wiki: "http://www.turtlebot.com",
-	tags: ["cturtle","fuerte","hydro","ground","indigo","indoor","mobile base"]
+ 	"name": "TurtleBot2",
+	"category": "ground",
+	"wiki": "http://www.turtlebot.com",
+	"tags": ["cturtle","fuerte","hydro","ground","indigo","indoor","mobile base"]
 },
 {
- 	name: "TurtleBot3",
-	category: "ground",
-	wiki: "http://turtlebot3.robotis.com",
-	tags: ["indigo","jade","kinetic","lunar","melodic","ground","diff-drive","mobile base","mobile robot","mobile manipulator","indoor","wireless","education","research","platform","robotis","dynamixel"]
+ 	"name": "TurtleBot3",
+	"category": "ground",
+	"wiki": "http://turtlebot3.robotis.com",
+	"tags": ["indigo","jade","kinetic","lunar","melodic","ground","diff-drive","mobile base","mobile robot","mobile manipulator","indoor","wireless","education","research","platform","robotis","dynamixel"]
 },
 {
- 	name: "Turtlebot Euclid",
-	category: "ground",
-	wiki: "https://www.clearpathrobotics.com/turtlebot-euclid/",
-	tags: ["education","educational","ground","indoor","kinetic","mobile base","mobile robot","research","teaching robot","wireless"]
+ 	"name": "Turtlebot Euclid",
+	"category": "ground",
+	"wiki": "https://www.clearpathrobotics.com/turtlebot-euclid/",
+	"tags": ["education","educational","ground","indoor","kinetic","mobile base","mobile robot","research","teaching robot","wireless"]
 },
 {
- 	name: "Universal_robots",
-	category: "manipulator",
-	wiki: "https://www.universal-robots.com/",
-	tags: ["ROS-Industrial","UR","arm","industrial","manipulator","universal_robots"]
+ 	"name": "Universal_robots",
+	"category": "manipulator",
+	"wiki": "https://www.universal-robots.com/",
+	"tags": ["ROS-Industrial","UR","arm","industrial","manipulator","universal_robots"]
 },
 {
- 	name: "WheeledRobin",
-	category: "ground",
-	wiki: "http://wiki.ros.org/Robots/WheeledRobin",
-	tags: ["mobile robot","research","balancing"]
+ 	"name": "WheeledRobin",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/Robots/WheeledRobin",
+	"tags": ["mobile robot","research","balancing"]
 },
 {
- 	name: "X-Terrabot",
-	category: "ground",
-	wiki: "http://www.asimovrobotics.com/",
-	tags: ["ground","holonomic","indoor","mobile manipulator","outdoor","wheeled"]
+ 	"name": "X-Terrabot",
+	"category": "ground",
+	"wiki": "http://www.asimovrobotics.com/",
+	"tags": ["ground","holonomic","indoor","mobile manipulator","outdoor","wheeled"]
 },
 {
- 	name: "Xiaoqiang",
-	category: "ground",
-	wiki: "http://wiki.ros.org/cn/xiaoqiang",
-	tags: ["diff-drive","mobile base","research"]
+ 	"name": "Xiaoqiang",
+	"category": "ground",
+	"wiki": "http://wiki.ros.org/cn/xiaoqiang",
+	"tags": ["diff-drive","mobile base","research"]
 },
 {
- 	name: "r12",
-	category: "manipulator",
-	wiki: "http://strobotics.com/",
-	tags: ["arm","melodic","moveit","manipulator"]
+ 	"name": "r12",
+	"category": "manipulator",
+	"wiki": "http://strobotics.com/",
+	"tags": ["arm","melodic","moveit","manipulator"]
 },
 {
- 	name: "xbot",
-	category: "ground",
-	wiki: "http://www.xbot.com",
-	tags: ["teaching robot","xbot group","ISCAS","ground","indigo","indoor","mobile robot"]
+ 	"name": "xbot",
+	"category": "ground",
+	"wiki": "http://www.xbot.com",
+	"tags": ["teaching robot","xbot group","ISCAS","ground","indigo","indoor","mobile robot"]
 }
 ]
