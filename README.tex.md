@@ -59,7 +59,7 @@ w.ranking(9045,100)
 ```
 
 
-## Tag Map Based Algorithm (TBMA)
+## Tag Map Based Algorithm (TMBA)
 
 As there is no previous activity, this approach is content based. It makes use of the tags that are associated to users and questions. Let $T$ be the set of all tags defined in ROS Answers, $Q_t$ the set of all questions tagged under the $t$ tag, and $T_{uq}$ the set of all tags that match the user $u$ and the question $q$. 
 

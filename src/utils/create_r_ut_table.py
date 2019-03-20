@@ -127,10 +127,12 @@ def main():
             print("user: " + str(u))
             now = datetime.datetime.now()
             print(now.strftime('%Y-%m-%d %H:%M:%S'))
+
             for t in tmba.tags_of_user(u):
                 r = tmba.calculate_r_ut(u, t)
                 # print("u:" + str(u) + "\tt:" + str(t) + "\t" + str(r))
                 writer.writerow([u, t, r])
+            
             print("\n" + str((datetime.datetime.now() - now).seconds) + " seconds")
             print("------- end -------\n\n")
 
