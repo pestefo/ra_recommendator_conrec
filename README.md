@@ -59,7 +59,7 @@ w.ranking(9045,100)
 ```
 
 
-## Tag Map Based Algorithm (TBMA)
+## Tag Map Based Algorithm (TMBA)
 
 As there is no previous activity, this approach is content based. It makes use of the tags that are associated to users and questions. Let <img src="/tex/2f118ee06d05f3c2d98361d9c30e38ce.svg?invert_in_darkmode&sanitize=true" align=middle width=11.889314249999991pt height=22.465723500000017pt/> be the set of all tags defined in ROS Answers, <img src="/tex/025b11cd28d6c936d3062a554bbaf0b5.svg?invert_in_darkmode&sanitize=true" align=middle width=17.96121689999999pt height=22.465723500000017pt/> the set of all questions tagged under the <img src="/tex/4f4f4e395762a3af4575de74c019ebb5.svg?invert_in_darkmode&sanitize=true" align=middle width=5.936097749999991pt height=20.221802699999984pt/> tag, and <img src="/tex/ca3b1156ca87c35b6cf1b4ab852bf22a.svg?invert_in_darkmode&sanitize=true" align=middle width=23.81617589999999pt height=22.465723500000017pt/> the set of all tags that match the user <img src="/tex/6dbb78540bd76da3f1625782d42d6d16.svg?invert_in_darkmode&sanitize=true" align=middle width=9.41027339999999pt height=14.15524440000002pt/> and the question <img src="/tex/d5c18a8ca1894fd3a7d25f242cbe8890.svg?invert_in_darkmode&sanitize=true" align=middle width=7.928106449999989pt height=14.15524440000002pt/>. 
 
