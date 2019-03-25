@@ -1,7 +1,19 @@
-# ra_recommendator_conrec
-*Adaptation of ConRec for ROS Answers' Answerers Recommendation*
+# Recommending Qualified Members of the ROS Community for Knowledge-sharing tasks
 
-ConRec is a recommender of developer candidates (technically a GitHub users) for a target software project (technically a GitHub repository). 
+*Adaptation of ConRec for ROS Answers' Answerers Recommendation* 
+
+ConRec is a recommender of developer candidates (technically a GitHub users) for a target software project (technically a GitHub repository). Its original concept is detailed in the work of Zhang et al. in the paper: *Who Will be Interested in? A Contributor Recommendation Approach for Open Source Projects*.
+
+```latex
+@inproceedings{zhang2017will,
+  title={Who Will be Interested in? A Contributor Recommendation Approach for Open Source Projects.},
+  author={Zhang, Xunhui and Wang, Tao and Yin, Gang and Yang, Cheng and Wang, Huaimin},
+  booktitle={SEKE},
+  pages={363--369},
+  year={2017},
+  url={http://ksiresearchorg.ipage.com/seke/seke17paper/seke17paper_67.pdf}
+}
+```
 
 #### Concepts equivalence between the original and the adaptation
 
