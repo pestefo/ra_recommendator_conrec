@@ -13,6 +13,8 @@ associated to a question.
 """
 
 
+# BD
+
 def create_connection(db_file):
     """ create a database connection to the SQLite database
         specified by the db_file
@@ -50,7 +52,10 @@ def get_question_ids():
     return [9084, 9097, 9107, 9130, 9135, 9159, 9163, 9166, 9208, 9210, 9259, 9261, 9273, 9287, 9343, 9471, 9511, 9512, 9545, 9553, 9588, 9637, 9640, 9686, 9693, 9766, 9768, 9807, 9815, 9902, 9922, 9942, 9943, 9977, 10026, 10027, 10038, 10047, 10110, 10120, 10130, 10143, 10145, 10166, 10187, 10222, 10245, 10329, 10332, 10335, 10338, 10343, 10356]
 
 
-def find_tags_in_question(question_id):
+
+def get_bag_of_words(body,title):
+
+    
 
 
 def main():
@@ -59,26 +64,22 @@ def main():
     # create a database connection
     conn = create_connection(database)
 
-    question_title_and_body_file = 'data/data_extracted_from_bd/ros_question_tag.json'
-    with open(question_tags_file) as json_data:
-        question_tags = json.load(json_data)
+    questions = get_question_ids()
 
-    question_tags_file = 'data/data_extracted_from_bd/ros_question_tag.json'
-    question_tags = None
-    extended_question_tags = None
-    with open(question_tags_file) as json_data:
-        question_tags = json.load(json_data)
+    for q_id in questions:
 
-    for q in get_question_ids[0]:
-        extended_question_tags[q] = []
-        extended_question_tags[q].extend(
-            map(lambda n: int(n), question_tags[str(q)]))
+        print("Question {}".format(q_id))
 
-        tags_found = find_tags_in_question(q)
+        body = get_body(q_id)
+        title = get_title(q_id)
 
-        extended_question_tags[q].extend(tags_found)
+        bag_of_words = get_bag_of_words(body,title)
 
-    # dump extended_question_tags into a json file
+        register_extended_tags(q_id,bag_of_words)
+
+
+
+
 
 
 if __name__ == '__main__':
