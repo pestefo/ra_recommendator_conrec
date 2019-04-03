@@ -37,8 +37,6 @@ def create_connection(db_file):
     global conn
     try:
         conn = sqlite3.connect(db_file)
-        print("dentro de create_connection")
-        print(conn)
         return conn
     except Error as e:
         print(e)
@@ -56,6 +54,17 @@ def execute_query(query):
     cur.execute(query)
 
     return cur.fetchall()
+
+
+def get_user_entered_tags(question_id):
+    query = """
+        select ros_tag.name
+        from ros_question_tag
+        left join ros_tag on ros_question_tag.ros_tag_id = ros_tag.id
+        where ros_question_tag.ros_question_id = {}""".format(question_id)
+    tags = execute_query(query)
+
+    return list(map(lambda x: x[0], tags))
 
 
 def get_data(question_id):
@@ -100,9 +109,6 @@ def main():
     global tag_pattern, output_file
     # Question's Title and Body data
 
-    # create a database connection
-    conn = create_connection(database)
-
     questions = get_question_ids()
     tags = get_tags()
     extended_tags = defaultdict(list)
@@ -118,6 +124,7 @@ def main():
 
         tags_found = extract_tags(title.lower())
         tags_found += extract_tags(body.lower())
+        tags_found += Counter(get_user_entered_tags(q_id))
         sorted(tags_found)
 
         print(tags_found.keys())
