@@ -5,6 +5,7 @@ from sqlite3 import Error
 from collections import defaultdict, Counter
 import re
 import json
+import csv
 
 conn = None
 database = "data/v1.2.db"
@@ -16,6 +17,11 @@ stopwords = list()
 with open('src/utils/stopwords.txt', 'r') as fp:
     for line in fp:
         stopwords.append(line.rstrip())
+
+with open('data/data_extracted_from_db/ros_tag.csv', mode='r') as infile:
+    reader = csv.reader(infile)
+    next(reader)
+    tag2id = {rows[1]: rows[0] for rows in reader}
 
 
 """
@@ -105,8 +111,27 @@ def extract_tags(str):
     return matches
 
 
+def print_counter(cnt):
+
+    new_cnt = sorted(list(map(lambda x: len(x), cnt.values())))
+
+    with open('question_tag_frequency_extended.json', 'w') as o:
+        json.dump(new_cnt, o)
+
+    with open('data/data_extracted_from_db/ros_question_tag.json', 'r') as fp:
+        rqt = json.load(fp)
+        questions = get_question_ids()
+        rqt = {k: v for k, v in rqt.items() if k in list(map(lambda x: str(x), questions))}
+
+        rqt = sorted(list(map(lambda x: len(x), rqt.values())))
+
+        with open('question_tag_frequency.json', 'w') as o:
+            json.dump(rqt, o)
+
+
+
 def main():
-    global tag_pattern, output_file
+    global tag_pattern, output_file, tag2id
     # Question's Title and Body data
 
     questions = get_question_ids()
@@ -124,16 +149,19 @@ def main():
 
         tags_found = extract_tags(title.lower())
         tags_found += extract_tags(body.lower())
-        tags_found += Counter(get_user_entered_tags(q_id))
+        # tags_found += Counter(get_user_entered_tags(q_id))
         sorted(tags_found)
 
         print(tags_found.keys())
-        extended_tags[q_id].extend(tags_found.keys())
+
+        extended_tags[q_id].extend(
+            list(map(lambda t: tag2id[t], tags_found.keys())))
         # extended_tags[q_id].append(extract_tags(body))
 
     with open(output_file, 'w') as outfile:
         json.dump(extended_tags, outfile)
 
+    print_counter(extended_tags)
 
 if __name__ == '__main__':
     main()
