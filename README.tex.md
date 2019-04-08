@@ -259,3 +259,20 @@ select *
 from ros_question
 where author = 3
 ```
+
+
+
+
+
+### Augment the tag description of questions by extracting tags as keywords from question's Body and Title
+
+As many questions have few tags, we wanted to extract keywords from the body and title of the question that could better describe the question and then potentially improve the TMBA. 
+
+```python
+nb_of_tags_per_question = [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 6]
+nb_of_tags_per_question_plus_body_and_title = [4, 7, 7, 7, 9, 9, 10, 10, 10, 11, 12, 12, 13, 15, 15, 15, 16, 16, 17, 18, 18, 20, 20, 21, 21, 22, 25, 25, 32, 34, 37, 37, 37, 38, 39, 44, 48, 55, 89, 99]
+
+```
+
+![Distribution of tags: Manually entered tags vs Extracted from Title and Body](/home/pestefo/projects/ra_recommendator_conrec/images/distribution_of_tags_manually_entered_vs_extended.png)
+
