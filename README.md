@@ -274,5 +274,5 @@ nb_of_tags_per_question_plus_body_and_title = [4, 7, 7, 7, 9, 9, 10, 10, 10, 11,
 
 ```
 
-![Distribution of tags: Manually entered tags vs Extracted from Title and Body](/home/pestefo/projects/ra_recommendator_conrec/images/distribution_of_tags_manually_entered_vs_extended.png)
+![Distribution of tags: Manually entered tags vs Extracted from Title and Body](/images/distribution_of_tags_manually_entered_vs_extended.png)
 
