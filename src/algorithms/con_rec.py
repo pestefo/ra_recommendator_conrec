@@ -14,8 +14,10 @@ THERE ARE TAGS THAT ARE ONLY REFERRED IN USERS BUT NOT IN QUESTIONS
 
 class AbstractConRecAlgorithm:
 
-    dir_preffix = '/home/pestefo/projects/experiment_1/'
-    r_uq_table_file = dir_preffix + 'data/r_uq_2.json'
+    # dir_preffix = '/home/pestefo/projects/experiment_1/'
+    dir_preffix = '/home/pestefo/projects/ra_recommendator_conrec/'
+    # r_uq_table_file = dir_preffix + 'data/r_uq_2.json'
+    r_uq_table_file = dir_preffix + 'data/r_uq.json'
     r_uq_table = None
     all_questions = None
 

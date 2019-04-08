@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
-from con_rec import AbstractConRecAlgorithm
-from weighted_collaborative_filtering_algorithm import WCFAlgorithm
+from algorithms.con_rec import AbstractConRecAlgorithm
+from algorithms.weighted_collaborative_filtering_algorithm import WCFAlgorithm
 import json
 from math import log
 ###
@@ -15,15 +15,18 @@ class TMBAlgorithm(AbstractConRecAlgorithm):
     question_tags = None
     tag_names = None
     r_ut_table = None
-    r_ut_table_file = 'data/r_ut_2.json'
     nb_of_tags = None
     nb_of_questions = None
     wcfa = WCFAlgorithm()
 
     # Data files
-    user_tags_file = 'data/ros_user_tag.json'
-    question_tags_file = 'data/ros_question_tag.json'
-    tags_file = 'data/ros_tag.json'
+    dir_preffix = '/home/pestefo/projects/ra_recommendator_conrec/'
+    user_tags_file = dir_preffix + 'data/data_extracted_from_db/ros_user_tag.json'
+    user_tags_extended_file = None
+    r_ut_table_file = dir_preffix + 'data/r_ut.json'
+    question_tags_file = dir_preffix + 'data/data_extracted_from_db/ros_question_tag.json'
+    question_tags_extended_file = dir_preffix + 'data/ros_question_tag_extended.json'
+    tags_file = dir_preffix + 'data/data_extracted_from_db/ros_tag.json'
 
     def __init__(self):
         AbstractConRecAlgorithm.__init__(self)
@@ -35,7 +38,7 @@ class TMBAlgorithm(AbstractConRecAlgorithm):
             TMBAlgorithm.user_tags = json.load(json_data)
             print("user_tags DONE")
 
-        with open(TMBAlgorithm.question_tags_file) as json_data:
+        with open(TMBAlgorithm.question_tags_extended_file) as json_data:
             TMBAlgorithm.question_tags = json.load(json_data)
             TMBAlgorithm.nb_of_questions = len(
                 TMBAlgorithm.question_tags.keys())

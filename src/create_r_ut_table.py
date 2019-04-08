@@ -12,7 +12,7 @@ GitHub repositories description of users,
 '''
 import csv
 import json
-from algorithms.tag_map_based_algorithm import *
+from algorithms.tag_map_based_algorithm import TMBAlgorithm
 """
 From
 2,3,5
@@ -29,9 +29,6 @@ To:
 
 tag_dict = None
 
-files_scenario_A = {"user_x_tag": 'data/ros_user_tag.csv',
-                    "question_x_tag": 'data/ros_question_tag.csv',
-                    "tags": 'data/ros_tag.csv'}
 
 # Input files
 ros_user_tag_csv = 'data/ros_user_tag.csv'

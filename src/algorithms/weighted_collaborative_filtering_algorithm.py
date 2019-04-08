@@ -8,12 +8,13 @@ from math import sqrt
 
 class WCFAlgorithm(AbstractConRecAlgorithm):
 
-    dir_preffix = '/home/pestefo/projects/experiment_1/'
+    # dir_preffix = '/home/pestefo/projects/experiment_1/'
+    dir_preffix = '/home/pestefo/projects/ra_recommendator_conrec/'
     act_ans_comm = None
     act_ask = None
     total_activities = None
 
-    db_file = dir_preffix + 'data/v1.db'
+    db_file = dir_preffix + 'data/v1.2.db'
 
     def __init__(self):
         AbstractConRecAlgorithm.__init__(self)
