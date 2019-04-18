@@ -144,13 +144,6 @@ class WCFAlgorithm(AbstractConRecAlgorithm):
                 return set()
         return questions
 
-    # Old implementation for calculating r_uq
-    def calculate_r_uq(self, user, question):
-        if self.activity(user, question) == 0:
-            return 0
-        return self.activity(user, question) / \
-            self.question_activities(question)
-
     # R_uu - Relation between two users
     def r_uu(self, user_a, user_b):
         q_in_common = self.questions_in_common([user_a, user_b])

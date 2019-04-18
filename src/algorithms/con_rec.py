@@ -2,7 +2,7 @@
 # coding: utf-8
 from operator import itemgetter
 import json
-
+import utils.data_files as files
 '''
 NOTES:
 Be careful because some WCFAlgorithm's functions return dataframes as output
@@ -22,15 +22,11 @@ class AbstractConRecAlgorithm:
     all_questions = None
 
     def __init__(self):
-        # Importing R_uq table
-        # r_uq.csv to JSON from: http://www.convertcsv.com/csv-to-json.htm
-        with open(AbstractConRecAlgorithm.r_uq_table_file) as json_data:
-            AbstractConRecAlgorithm.r_uq_table = json.load(json_data)
-            print("r_uq_table DONE")
+
+        AbstractConRecAlgorithm.r_uq_table = files.get_data(files.r_uq_table)
         AbstractConRecAlgorithm.all_questions = list(
             map(lambda q: int(q),
                 AbstractConRecAlgorithm.r_uq_table.keys()))
-        print("all_questions DONE")
 
     # R_uq - Relation between a user and a question
     def r_uq(self, user_id, question_id):

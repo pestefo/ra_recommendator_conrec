@@ -17,32 +17,27 @@ class TMBAlgorithm(AbstractConRecAlgorithm):
     r_ut_table = None
     nb_of_tags = None
     nb_of_questions = None
-    wcfa = WCFAlgorithm()
 
     # Data files
     dir_preffix = '/home/pestefo/projects/ra_recommendator_conrec/'
     user_tags_file = dir_preffix + 'data/data_extracted_from_db/ros_user_tag.json'
     user_tags_extended_file = None
     r_ut_table_file = dir_preffix + 'data/r_ut.json'
-    question_tags_file = dir_preffix + 'data/data_extracted_from_db/ros_question_tag.json'
-    question_tags_extended_file = dir_preffix + 'data/ros_question_tag_extended.json'
+    question_tags_file = dir_preffix + \
+        'data/data_extracted_from_db/ros_question_tag.json'
+    question_tags_extended_file = dir_preffix + \
+        'data/ros_question_tag_extended.json'
     tags_file = dir_preffix + 'data/data_extracted_from_db/ros_tag.json'
 
     def __init__(self):
         AbstractConRecAlgorithm.__init__(self)
-        with open(TMBAlgorithm.r_ut_table_file) as json_data:
-            TMBAlgorithm.r_ut_table = json.load(json_data)
-            print("r_ut_table DONE")
-
-        with open(TMBAlgorithm.user_tags_file) as json_data:
-            TMBAlgorithm.user_tags = json.load(json_data)
-            print("user_tags DONE")
-
-        with open(TMBAlgorithm.question_tags_extended_file) as json_data:
-            TMBAlgorithm.question_tags = json.load(json_data)
-            TMBAlgorithm.nb_of_questions = len(
+        TMBAlgorithm.r_ut_table = files.get_data(files.r_ut_table)
+        TMBAlgorithm.user_tags = files.get_data(files.user_tags)
+        TMBAlgorithm.question_tags_extended = files.get_data(files.question_tags_extended)
+        TMBAlgorithm.nb_of_questions = len(
                 TMBAlgorithm.question_tags.keys())
-            print("question_tags DONE")
+
+
 
         with open(TMBAlgorithm.tags_file) as json_data:
             TMBAlgorithm.tag_names = json.load(json_data)
