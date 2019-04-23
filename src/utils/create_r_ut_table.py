@@ -10,9 +10,10 @@ by adding tags extracted as keywords of question body or title, or
 GitHub repositories description of users,
 
 '''
-import csv
 import json
-from algorithms.tag_map_based_algorithm import *
+import data_files as files
+from db import Database
+from math import log
 """
 From
 2,3,5
@@ -27,93 +28,99 @@ To:
 4:[(5,6).(6,7)],...
 """
 
+r_uq_data = files.get_data(files.r_uq_table)
+
 tag_dict = None
+db = Database()
+db_tables = {
+    "B": {"question_tag": "ra_question_tag_extended",
+          "user_tag": "ra_user_tag"},
+    "C": {"question_tag": "ra_question_tag",
+          "user_tag": "ra_user_tag_extended"},
+    "D": {"question_tag": "ra_question_tag_extended",
+          "user_tag": "ra_user_tag_extended"}
+}
 
-files_scenario_A = {"user_x_tag": 'data/ros_user_tag.csv',
-                    "question_x_tag": 'data/ros_question_tag.csv',
-                    "tags": 'data/ros_tag.csv'}
+output_file = {
+    "B": 'r_ut_scenario_b.json',
+    "C": 'r_ut_scenario_c.json',
+    "D": 'r_ut_scenario_d.json',
+}
 
-# Input files
-ros_user_tag_csv = 'data/ros_user_tag.csv'
-ros_question_tag_csv = 'data/ros_question_tag.csv'
-ros_tag_csv = 'data/ros_tag.csv'
-
-# Output files
-ros_user_tag_json = 'data/ros_user_tag.json'
-ros_question_tag_json = 'data/ros_question_tag.json'
-ros_tag_json = 'data/ros_tag.json'
-r_ut_output_file = 'data/r_ut_questions_extended.json'
-
-
-def generate_list_of_tags_per_user():
-    with open(ros_user_tag_csv, 'r') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
-        reader.__next__()   # skip header
-        user_tags = {}
-        for u, t, c in reader:
-
-            try:
-                user_tags[u].append({'tag': t, 'count': c})
-            except KeyError:
-                user_tags[u] = [{'tag': t, 'count': c}]
-
-        return user_tags
+questions = None
 
 
-'''
-Output example:
-"35923": [{"tag": "165", "count": "4"}, {"tag": "886", "count": "4"},
-{"tag": "2182", "count": "4"}],
-"35924": [{"tag": "815", "count": "2"}, {"tag": "2933", "count": "2"}]
-'''
+def tags_of_user(table, user_id):
+    query = """
+    select tag_id
+    from {}
+    where user_id={}""".format(table, user_id)
+    db.execute(query, [])
+    results = db.cursor.fetchall()
+
+    return list(map(lambda x: x[0], results))
 
 
-def generate_list_of_tags_per_question():
-    with open(ros_question_tag_csv, 'r') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
-        reader.__next__()   # skip header
-        question_tags = {}
-        for q, t in reader:
+def questions_with_tag(table, tag_id):
+    query = """
+    select question_id
+    from {}
+    where tag_id={}""".format(table, tag_id)
+    print(query)
+    db.execute(query, [])
+    results = db.cursor.fetchall()
 
-            try:
-                question_tags[q].append(t)
-            except KeyError:
-                question_tags[q] = [t]
-
-        return question_tags
+    return list(map(lambda x: x[0], results))
 
 
-def generate_tag_name_dictionary():
-    with open(ros_tag_csv, 'r') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
-        reader.__next__()
-        tag_dict = {tag_id: tag_name for tag_id, tag_name in reader}
+def all_questions():
+    global questions
 
-    return tag_dict
+    query = """
+    select distinct question_id
+    from ra_question_tag"""
+
+    if not questions:
+        db.execute(query, [])
+        questions = db.cursor.fetchall()
+
+    return list(map(lambda x: x[0], questions))
 
 
-def generate_all_json_files():
-    u = generate_list_of_tags_per_user()
-    q = generate_list_of_tags_per_question()
-    tag_dict = generate_tag_name_dictionary()
+def nb_of_questions():
+    return len(all_questions())
 
-    with open(ros_user_tag_json, 'w') as outfile:
-        json.dump(u, outfile)
-        print('ros_user_tag.json DONE')
 
-    with open(ros_question_tag_json, 'w') as outfile:
-        json.dump(q, outfile)
-        print('ros_question_tag.json DONE')
+def r_uq(user_id, question_id):
+    pairs = r_uq_data[str(question_id)]
+    for p in pairs:
+        if p['u'] == user_id:
+            return p['r']
 
-    with open(ros_tag_json, 'w') as outfile:
-        json.dump(tag_dict, outfile)
-        print('ros_tag.json DONE')
-    # print(q)
-    # '296861': ['63', '1465', '66', '5392'],
-    # print("'296861': ['63', '1465', '66', '5392'],")
-    # print(tag_dict['63'] + ', ' + tag_dict['1465'] +
-    # ', ' + tag_dict['66'] + ', ' + tag_dict['5392'])
-    # Should say: kinetic, offline, install, dvd
+    print("user_id={}\tquestion_id={}".format(user_id, question_id))
+    raise Exception
+
+
+def all_users():
+    query = """
+    select distinct user_id
+    from ra_user_tag"""
+    db.execute(query, [])
+    results = db.cursor.fetchall()
+
+    return list(map(lambda x: x[0], results))
+
+
+def calculate_r_ut(user_id, tag_id, question_table):
+    questions = questions_with_tag(question_table, tag_id)
+
+    # TODO: In theory, this should never happen
+    if len(questions) == 0:
+        return 0
+
+    log_of_ratio = log(nb_of_questions() / len(questions))
+    return log_of_ratio * sum(map(lambda q: r_uq(user_id, q),
+                                  questions))
 
 
 def main():
@@ -122,9 +129,14 @@ def main():
     # if you encounter a "year is out of range" error the timestamp
     # may be in milliseconds, try `ts /= 1000` in that case
     # Create table of R_ut
-    tmba = TMBAlgorithm()
-    users = tmba.all_users()
+
+    # users = all_users()
     r_ut = {}
+
+    users = all_users()
+    scenario = 'B'  # C/D
+    question_table = db_tables[scenario]['question_tag']
+    user_table = db_tables[scenario]['user_tag']
 
     for u in users:
         print("------- start -------")
@@ -134,15 +146,16 @@ def main():
 
         r_ut[u] = []
 
-        for t in tmba.tags_of_user(u):
-            r = tmba.calculate_r_ut(u, t)
+        for t in tags_of_user(user_table, u):
+            print(t)
+            r = calculate_r_ut(u, t, question_table)
             # print("u:" + str(u) + "\tt:" + str(t) + "\t" + str(r))
             r_ut[u].append({"t": t, "r": r})
 
         print("\n" + str((datetime.datetime.now() - now).seconds) + " seconds")
         print("------- end -------\n\n")
 
-    with open(r_ut_output_file, 'w') as outfile:
+    with open(output_file[scenario], 'w') as outfile:
         json.dump(r_ut, outfile)
 
 

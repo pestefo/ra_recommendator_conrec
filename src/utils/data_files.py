@@ -21,13 +21,13 @@ user_tags = dp + 'data/data_extracted_from_db/ros_user_tag.json'
  Extracted from the questions in which the user has participated
  and the extended tag description
 """
-user_tags_extended = None
+user_tags_extended = 'data/data_extracted_from_db/ros_user_tag_extended.json'
 
 """
  Question ID - User ID - R_uq calculation
  {"question_id": [ {u": user_id, "r": r_uq_value}, ... ],
 """
-r_ut_table = dp + 'data/r_uq.json'
+r_uq_table = dp + 'data/r_uq.json'
 
 """
  User ID - Tag ID - R_ut calculation
@@ -49,6 +49,8 @@ Question ID - List of Tag IDs  -    Considering manually entered and
 question_tags_extended = dp + \
     'data/ros_question_tag_extended.json'
 tags_file = dp + 'data/data_extracted_from_db/ros_tag.json'
+
+tables = dp + 'data/table_and_column_names.json'
 
 
 def get_data(path_to_file):

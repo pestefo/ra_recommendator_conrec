@@ -33,11 +33,10 @@ class TMBAlgorithm(AbstractConRecAlgorithm):
         AbstractConRecAlgorithm.__init__(self)
         TMBAlgorithm.r_ut_table = files.get_data(files.r_ut_table)
         TMBAlgorithm.user_tags = files.get_data(files.user_tags)
-        TMBAlgorithm.question_tags_extended = files.get_data(files.question_tags_extended)
+        TMBAlgorithm.question_tags_extended = files.get_data(
+            files.question_tags_extended)
         TMBAlgorithm.nb_of_questions = len(
-                TMBAlgorithm.question_tags.keys())
-
-
+            TMBAlgorithm.question_tags.keys())
 
         with open(TMBAlgorithm.tags_file) as json_data:
             TMBAlgorithm.tag_names = json.load(json_data)
@@ -80,17 +79,6 @@ class TMBAlgorithm(AbstractConRecAlgorithm):
 
     def nb_of_questions(self):
         return TMBAlgorithm.nb_of_questions
-
-    def calculate_r_ut(self, user_id, tag_id):
-        questions = self.questions_with_tag(tag_id)
-
-        # TODO: In theory, this should never happen
-        if len(questions) == 0:
-            return 0
-
-        log_of_ratio = log(self.nb_of_questions / len(questions))
-        return log_of_ratio * sum(map(lambda q: self.r_uq(user_id, q),
-                                      questions))
 
     def r_ut(self, user_id, tag_id):
         try:
