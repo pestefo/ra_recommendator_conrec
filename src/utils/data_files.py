@@ -35,9 +35,9 @@ r_uq_table = dp + 'data/r_uq.json'
 """
 r_ut_table = dp + 'data/r_ut.json'
 r_ut_table_scenario = {
-    'B': 'data/r_ut_scenario_b.json',
-    'C': 'data/r_ut_scenario_c.json',
-    'D': 'data/r_ut_scenario_d.json'
+    'B': dp + 'data/r_ut_scenario_b.json',
+    'C': dp + 'data/r_ut_scenario_c.json',
+    'D': dp + 'data/r_ut_scenario_d.json'
 }
 
 """

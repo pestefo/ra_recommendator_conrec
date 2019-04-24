@@ -9,13 +9,13 @@ class Database:
         self.host = 'localhost'
         self.user = 'root'
         self.password = 'buenacabr0s'
-        self.self_name = 'ros_profiles_self'
+        self.db_name = 'ros_profiles_db'
 
         self.connection = mysql.connector.connect(
             user=self.user,
             password=self.password,
             host=self.host,
-            database=self.self_name,
+            database=self.db_name,
             auth_plugin='mysql_native_password',
             use_unicode=True)
 
@@ -24,10 +24,7 @@ class Database:
         self.cursor.execute("SET CHARACTER SET utf8mb4")
         self.cursor.execute("SET character_set_connection=utf8mb4")
 
-        # with open(files.tables, 'r') as fp:
-        #     self.tables = json.load(fp)
-
-        self.db_tables = {
+        self.DB_TABLES = {
             "B": {"question_tag": "ra_question_tag_extended",
                   "user_tag": "ra_user_tag"},
             "C": {"question_tag": "ra_question_tag",
@@ -35,10 +32,17 @@ class Database:
             "D": {"question_tag": "ra_question_tag_extended",
                   "user_tag": "ra_user_tag_extended"}
         }
-        self.questions = None
+        self.QUESTIONS_CACHE = None
+        self.USERS_CACHE = None
+        self.TAGS_CACHE = None
+
+    def set_scenario(self, new_scenario):
+        if new_scenario not in ('B', 'C', 'D'):
+            raise Exception('Valid scenarios are "B", "C" or "D"')
+
+        self.scenario = new_scenario
 
     def execute(self, query, data):
-
         self.cursor.execute(query, data)
 
     def commit(self):
@@ -51,33 +55,43 @@ class Database:
         query = """
         select tag_id
         from {}
-        where user_id={}""".format(self.db_tables[scenario]['user_tag'], user_id)
-        self.execute(query, [])
-        results = self.cursor.fetchall()
+        where user_id={}""".format(
+            self.DB_TABLES[scenario]['user_tag'],
+            user_id)
 
-        return list(map(lambda x: x[0], results))
+        self.execute(query, [])
+
+        return list(map(lambda x: x[0],
+                        self.cursor.fetchall()))
 
     def tags_of_question(self, scenario, question_id):
         query = """
         select tag_id
         from {}
-        where question_id={}""".format(self.db_tables[scenario]['question_tag'], user_id)
-        self.execute(query, [])
-        results = self.cursor.fetchall()
+        where question_id={}""".format(
+            self.DB_TABLES[scenario]['question_tag'],
+            question_id)
 
-        return list(map(lambda x: x[0], results))
+        self.execute(query, [])
+
+        return list(map(lambda x: x[0],
+                        self.cursor.fetchall()))
 
     def questions_with_tag(self, scenario, tag_id):
         query = """
         select question_id
         from {}
-        where tag_id={}""".format(self.db_tables[scenario]['question_tag'], tag_id)
-        # print(query)
+        where tag_id={}""".format(
+            self.DB_TABLES[scenario]['question_tag'],
+            tag_id)
+
         self.execute(query, [])
         results = self.cursor.fetchall()
         results = list(map(lambda x: x[0], results))
+
         if not results:
             return []
+
         return results
 
     def all_questions(self):
@@ -85,11 +99,12 @@ class Database:
         select distinct question_id
         from ra_question_tag"""
 
-        if not self.questions:
+        if not self.QUESTIONS_CACHE:
             self.execute(query, [])
-            self.questions = self.cursor.fetchall()
+            self.QUESTIONS_CACHE = list(map(lambda x: x[0],
+                                            self.cursor.fetchall()))
 
-        return list(map(lambda x: x[0], self.questions))
+        return self.QUESTIONS_CACHE
 
     def nb_of_questions(self):
         return len(self.all_questions())
@@ -98,7 +113,25 @@ class Database:
         query = """
         select distinct user_id
         from ra_user_tag"""
-        self.execute(query, [])
-        results = self.cursor.fetchall()
 
-        return list(map(lambda x: x[0], results))
+        if not self.USERS_CACHE:
+            self.execute(query, [])
+            self.USERS_CACHE = list(map(lambda x: x[0],
+                                        self.cursor.fetchall()))
+
+        return self.USERS_CACHE
+
+    def all_tags(self):
+        query = """
+        select *
+        from ra_tag"""
+
+        if not self.TAGS_CACHE:
+            self.execute(query, [])
+            self.TAGS_CACHE = list(map(lambda x: x[0],
+                                       self.cursor.fetchall()))
+
+        return self.TAGS_CACHE
+
+    def nb_of_tags(self):
+        return len(self.all_tags())
