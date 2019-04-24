@@ -53,7 +53,7 @@ class Database:
 
     def tags_of_user(self, scenario, user_id):
         query = """
-        select tag_id
+        SELECT tag_id
         from {}
         where user_id={}""".format(
             self.DB_TABLES[scenario]['user_tag'],
@@ -66,7 +66,7 @@ class Database:
 
     def tags_of_question(self, scenario, question_id):
         query = """
-        select tag_id
+        SELECT tag_id
         from {}
         where question_id={}""".format(
             self.DB_TABLES[scenario]['question_tag'],
@@ -79,7 +79,7 @@ class Database:
 
     def questions_with_tag(self, scenario, tag_id):
         query = """
-        select question_id
+        SELECT question_id
         from {}
         where tag_id={}""".format(
             self.DB_TABLES[scenario]['question_tag'],
@@ -96,7 +96,7 @@ class Database:
 
     def all_questions(self):
         query = """
-        select distinct question_id
+        SELECT distinct question_id
         from ra_question_tag"""
 
         if not self.QUESTIONS_CACHE:
@@ -111,7 +111,7 @@ class Database:
 
     def all_users(self):
         query = """
-        select distinct user_id
+        SELECT distinct user_id
         from ra_user_tag"""
 
         if not self.USERS_CACHE:
@@ -123,7 +123,7 @@ class Database:
 
     def all_tags(self):
         query = """
-        select *
+        SELECT *
         from ra_tag"""
 
         if not self.TAGS_CACHE:
@@ -135,3 +135,24 @@ class Database:
 
     def nb_of_tags(self):
         return len(self.all_tags())
+
+    def participants_of_question(self, question_id):
+        query = """
+        SELECT author
+        FROM ra_questions
+        WHERE id= {}
+
+        UNION
+
+        SELECT author
+        FROM (
+            SELECT ra_answer_id AS id
+            FROM ra_question_answer
+            WHERE ra_question_id = {}
+        ) AS answers
+        JOIN ra_answers ON answers.id = ra_answers.id
+        """.format(question_id, question_id)
+
+        self.execute(query, [])
+        return list(map(lambda x: x[0],
+                        self.cursor.fetchall()))

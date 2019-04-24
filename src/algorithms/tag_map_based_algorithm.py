@@ -17,6 +17,10 @@ class TMBAlgorithm(AbstractConRecAlgorithm):
 
         self.R_UT_TABLE = files.get_data(files.r_ut_table_scenario[scenario])
         self.db = Database(scenario)
+        self.scenario = scenario
+
+    def get_scenario(self):
+        return self.scenario
 
     def all_users(self):
         return self.db.all_users()
@@ -44,11 +48,18 @@ class TMBAlgorithm(AbstractConRecAlgorithm):
 
     def r_ut(self, user_id, tag_id):
         try:
-            return self.R_UT_TABLE[str(user_id)][str(tag_id)]
+            for pair in self.R_UT_TABLE[str(user_id)]:
+                if pair['t'] == int(tag_id):
+                    return pair['r']
 
-        except KeyError:
-            # WE SUPPOSE THAT user_id and question_id are valid ids
+        # If there's no calculated R_ut for that user_id and question_id
+        # it means that user_id did not participate in question_id, then,
+        # r_uq(user_id, question_id) = 0
+
+        except Exception:
             return 0
+
+        return 0
 
     def tags_in_common(self, user_id, question_id):
 
