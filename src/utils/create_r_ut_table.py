@@ -66,11 +66,13 @@ def questions_with_tag(table, tag_id):
     select question_id
     from {}
     where tag_id={}""".format(table, tag_id)
-    print(query)
+    # print(query)
     db.execute(query, [])
     results = db.cursor.fetchall()
-
-    return list(map(lambda x: x[0], results))
+    results = list(map(lambda x: x[0], results))
+    if not results:
+        return []
+    return results
 
 
 def all_questions():
@@ -92,14 +94,20 @@ def nb_of_questions():
 
 
 def r_uq(user_id, question_id):
-    pairs = r_uq_data[str(question_id)]
-    for p in pairs:
-        if p['u'] == user_id:
-            return p['r']
+    try:
+        pairs = r_uq_data[str(question_id)]
+        for p in pairs:
+            if p['u'] == user_id:
+                return p['r']
 
-    print("user_id={}\tquestion_id={}".format(user_id, question_id))
-    raise Exception
+    # If there's no calculated R_uq for that user_id and question_id
+    # it means that user_id did not participate in question_id, then,
+    # r_uq(user_id, question_id) = 0
+    # print("user_id={}\tquestion_id={}".format(user_id, question_id))
+    except Exception:
+        return 0
 
+    return 0
 
 def all_users():
     query = """
@@ -113,11 +121,9 @@ def all_users():
 
 def calculate_r_ut(user_id, tag_id, question_table):
     questions = questions_with_tag(question_table, tag_id)
-
     # TODO: In theory, this should never happen
     if len(questions) == 0:
         return 0
-
     log_of_ratio = log(nb_of_questions() / len(questions))
     return log_of_ratio * sum(map(lambda q: r_uq(user_id, q),
                                   questions))
@@ -130,33 +136,34 @@ def main():
     # may be in milliseconds, try `ts /= 1000` in that case
     # Create table of R_ut
 
-    # users = all_users()
     r_ut = {}
 
     users = all_users()
-    scenario = 'B'  # C/D
-    question_table = db_tables[scenario]['question_tag']
-    user_table = db_tables[scenario]['user_tag']
+    scenarios = ['B', 'C', 'D']
+    for scenario in scenarios[1:]:
+        question_table = db_tables[scenario]['question_tag']
+        user_table = db_tables[scenario]['user_tag']
 
-    for u in users:
-        print("------- start -------")
-        print("user: " + str(u))
-        now = datetime.datetime.now()
-        print(now.strftime('%Y-%m-%d %H:%M:%S'))
+        for u in users:
+            print("------- start (" + scenario + ") -------")
+            print("user: " + str(u))
+            now = datetime.datetime.now()
+            print(now.strftime('%Y-%m-%d %H:%M:%S'))
 
-        r_ut[u] = []
+            r_ut[u] = []
 
-        for t in tags_of_user(user_table, u):
-            print(t)
-            r = calculate_r_ut(u, t, question_table)
-            # print("u:" + str(u) + "\tt:" + str(t) + "\t" + str(r))
-            r_ut[u].append({"t": t, "r": r})
+            for t in tags_of_user(user_table, u):
+                # print("tag: " + str(t))
+                r = calculate_r_ut(u, t, question_table)
+                # print("u:" + str(u) + "\tt:" + str(t) + "\t" + str(r))
+                r_ut[u].append({"t": t, "r": r})
 
-        print("\n" + str((datetime.datetime.now() - now).seconds) + " seconds")
-        print("------- end -------\n\n")
+            print("\n" + str((datetime.datetime.now() - now).seconds) +
+                  " seconds")
+            print("------- end -------\n\n")
 
-    with open(output_file[scenario], 'w') as outfile:
-        json.dump(r_ut, outfile)
+        with open(output_file[scenario], 'w') as outfile:
+            json.dump(r_ut, outfile)
 
 
 if __name__ == '__main__':

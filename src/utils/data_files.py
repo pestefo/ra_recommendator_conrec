@@ -34,6 +34,11 @@ r_uq_table = dp + 'data/r_uq.json'
  {"user_id": [ {t": tag_id, "r": r_ut_value}, ... ],
 """
 r_ut_table = dp + 'data/r_ut.json'
+r_ut_table_scenario = {
+    'B': 'data/r_ut_scenario_b.json',
+    'C': 'data/r_ut_scenario_c.json',
+    'D': 'data/r_ut_scenario_d.json'
+}
 
 """
  Question ID - List of Tag IDs
