@@ -35,6 +35,7 @@ r_uq_table = dp + 'data/r_uq.json'
 """
 r_ut_table = dp + 'data/r_ut.json'
 r_ut_table_scenario = {
+    'A': dp + 'data/r_ut.json',
     'B': dp + 'data/r_ut_scenario_b.json',
     'C': dp + 'data/r_ut_scenario_c.json',
     'D': dp + 'data/r_ut_scenario_d.json'
@@ -68,5 +69,6 @@ def get_data(path_to_file):
 def results_dir(scenario):
     return dp + 'results/second_experiments/scenario_' + scenario
 
-def results_file(question_id,scenario):
-	return results_dir(scenario) + '/results_for_' + str(question_id) + '.json'
+
+def results_file(question_id, scenario):
+    return results_dir(scenario) + '/results_for_' + str(question_id) + '.json'

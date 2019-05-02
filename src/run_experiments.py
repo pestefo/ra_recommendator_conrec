@@ -12,7 +12,6 @@ import json
 import datetime
 import time
 
-dir_preffix = '/home/pestefo/projects/experiment_1/'
 # path_to_results = 'data/tmba_100q_5p'
 
 # path_to_results = 'data/tmba_100q_1p'
@@ -22,11 +21,11 @@ dir_preffix = '/home/pestefo/projects/experiment_1/'
 ALGORITHM = None
 SAMPLE_SIZE = 100
 NB_OF_RESULTS = 150
-SCENARIOS = ('B', 'C', 'D')
+SCENARIOS = ('A', 'B', 'C', 'D')
 
 
 def print_header(question_id, scenario):
-    print("------- start ({}) -------".format(scenario))
+    print("------- start (Scenario {}) -------".format(scenario))
     print("question: " + str(question_id))
     now = datetime.datetime.now()
     print(now.strftime('%d-%m-%Y %H:%M:%S'))
@@ -60,7 +59,8 @@ def main():
     # Start clicking
     start_time = datetime.datetime.now()
 
-    for scenario in SCENARIOS:
+    # for scenario in SCENARIOS:
+    for scenario in ['A']:
         ALGORITHM = TMBAlgorithm(scenario)
         # Run experiment for each question in the sample
         for question_id in sample[:SAMPLE_SIZE]:

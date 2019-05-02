@@ -3,8 +3,11 @@ import mysql.connector
 
 class Database:
 
-    def __init__(self, connection=None, scenario='B'):
-        print("Initializing DB for scenario {}".format(scenario))
+    def __init__(self, scenario, connection=None, ):
+
+        self.scenario = scenario
+
+        print("Initializing DB for scenario {}...".format(self.scenario))
 
         self.host = 'localhost'
         self.user = 'root'
@@ -25,6 +28,8 @@ class Database:
         self.cursor.execute("SET character_set_connection=utf8mb4")
 
         self.DB_TABLES = {
+            "A": {"question_tag": "ra_question_tag",
+                  "user_tag": "ra_user_tag"},
             "B": {"question_tag": "ra_question_tag_extended",
                   "user_tag": "ra_user_tag"},
             "C": {"question_tag": "ra_question_tag",
@@ -36,12 +41,6 @@ class Database:
         self.USERS_CACHE = None
         self.TAGS_CACHE = None
 
-    def set_scenario(self, new_scenario):
-        if new_scenario not in ('B', 'C', 'D'):
-            raise Exception('Valid scenarios are "B", "C" or "D"')
-
-        self.scenario = new_scenario
-
     def execute(self, query, data):
         self.cursor.execute(query, data)
 
@@ -51,12 +50,12 @@ class Database:
         except Exception:
             self.connection.rollback()
 
-    def tags_of_user(self, scenario, user_id):
+    def tags_of_user(self, user_id):
         query = """
         SELECT tag_id
         from {}
         where user_id={}""".format(
-            self.DB_TABLES[scenario]['user_tag'],
+            self.DB_TABLES[self.scenario]['user_tag'],
             user_id)
 
         self.execute(query, [])
@@ -64,12 +63,12 @@ class Database:
         return list(map(lambda x: x[0],
                         self.cursor.fetchall()))
 
-    def tags_of_question(self, scenario, question_id):
+    def tags_of_question(self, question_id):
         query = """
         SELECT tag_id
         from {}
         where question_id={}""".format(
-            self.DB_TABLES[scenario]['question_tag'],
+            self.DB_TABLES[self.scenario]['question_tag'],
             question_id)
 
         self.execute(query, [])
@@ -77,12 +76,12 @@ class Database:
         return list(map(lambda x: x[0],
                         self.cursor.fetchall()))
 
-    def questions_with_tag(self, scenario, tag_id):
+    def questions_with_tag(self, tag_id):
         query = """
         SELECT question_id
         from {}
         where tag_id={}""".format(
-            self.DB_TABLES[scenario]['question_tag'],
+            self.DB_TABLES[self.scenario]['question_tag'],
             tag_id)
 
         self.execute(query, [])

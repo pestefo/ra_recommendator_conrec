@@ -10,8 +10,7 @@ from utils.db import Database
 
 class TMBAlgorithm(AbstractConRecAlgorithm):
 
-    def __init__(self, scenario='B'):
-        print("------ TMBA Scenario {} ------".format(scenario))
+    def __init__(self, scenario):
 
         AbstractConRecAlgorithm.__init__(self)
 
@@ -29,13 +28,13 @@ class TMBAlgorithm(AbstractConRecAlgorithm):
         return self.db.all_questions()
 
     def tags_of_user(self, user_id):
-        return self.db.tags_of_user(self.scenario, user_id)
+        return self.db.tags_of_user(user_id)
 
     def tags_of_question(self, question_id):
-        return self.db.tags_of_question(self.scenario, question_id)
+        return self.db.tags_of_question(question_id)
 
     def questions_with_tag(self, tag_id):
-        return self.db.questions_with_tag(self.scenario, tag_id)
+        return self.db.questions_with_tag(tag_id)
 
     def nb_of_tags(self):
         return self.db.nb_of_tags()
