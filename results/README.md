@@ -31,17 +31,146 @@ D. **Questions extended** tag description - **Users extended** tag description
 
 - [x] Extract new tags from Questions: generate `ros_question_tag_extended.json`
 - [x] Extract new tags from participation of Users in Questions: generate `ros_user_tag_extended.json` --> (`ra_user_tag_extended` in the DB)
-- [ ] Generate R_ut for Scenario B: generate `r_ut_scenario_b.json`
-- [ ] Generate R_ut for Scenario C: generate `r_ut_scenario_c.json`
-- [ ] Generate R_ut for Scenario D: generate `r_ut_scenario_d.json`
-- [ ] Get scores for Scenario B
-- [ ] Get scores for Scenario C
-- [ ] Get scores for Scenario D
-- [ ] Overall evaluation for Scenario B (boxplot of recall)
-- [ ] Overall evaluation for Scenario C (boxplot of recall)
-- [ ] Overall evaluation for Scenario D (boxplot of recall)
+- [x] Generate R_ut for Scenario B: generate `r_ut_scenario_b.json`
+- [x] Generate R_ut for Scenario C: generate `r_ut_scenario_c.json`
+- [x] Generate R_ut for Scenario D: generate `r_ut_scenario_d.json`
+- [x] Get scores for Scenario B
+- [x] Get scores for Scenario C
+- [x] Get scores for Scenario D
+- [x] Overall evaluation for Scenario B (boxplot of recall)
+- [x] Overall evaluation for Scenario C (boxplot of recall)
+- [x] Overall evaluation for Scenario D (boxplot of recall)
 - [ ] Manual inspection
 
 
 
-  
+#### Questions with worse recall for each scenario
+
+We show the questions with a recall ` <=0.2` counting the top 60 best ranked users. The script for this is in the file: `reports/recall_diff.r`
+
+
+
+###### Scenario A
+
+| q_id  | top.15 | top.30 | top.45 | top.60 |
+| ----- | ------ | ------ | ------ | ------ |
+| 9273  | 0.0    | 0.0    | 0.0    | 0.2    |
+| 9277  | 0.0    | 0.0    | 0.0    | 0.2    |
+| 10006 | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9135  | 0.2    | 0.2    | 0.2    | 0.2    |
+| 9615  | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10027 | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10105 | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10120 | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10284 | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10313 | 0.2    | 0.2    | 0.2    | 0.2    |
+
+#####  
+
+######   Scenario B
+
+| q_id  | top.15 | top.30 | top.45 | top.60 |
+| ----- | ------ | ------ | ------ | ------ |
+| 9653  | 0.0    | 0.0    | 0.0    | 0.0    |
+| 9750  | 0.0    | 0.0    | 0.0    | 0.0    |
+| 9796  | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10006 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10013 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10020 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10105 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10149 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10280 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10284 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10313 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10323 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10342 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 9277  | 0.0    | 0.0    | 0.0    | 0.2    |
+| 10238 | 0.0    | 0.0    | 0.0    | 0.2    |
+| 9620  | 0.0    | 0.0    | 0.2    | 0.2    |
+| 9197  | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9251  | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9615  | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9684  | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9427  | 0.2    | 0.2    | 0.2    | 0.2    |
+| 9606  | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10072 | 0.2    | 0.2    | 0.2    | 0.2    |
+
+###### Scenario C
+
+| q_id  | top.15 | top.30 | top.45 | top.60 |
+| ----- | ------ | ------ | ------ | ------ |
+| 9273  | 0.0    | 0.0    | 0.0    | 0.2    |
+| 9277  | 0.0    | 0.0    | 0.0    | 0.2    |
+| 10006 | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9135  | 0.2    | 0.2    | 0.2    | 0.2    |
+| 9615  | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10027 | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10105 | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10120 | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10284 | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10313 | 0.2    | 0.2    | 0.2    | 0.2    |
+
+###### Scenario D
+
+| q_id  | top.15 | top.30 | top.45 | top.60 |
+| ----- | ------ | ------ | ------ | ------ |
+| 9653  | 0.0    | 0.0    | 0.0    | 0.0    |
+| 9750  | 0.0    | 0.0    | 0.0    | 0.0    |
+| 9796  | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10006 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10013 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10020 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10105 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10149 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10280 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10284 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10313 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10323 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 10342 | 0.0    | 0.0    | 0.0    | 0.0    |
+| 9277  | 0.0    | 0.0    | 0.0    | 0.2    |
+| 10238 | 0.0    | 0.0    | 0.0    | 0.2    |
+| 9620  | 0.0    | 0.0    | 0.2    | 0.2    |
+| 9197  | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9251  | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9615  | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9684  | 0.0    | 0.2    | 0.2    | 0.2    |
+| 9427  | 0.2    | 0.2    | 0.2    | 0.2    |
+| 9606  | 0.2    | 0.2    | 0.2    | 0.2    |
+| 10072 | 0.2    | 0.2    | 0.2    | 0.2    |
+
+###### Summary: Questions with Recall@60 <= 0.2 in at least one scenario 
+
+|   q_id    |    A    |    B    |    C    |    D    |
+| :-------: | :-----: | :-----: | :-----: | :-----: |
+|   [9135](https://answers.ros.org/question/9135) |   0.2   | **0.8** |   0.2   | **0.8** |
+| **[9197](https://answers.ros.org/question/9197)** | **0.8** |   0.2   | **0.8** |   0.2   |
+| **[9251](https://answers.ros.org/question/9251)** | **0.8** |   0.2   | **0.8** |   0.2   |
+|   [9273](https://answers.ros.org/question/9273) |   0.2   |   0.4   |   0.2   |   0.4   |
+|   [9277](https://answers.ros.org/question/9277) |   0.2   |   0.2   |   0.2   |   0.2   |
+|   [9427](https://answers.ros.org/question/9427) |   0.4   |   0.2   |   0.4   |   0.2   |
+|   [9606](https://answers.ros.org/question/9606) |   0.6   |   0.2   |   0.6   |   0.2   |
+|   [9615](https://answers.ros.org/question/9615) |   0.2   |   0.2   |   0.2   |   0.2   |
+| **[9620](https://answers.ros.org/question/9620)** | **0.8** |   0.2   | **0.8** |   0.2   |
+|   [9653](https://answers.ros.org/question/9653) |   0.4   |   0.0   |   0.4   |   0.0   |
+| **[9684](https://answers.ros.org/question/9684)** | **0.8** |   0.2   | **0.8** |   0.2   |
+|   [9750](https://answers.ros.org/question/9750) |   0.4   |   0.0   |   0.4   |   0.0   |
+|   [9796](https://answers.ros.org/question/9796) |   0.6   |   0.0   |   0.6   |   0.0   |
+|   [10006](https://answers.ros.org/question/10006) |   0.2   |   0.0   |   0.2   |   0.0   |
+| **[10013](https://answers.ros.org/question/10013)** | **0.8** |   0.0   | **0.8** |   0.0   |
+|   [10020](https://answers.ros.org/question/10020) |   0.4   |   0.0   |   0.4   |   0.0   |
+|   [10027](https://answers.ros.org/question/10027) |   0.2   |   0.6   |   0.2   | **1.0** |
+|   [10072](https://answers.ros.org/question/10072) |   0.4   |   0.2   |   0.4   |   0.2   |
+|   [10105](https://answers.ros.org/question/10105) |   0.2   |   0.0   |   0.2   |   0.0   |
+| **[10120](https://answers.ros.org/question/10120)** |   0.2   | **0.8** |   0.2   | **0.8** |
+| **[10149](https://answers.ros.org/question/10149)** |   0.8   |   0.0   | **0.8** |   0.0   |
+|   [10238](https://answers.ros.org/question/10238) |   0.4   |   0.2   |   0.4   |   0.2   |
+|   [10280](https://answers.ros.org/question/10280) |   0.4   |   0.0   |   0.6   |   0.0   |
+|   [10284](https://answers.ros.org/question/10284) |   0.2   |   0.0   |   0.2   |   0.0   |
+|   [10313](https://answers.ros.org/question/10313) |   0.2   |   0.0   |   0.2   |   0.0   |
+|   [10323](https://answers.ros.org/question/10323) |   0.4   |   0.0   |   0.4   |   0.0   |
+| **[10342](https://answers.ros.org/question/10342)** |   0.8   |   0.0   | **0.8** |   0.0   |
+
+Tags of the questions above:
+
+`getting_started`,`package`,`tutorials`,`beginner`,`rosinstall`,`Ubuntu`,`rein`,`object_recognition`,`camera_calibration`,`messages`,`enum`,`rosdep`,`linuxmint`,`launch`,`debug`,`navigation`,`sbpl`,`ompl`,`motionplanning`,`rosmake`,`C++`,`diamondback`,`move_base`,`acml`,`goal`,`pause`,`abort`,`ROS_PACKAGE_PATH`,`RGBDSLAM`,`depth`,`Kinect`,`openni_camera`,`rosbag`,`nodelet`,`openni`,`gazebo`,`rviz`,`Qt`,`hardware`,`thesis`,`turtlebot`,`networking`,`ROS_MASTER_URI`,`calibration`,`camera`,`laser`,`extrinsic`,`tf`,`usb_cam`,`StampedTransform`,`transform_broadcaster`,`pose`,
+

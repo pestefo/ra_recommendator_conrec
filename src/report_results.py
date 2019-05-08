@@ -6,14 +6,14 @@ from utils import data_files as files
 from utils.db import Database
 
 
-SCENARIOS = ('B', 'C', 'D')
+SCENARIOS = ('A', 'B', 'C', 'D')
 
 
 SAMPLE_SIZE = 100   # nb of questions in the sample
 LIMIT_OF_RESULTS = 150  # size of the ranked users,
 # defined in con_rec_sanity_check.py
 BREAKS = list(range(5, LIMIT_OF_RESULTS + 5, 5))  # top5, top10, ..., top50
-db = Database()
+db = None
 # Return the list of pairs (user,score) in order from higher to lower score
 
 
@@ -55,10 +55,11 @@ def recall(question_id, scenario):
 
 
 def main():
+    global db
     sample = files.get_data(files.questions_sample)[:100]
 
-    for scenario in SCENARIOS:
-
+    for scenario in SCENARIOS[0]:
+        db = Database(scenario)
         # Read results, get coverage and print it
         filename = files.results_dir(
             scenario) + '/results_scenario_' + scenario + '.csv'
