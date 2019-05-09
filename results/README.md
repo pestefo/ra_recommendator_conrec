@@ -138,37 +138,37 @@ We show the questions with a recall ` <=0.2` counting the top 60 best ranked use
 | 9606  | 0.2    | 0.2    | 0.2    | 0.2    |
 | 10072 | 0.2    | 0.2    | 0.2    | 0.2    |
 
-###### Summary: Questions with Recall@60 <= 0.2 in at least one scenario 
+###### Summary: Questions with Recall@60 <= 0.2 in at least one for each scenario 
 
-|   q_id    |    A    |    B    |    C    |    D    |
-| :-------: | :-----: | :-----: | :-----: | :-----: |
-|   [9135](https://answers.ros.org/question/9135) |   0.2   | **0.8** |   0.2   | **0.8** |
-| **[9197](https://answers.ros.org/question/9197)** | **0.8** |   0.2   | **0.8** |   0.2   |
-| **[9251](https://answers.ros.org/question/9251)** | **0.8** |   0.2   | **0.8** |   0.2   |
-|   [9273](https://answers.ros.org/question/9273) |   0.2   |   0.4   |   0.2   |   0.4   |
-|   [9277](https://answers.ros.org/question/9277) |   0.2   |   0.2   |   0.2   |   0.2   |
-|   [9427](https://answers.ros.org/question/9427) |   0.4   |   0.2   |   0.4   |   0.2   |
-|   [9606](https://answers.ros.org/question/9606) |   0.6   |   0.2   |   0.6   |   0.2   |
-|   [9615](https://answers.ros.org/question/9615) |   0.2   |   0.2   |   0.2   |   0.2   |
-| **[9620](https://answers.ros.org/question/9620)** | **0.8** |   0.2   | **0.8** |   0.2   |
-|   [9653](https://answers.ros.org/question/9653) |   0.4   |   0.0   |   0.4   |   0.0   |
-| **[9684](https://answers.ros.org/question/9684)** | **0.8** |   0.2   | **0.8** |   0.2   |
-|   [9750](https://answers.ros.org/question/9750) |   0.4   |   0.0   |   0.4   |   0.0   |
-|   [9796](https://answers.ros.org/question/9796) |   0.6   |   0.0   |   0.6   |   0.0   |
-|   [10006](https://answers.ros.org/question/10006) |   0.2   |   0.0   |   0.2   |   0.0   |
+|                        q_id                         |    A    |    B    |    C    |    D    |
+| :-------------------------------------------------: | :-----: | :-----: | :-----: | :-----: |
+|    [9135](https://answers.ros.org/question/9135)    |   0.2   | **0.8** |   0.2   | **0.8** |
+|  **[9197](https://answers.ros.org/question/9197)**  | **0.8** |   0.2   | **0.8** |   0.2   |
+|  **[9251](https://answers.ros.org/question/9251)**  | **0.8** |   0.2   | **0.8** |   0.2   |
+|    [9273](https://answers.ros.org/question/9273)    |   0.2   |   0.4   |   0.2   |   0.4   |
+|    [9277](https://answers.ros.org/question/9277)    |   0.2   |   0.2   |   0.2   |   0.2   |
+|    [9427](https://answers.ros.org/question/9427)    |   0.4   |   0.2   |   0.4   |   0.2   |
+|    [9606](https://answers.ros.org/question/9606)    |   0.6   |   0.2   |   0.6   |   0.2   |
+|    [9615](https://answers.ros.org/question/9615)    |   0.2   |   0.2   |   0.2   |   0.2   |
+|  **[9620](https://answers.ros.org/question/9620)**  | **0.8** |   0.2   | **0.8** |   0.2   |
+|    [9653](https://answers.ros.org/question/9653)    |   0.4   |   0.0   |   0.4   |   0.0   |
+|  **[9684](https://answers.ros.org/question/9684)**  | **0.8** |   0.2   | **0.8** |   0.2   |
+|    [9750](https://answers.ros.org/question/9750)    |   0.4   |   0.0   |   0.4   |   0.0   |
+|    [9796](https://answers.ros.org/question/9796)    |   0.6   |   0.0   |   0.6   |   0.0   |
+|   [10006](https://answers.ros.org/question/10006)   |   0.2   |   0.0   |   0.2   |   0.0   |
 | **[10013](https://answers.ros.org/question/10013)** | **0.8** |   0.0   | **0.8** |   0.0   |
-|   [10020](https://answers.ros.org/question/10020) |   0.4   |   0.0   |   0.4   |   0.0   |
-|   [10027](https://answers.ros.org/question/10027) |   0.2   |   0.6   |   0.2   | **1.0** |
-|   [10072](https://answers.ros.org/question/10072) |   0.4   |   0.2   |   0.4   |   0.2   |
-|   [10105](https://answers.ros.org/question/10105) |   0.2   |   0.0   |   0.2   |   0.0   |
+|   [10020](https://answers.ros.org/question/10020)   |   0.4   |   0.0   |   0.4   |   0.0   |
+|   [10027](https://answers.ros.org/question/10027)   |   0.2   |   0.6   |   0.2   | **1.0** |
+|   [10072](https://answers.ros.org/question/10072)   |   0.4   |   0.2   |   0.4   |   0.2   |
+|   [10105](https://answers.ros.org/question/10105)   |   0.2   |   0.0   |   0.2   |   0.0   |
 | **[10120](https://answers.ros.org/question/10120)** |   0.2   | **0.8** |   0.2   | **0.8** |
-| **[10149](https://answers.ros.org/question/10149)** |   0.8   |   0.0   | **0.8** |   0.0   |
-|   [10238](https://answers.ros.org/question/10238) |   0.4   |   0.2   |   0.4   |   0.2   |
-|   [10280](https://answers.ros.org/question/10280) |   0.4   |   0.0   |   0.6   |   0.0   |
-|   [10284](https://answers.ros.org/question/10284) |   0.2   |   0.0   |   0.2   |   0.0   |
-|   [10313](https://answers.ros.org/question/10313) |   0.2   |   0.0   |   0.2   |   0.0   |
-|   [10323](https://answers.ros.org/question/10323) |   0.4   |   0.0   |   0.4   |   0.0   |
-| **[10342](https://answers.ros.org/question/10342)** |   0.8   |   0.0   | **0.8** |   0.0   |
+| **[10149](https://answers.ros.org/question/10149)** | **0.8** |   0.0   | **0.8** |   0.0   |
+|   [10238](https://answers.ros.org/question/10238)   |   0.4   |   0.2   |   0.4   |   0.2   |
+|   [10280](https://answers.ros.org/question/10280)   |   0.4   |   0.0   |   0.6   |   0.0   |
+|   [10284](https://answers.ros.org/question/10284)   |   0.2   |   0.0   |   0.2   |   0.0   |
+|   [10313](https://answers.ros.org/question/10313)   |   0.2   |   0.0   |   0.2   |   0.0   |
+|   [10323](https://answers.ros.org/question/10323)   |   0.4   |   0.0   |   0.4   |   0.0   |
+| **[10342](https://answers.ros.org/question/10342)** | **0.8** |   0.0   | **0.8** |   0.0   |
 
 Tags of the questions above:
 
