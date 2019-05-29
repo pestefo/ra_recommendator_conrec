@@ -151,14 +151,14 @@ Union of all questions in which any of the scenarios performed poorly, ie. Recal
 
 |                        q_id                         | A - Base | B - Q+ | C - U+ | D - Q+ U+ |  Q+  |  U+  |
 | :-------------------------------------------------: | :------: | :----: | :----: | :-------: | :--: | :--: |
-|    [9135](https://answers.ros.org/question/9135)    |   0.2    |  0.8   |  0.2   |    0.8    |  ⬆⬆  |  -   |
+|  **[9135](https://answers.ros.org/question/9135)**  |   0.2    |  0.8   |  0.2   |    0.8    |  ⬆⬆  |  -   |
 |    [9197](https://answers.ros.org/question/9197)    |   0.8    |  0.2   |  0.8   |    0.2    |  ⬇⬇  |  -   |
 |    [9251](https://answers.ros.org/question/9251)    |   0.8    |  0.2   |  0.8   |    0.2    |  ⬇⬇  |  -   |
 |    [9273](https://answers.ros.org/question/9273)    |   0.2    |  0.4   |  0.2   |    0.4    |  ⬆   |  -   |
-|    [9277](https://answers.ros.org/question/9277)    |   0.2    |  0.2   |  0.2   |    0.2    |  -   |  -   |
-|    [9427](https://answers.ros.org/question/9427)    |   0.4    |  0.2   |  0.4   |    0.2    |  -   |  ⬆   |
+|  **[9277](https://answers.ros.org/question/9277)**  |   0.2    |  0.2   |  0.2   |    0.2    |  -   |  -   |
+|    [9427](https://answers.ros.org/question/9427)    |   0.4    |  0.2   |  0.4   |    0.2    |  ⬇   |  -   |
 |    [9606](https://answers.ros.org/question/9606)    |   0.6    |  0.2   |  0.6   |    0.2    |  ⬇   |  -   |
-|    [9615](https://answers.ros.org/question/9615)    |   0.2    |  0.2   |  0.2   |    0.2    |  -   |  -   |
+|  **[9615](https://answers.ros.org/question/9615)**  |   0.2    |  0.2   |  0.2   |    0.2    |  -   |  -   |
 |    [9620](https://answers.ros.org/question/9620)    |   0.8    |  0.2   |  0.8   |    0.2    |  ⬇⬇  |  -   |
 |    [9653](https://answers.ros.org/question/9653)    |   0.4    |  0.0   |  0.4   |    0.0    |  ⬇⬇  |  -   |
 |    [9684](https://answers.ros.org/question/9684)    |   0.8    |  0.2   |  0.8   |    0.2    |  ⬇⬇  |  -   |
@@ -170,10 +170,10 @@ Union of all questions in which any of the scenarios performed poorly, ie. Recal
 | [**10027**](https://answers.ros.org/question/10027) |   0.2    |  0.6   |  0.2   |    1.0    |  ⬆   |  ⬆   |
 |   [10072](https://answers.ros.org/question/10072)   |   0.4    |  0.2   |  0.4   |    0.2    |  ⬇   |  -   |
 |   [10105](https://answers.ros.org/question/10105)   |   0.2    |  0.0   |  0.2   |    0.0    |  ⬇   |  -   |
-|   [10120](https://answers.ros.org/question/10120)   |   0.2    |  0.8   |  0.2   |    0.8    |  ⬆   |  -   |
+| **[10120](https://answers.ros.org/question/10120)** |   0.2    |  0.8   |  0.2   |    0.8    |  ⬆   |  -   |
 |   [10149](https://answers.ros.org/question/10149)   |   0.8    |  0.0   |  0.8   |    0.0    |  ⬇⬇  |  -   |
 |   [10238](https://answers.ros.org/question/10238)   |   0.4    |  0.2   |  0.4   |    0.2    |  ⬇   |  -   |
-|   [10280](https://answers.ros.org/question/10280)   |   0.4    |  0.0   |  0.6   |    0.0    |  ⬇⬇  |  ⬆   |
+| **[10280](https://answers.ros.org/question/10280)** |   0.4    |  0.0   |  0.6   |    0.0    |  ⬇⬇  |  ⬆   |
 |   [10284](https://answers.ros.org/question/10284)   |   0.2    |  0.0   |  0.2   |    0.0    |  ⬇   |  -   |
 |   [10313](https://answers.ros.org/question/10313)   |   0.2    |  0.0   |  0.2   |    0.0    |  ⬇   |  -   |
 |   [10323](https://answers.ros.org/question/10323)   |   0.4    |  0.0   |  0.4   |    0.0    |  ⬇   |  -   |
