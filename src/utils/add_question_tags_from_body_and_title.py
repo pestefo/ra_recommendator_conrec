@@ -129,7 +129,6 @@ def print_counter(cnt):
             json.dump(rqt, o)
 
 
-
 def main():
     global tag_pattern, output_file, tag2id
     # Question's Title and Body data
