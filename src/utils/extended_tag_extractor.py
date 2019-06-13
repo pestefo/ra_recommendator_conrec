@@ -1,13 +1,13 @@
 
-from collections import defaultdict, Counter
+from collections import Counter
 import re
-import json
-import csv
 import sqlite3
 from sqlite3 import Error
 
 
 class ExtendedTagExtractor:
+
+    # private - initialization
 
     def __init__(self):
         self.__initialize_tag_pattern()
@@ -49,6 +49,8 @@ class ExtendedTagExtractor:
 
         return None
 
+    # private -db
+
     def __execute_query(self, query):
         if not self.__conn:
             self.__create_connection(self.__database)
@@ -58,12 +60,7 @@ class ExtendedTagExtractor:
 
         return cur.fetchall()
 
-    def get_title_and_body(self, question_id):
-        query = "select title,summary from ros_question where id={}".format(
-            question_id)
-        title, body = self.__execute_query(query)[0]
-        body = self.__cleanhtml(body)
-        return title, body
+    # private - core
 
     def __extract_tags(self, str):
 
@@ -78,11 +75,38 @@ class ExtendedTagExtractor:
 
         return matches
 
+    # public methods
+
+    def get_title_and_body(self, question_id):
+        query = "select title,summary from ros_question where id={}".format(
+            question_id)
+        title, body = self.__execute_query(query)[0]
+        body = self.__cleanhtml(body)
+        return title, body
+
     def extended_tags_for(self, question_id):
         title, body = self.get_title_and_body(question_id)
 
         tags_found = self.__extract_tags(title.lower())
         tags_found += self.__extract_tags(body.lower())
+
+        sorted(tags_found)
+
+        return tags_found
+
+    def body_extended_tags_for(self, question_id):
+        title, body = self.get_title_and_body(question_id)
+
+        tags_found = self.__extract_tags(body.lower())
+
+        sorted(tags_found)
+
+        return tags_found
+
+    def title_extended_tags_for(self, question_id):
+        title, body = self.get_title_and_body(question_id)
+
+        tags_found = self.__extract_tags(title.lower())
 
         sorted(tags_found)
 

@@ -6,6 +6,7 @@ from collections import defaultdict, Counter
 import re
 import json
 import csv
+from extended_tag_extractor import ExtendedTagExtractor
 
 conn = None
 database = "data/v1.2.db"
@@ -134,22 +135,18 @@ def main():
     # Question's Title and Body data
 
     questions = get_question_ids()
-    tags = get_tags()
     extended_tags = defaultdict(list)
 
-    tag_pattern = '\\b(' + \
-        '|'.join(list(map(lambda x: re.escape(x), tags))) + ')\\b'
+    tag_extractor = ExtendedTagExtractor()
+
+
 
     for q_id in questions[13:]:
 
         print("Question {}".format(q_id))
 
-        title, body = get_data(q_id)
+        tags_found = tag_extractor.extended_tags_for(q_id)
 
-        tags_found = extract_tags(title.lower())
-        tags_found += extract_tags(body.lower())
-        # tags_found += Counter(get_user_entered_tags(q_id))
-        sorted(tags_found)
 
         print(tags_found.keys())
 
