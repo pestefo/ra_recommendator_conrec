@@ -10,11 +10,11 @@ class ExtendedTagExtractor:
     # private - initialization
 
     def __init__(self):
-        self.__initialize_tag_pattern()
         self.__database = "data/v1.2.db"
-        self.__create_connection()
-        self.__initialize_stopwords()
+        self.__conn = self.__create_connection()
         self.__initialize_tags()
+        self.__initialize_tag_pattern()
+        self.__initialize_stopwords()
 
     def __initialize_tag_pattern(self):
         self.tag_pattern = '\\b(' + \
@@ -32,7 +32,7 @@ class ExtendedTagExtractor:
 
     def __initialize_tags(self):
         query = "select name from ros_tag"
-        return list(map(lambda x: x[0], self.__execute_query(query)))
+        self._all_tags = list(map(lambda x: x[0], self.__execute_query(query)))
 
     def __create_connection(self):
         """ create a database connection to the SQLite database
@@ -44,6 +44,7 @@ class ExtendedTagExtractor:
         try:
             self.__conn = sqlite3.connect(self.__database)
             return self.__conn
+
         except Error as e:
             print(e)
 
@@ -53,7 +54,7 @@ class ExtendedTagExtractor:
 
     def __execute_query(self, query):
         if not self.__conn:
-            self.__create_connection(self.__database)
+            self.__create_connection()
 
         cur = self.__conn.cursor()
         cur.execute(query)
@@ -76,6 +77,16 @@ class ExtendedTagExtractor:
         return matches
 
     # public methods
+    def tags_for(question_id):
+        # Returns the tags that were entered by the authors of the question
+        query = """
+            select ros_tag.name
+            from ros_question_tag
+            left join ros_tag on ros_question_tag.ros_tag_id = ros_tag.id
+            where ros_question_tag.ros_question_id = {}""".format(question_id)
+        tags = execute_query(query)
+
+        return list(map(lambda x: x[0], tags))
 
     def get_title_and_body(self, question_id):
         query = "select title,summary from ros_question where id={}".format(
