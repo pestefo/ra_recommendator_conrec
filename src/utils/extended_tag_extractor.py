@@ -4,6 +4,8 @@ import re
 import sqlite3
 from sqlite3 import Error
 
+# Ejecutar desde ../src para evitar problemas de paths
+
 
 class ExtendedTagExtractor:
 
@@ -32,7 +34,8 @@ class ExtendedTagExtractor:
 
     def __initialize_tags(self):
         query = "select name from ros_tag"
-        self._all_tags = list(map(lambda x: x[0], self.__execute_query(query)))
+        self.__all_tags = list(
+            map(lambda x: x[0], self.__execute_query(query)))
 
     def __create_connection(self):
         """ create a database connection to the SQLite database
@@ -76,15 +79,20 @@ class ExtendedTagExtractor:
 
         return matches
 
+    def __cleanhtml(self, raw_html):
+        cleanr = re.compile('<.*?>')
+        cleantext = re.sub(cleanr, '', raw_html)
+        return cleantext
+
     # public methods
-    def tags_for(question_id):
+    def tags_for(self, question_id):
         # Returns the tags that were entered by the authors of the question
         query = """
             select ros_tag.name
             from ros_question_tag
             left join ros_tag on ros_question_tag.ros_tag_id = ros_tag.id
             where ros_question_tag.ros_question_id = {}""".format(question_id)
-        tags = execute_query(query)
+        tags = self.__execute_query(query)
 
         return list(map(lambda x: x[0], tags))
 
