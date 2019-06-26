@@ -1,10 +1,32 @@
 import json
 
 """
+Helpers
+"""
+
+
+def get_data(path_to_file):
+    with open(path_to_file) as json_data:
+        return json.load(json_data)
+
+
+def results_dir(scenario):
+    return dp + 'results/second_experiments/scenario_' + scenario
+
+
+def results_file(question_id, scenario):
+    return results_dir(scenario) + '/results_for_' + str(question_id) + '.json'
+
+
+"""
 Directory preffix
 """
 
 dp = '/home/pestefo/projects/ra_recommendator_conrec/'
+
+"""
+Database path
+"""
 
 db = dp + 'data/v1.2.db'
 
@@ -60,15 +82,12 @@ tables = dp + 'data/table_and_column_names.json'
 
 questions_sample = dp + 'data/list_of_questions_with_5_participants.json'
 
+"""
+Stopwords for ExtendedTagExtractor
+"""
+stopwords = dp + 'src/utils/stopwords.txt'
 
-def get_data(path_to_file):
-    with open(path_to_file) as json_data:
-        return json.load(json_data)
-
-
-def results_dir(scenario):
-    return dp + 'results/second_experiments/scenario_' + scenario
-
-
-def results_file(question_id, scenario):
-    return results_dir(scenario) + '/results_for_' + str(question_id) + '.json'
+"""
+Data for testing
+"""
+tag_data_for_testing = get_data(dp + 'data/test_data/tags_data.json')

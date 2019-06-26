@@ -3,6 +3,7 @@ from collections import Counter
 import re
 import sqlite3
 from sqlite3 import Error
+import src.utils.data_files as files
 
 # Ejecutar desde ../src para evitar problemas de paths
 
@@ -12,7 +13,7 @@ class ExtendedTagExtractor:
     # private - initialization
 
     def __init__(self):
-        self.__database = "data/v1.2.db"
+        self.__database = files.db
         self.__conn = self.__create_connection()
         self.__initialize_tags()
         self.__initialize_tag_pattern()
@@ -26,7 +27,7 @@ class ExtendedTagExtractor:
     def __initialize_stopwords(self):
         stopwords = list()
         # Stopwords from https://gist.github.com/sebleier/554280
-        with open('src/utils/stopwords.txt', 'r') as fp:
+        with open(files.stopwords, 'r') as fp:
             for line in fp:
                 stopwords.append(line.rstrip())
 
@@ -40,7 +41,6 @@ class ExtendedTagExtractor:
     def __create_connection(self):
         """ create a database connection to the SQLite database
             specified by the db_file
-        :param db_file: database file
         :return: Connection object or None
         """
 
