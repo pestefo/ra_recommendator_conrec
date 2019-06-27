@@ -104,13 +104,13 @@ class ExtendedTagExtractor:
         return title, body
 
     def extended_tags_for(self, question_id):
-        title, body = self.get_title_and_body(question_id)
+        return list(self.count_of_tags_for(question_id).keys())
 
+    def count_of_tags_for(self, question_id):
+        title, body = self.get_title_and_body(question_id)
         tags_found = self.__extract_tags(title.lower())
         tags_found += self.__extract_tags(body.lower())
-
         sorted(tags_found)
-
         return tags_found
 
     def body_extended_tags_for(self, question_id):

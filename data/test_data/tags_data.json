@@ -1,110 +1,137 @@
 {	
 	"9135" : {
 		"tags" : ["communication","multimaster","multi_robot"],
-		"extended-tags" : []
+		"to-test" : false,
+		"extended-tags" : ["communication", "robots", "ros"]
 	},
 	"9197" : {
 		"tags" : ["tutorials","rosinstall","getting_started","beginner","package"],
-		"extended-tags" : []
+		"to-test" : false,
+		"extended-tags" : ["package", "find_object", "svn"]
 	},
 	"9251" : {
 		"tags" : ["rein","object_recognition","Ubuntu"],
-		"extended-tags" : []
+		"to-test" : false,
+		"extended-tags" : ["rein", "ubuntu", "recognition", "infrastructure", "maverick", "ros_build_blacklist", "soci.h", "cmake", "issue", "object_recognition", "stack"]
 	},
 	"9273" : {
 		"tags" : ["git","best_practices"],
-		"extended-tags" : []
+		"to-test" : false,
+		"extended-tags" : ["git", "ros", "control", "node", "diamondback", "stacks", "version"]
 	},
 	"9277" : {
 		"tags" : ["camera_calibration"],
-		"extended-tags" : []
+		"to-test" : false,
+		"extended-tags" : ["calibration", "boards", "printer"]
 	},
 	"9427" : {
 		"tags" : ["enum","messages"],
-		"extended-tags" : []
+		"to-test" : false,
+		"extended-tags" : ["enum", "msg", "message", "type"]
 	},
 	"9606" : {
 		"tags" : ["rosdep","linuxmint"],
-		"extended-tags" : []
+		"to-test" : false,
+		"extended-tags" : ["keyerror", "rosdep", "linux", "mint", "virtual", "box", "tutorial", "turtlesim", "ros"]
 	},
 	"9615" : {
 		"tags" : ["debug","launch"],
-		"extended-tags" : []
+		"to-test" : false,
+		"extended-tags" : ["debug", "output", "launch", "file", "ros_debug", "node"]
 	},
 	"9620" : {
 		"tags" : ["navigation","ompl","sbpl","motionplanning"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"9653" : {
 		"tags" : ["rosmake","C++","diamondback","Ubuntu"],
+		"to-test" : true,
 		"extended-tags" : []
 	},
 	"9684" : {
 		"tags" : ["goal","move_base","abort","pause","acml"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"9750" : {
 		"tags" : ["rosmake","rosinstall","ROS_PACKAGE_PATH"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"9796" : {
 		"tags" : ["depth","RGBDSLAM"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10006" : {
 		"tags" : ["Kinect","openni_camera"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10013" : {
 		"tags" : ["Kinect","RGBDSLAM","rosbag","openni_camera","nodelet"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10020" : {
 		"tags" : ["openni"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10027" : {
 		"tags" : ["ROS"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10072" : {
 		"tags" : ["gazebo"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10105" : {
 		"tags" : ["rviz","Qt"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10120" : {
 		"tags" : ["rosjava","android"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10149" : {
 		"tags" : ["thesis","hardware"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10238" : {
 		"tags" : ["turtlebot","ROS_MASTER_URI","networking"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10280" : {
 		"tags" : ["calibration","camera","laser","extrinsic"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10284" : {
 		"tags" : ["rviz","tf"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10313" : {
 		"tags" : ["camera_calibration","usb_cam"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10323" : {
 		"tags" : ["tf","transform_broadcaster","StampedTransform"],
+		"to-test" : false,
 		"extended-tags" : []
 	},
 	"10342" : {
 		"tags" : ["gazebo","rviz","camera","pose"],
+		"to-test" : false,
 		"extended-tags" : []
 	}
 }	
