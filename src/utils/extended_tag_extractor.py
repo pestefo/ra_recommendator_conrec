@@ -24,12 +24,14 @@ class ExtendedTagExtractor:
             '|'.join(list(map(lambda x: re.escape(x),
                               self.__all_tags))) + ')\\b'
 
+    # TODO: Ignore also numeric stopwords
     def __initialize_stopwords(self):
         stopwords = list()
         # Stopwords from https://gist.github.com/sebleier/554280
-        with open(files.stopwords, 'r') as fp:
-            for line in fp:
-                stopwords.append(line.rstrip())
+        for f in files.stopwords:
+            with open (f, 'r') as fp:
+                for line in fp:
+                    stopwords.append (line.rstrip ())
 
         self.__stopwords = stopwords
 

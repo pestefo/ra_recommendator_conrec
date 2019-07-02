@@ -6,16 +6,30 @@ Helpers
 
 
 def get_data(path_to_file):
-    with open(path_to_file) as json_data:
-        return json.load(json_data)
+    with open (path_to_file) as json_data:
+        return json.load (json_data)
 
 
-def results_dir(scenario):
-    return dp + 'results/second_experiments/scenario_' + scenario
+def results_dir(scenario, nb_of_participants):
+    # For an experiment run on 2019-07-02 at 18:28 for all questions of
+    # 5 participants with the scenario A:
+    # >> "path_to_results/results/20190702_1828/5p/A/"
+
+    import time
+    import os
+
+    path_to_results = "{path_to_results}results/{time}/{participants}p/{scenario}" \
+        .format (path_to_results=dp,
+                 time=time.strftime ("%Y%m%d_%H%M"),
+                 participants=nb_of_participants,
+                 scenario=scenario)
+
+    os.makedirs (path_to_results, exist_ok=True)
+    return path_to_results
 
 
-def results_file(question_id, scenario):
-    return results_dir(scenario) + '/results_for_' + str(question_id) + '.json'
+def results_file(question_id, scenario, nb_of_participants):
+    return results_dir (scenario, nb_of_participants) + '/results_for_' + str (question_id) + '.json'
 
 
 """
@@ -68,14 +82,14 @@ r_ut_table_scenario = {
  {"9033": ["37", "123"], "9036": ["17", "20", "22"],
 """
 question_tags = dp + \
-    'data/data_extracted_from_db/ros_question_tag.json'
+                'data/data_extracted_from_db/ros_question_tag.json'
 
 """
 Question ID - List of Tag IDs  -    Considering manually entered and
                                     and extracted from body and title
 """
 question_tags_extended = dp + \
-    'data/ros_question_tag_extended.json'
+                         'data/ros_question_tag_extended.json'
 tags_file = dp + 'data/data_extracted_from_db/ros_tag.json'
 
 tables = dp + 'data/table_and_column_names.json'
@@ -85,9 +99,9 @@ questions_sample = dp + 'data/list_of_questions_with_5_participants.json'
 """
 Stopwords for ExtendedTagExtractor
 """
-stopwords = dp + 'src/utils/stopwords.txt'
+stopwords = [dp + 'src/utils/stopwords.txt', dp + 'src/utils/stopwords-complement.txt']
 
 """
 Data for testing
 """
-tag_data_for_testing = get_data(dp + 'data/test_data/tags_data.json')
+tag_data_for_testing = get_data (dp + 'data/test_data/tags_data.json')
