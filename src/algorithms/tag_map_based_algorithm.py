@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
-from algorithms.con_rec import AbstractConRecAlgorithm
-import utils.data_files as files
-from utils.db import Database
+import src.algorithms.con_rec
+import src.utils.data_files as files
+from src.utils.db import Database
 ###
 # Tag Map Based Algorithm (TMBA)
 ###
 
 
-class TMBAlgorithm(AbstractConRecAlgorithm):
+class TMBAlgorithm(src.algorithms.con_rec.AbstractConRecAlgorithm):
 
     def __init__(self, scenario):
 
-        AbstractConRecAlgorithm.__init__(self)
+        src.algorithms.con_rec.AbstractConRecAlgorithm.__init__(self)
 
         self.R_UT_TABLE = files.get_data(files.r_ut_table_scenario[scenario])
         self.db = Database(scenario)

@@ -147,7 +147,6 @@ def main():
 
         tags_found = tag_extractor.extended_tags_for(q_id)
 
-
         print(tags_found.keys())
 
         extended_tags[q_id].extend(
@@ -161,17 +160,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-'''
-1. Faltan stopwords
-2. kewas los lowerkase ermanz
-
-Question 9287
-Are opencv samples in diamondback debs?
-ar <---- ????
-opencv
-samples
-in
-diamondback
-deb
-'''

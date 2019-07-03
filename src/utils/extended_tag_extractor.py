@@ -5,9 +5,6 @@ import sqlite3
 from sqlite3 import Error
 import src.utils.data_files as files
 
-# Ejecutar desde ../src para evitar problemas de paths
-
-
 class ExtendedTagExtractor:
 
     # private - initialization
@@ -24,7 +21,6 @@ class ExtendedTagExtractor:
             '|'.join(list(map(lambda x: re.escape(x),
                               self.__all_tags))) + ')\\b'
 
-    # TODO: Ignore also numeric stopwords
     def __initialize_stopwords(self):
         stopwords = list()
         # Stopwords from https://gist.github.com/sebleier/554280
@@ -55,7 +51,7 @@ class ExtendedTagExtractor:
 
         return None
 
-    # private -db
+    # private - db
 
     def __execute_query(self, query):
         if not self.__conn:
@@ -76,7 +72,7 @@ class ExtendedTagExtractor:
 
         # removing stopwords
         for tag in list(matches):
-            if tag in self.__stopwords:
+            if tag in self.__stopwords or tag.isdigit():
                 del matches[tag]
 
         return matches
@@ -87,6 +83,8 @@ class ExtendedTagExtractor:
         return cleantext
 
     # public methods
+
+    # Returns the user entered tags
     def tags_for(self, question_id):
         # Returns the tags that were entered by the authors of the question
         query = """
@@ -98,15 +96,13 @@ class ExtendedTagExtractor:
 
         return list(map(lambda x: x[0], tags))
 
-    def get_title_and_body(self, question_id):
-        query = "select title,summary from ros_question where id={}".format(
-            question_id)
-        title, body = self.__execute_query(query)[0]
-        body = self.__cleanhtml(body)
-        return title, body
-
+    # Returns only the extracted extended tags
     def extended_tags_for(self, question_id):
         return list(self.count_of_tags_for(question_id).keys())
+
+    # Returns both Extended Tags and User entered tags
+    def full_extended_tags_for(self,question_id):
+        return list(set(self.tags_for(question_id)).union(set(self.extended_tags_for(question_id))))
 
     def count_of_tags_for(self, question_id):
         title, body = self.get_title_and_body(question_id)
@@ -114,6 +110,13 @@ class ExtendedTagExtractor:
         tags_found += self.__extract_tags(body.lower())
         sorted(tags_found)
         return tags_found
+
+    def get_title_and_body(self, question_id):
+        query = "select title,summary from ros_question where id={}".format (
+            question_id)
+        title, body = self.__execute_query (query)[0]
+        body = self.__cleanhtml (body)
+        return title, body
 
     def body_extended_tags_for(self, question_id):
         title, body = self.get_title_and_body(question_id)

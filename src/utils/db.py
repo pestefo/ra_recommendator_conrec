@@ -105,6 +105,25 @@ class Database:
 
         return self.QUESTIONS_CACHE
 
+    def questions_with_n_participants(self, nb_of_participants):
+        query = """
+        select question_id 
+        from
+           (
+              SELECT
+                 question_id,
+                 count(distinct user_id) as nb_of_participants 
+              FROM
+                 ros_profiles_db.ros_question_participants 
+              group by
+                 question_id
+           )
+           as summarized 
+        where summarized.nb_of_participants = {}""".format(nb_of_participants)
+
+        self.execute (query, [])
+        return list (map (lambda x: x[0], self.cursor.fetchall ()))
+
     def nb_of_questions(self):
         return len(self.all_questions())
 
@@ -137,20 +156,21 @@ class Database:
 
     def participants_of_question(self, question_id):
         query = """
-        SELECT author
-        FROM ra_questions
-        WHERE id= {}
+        select user_id
+        from ros_question_participants
+        where question_id={}   
+        """.format(question_id)
 
-        UNION
+        self.execute(query, [])
+        return list(map(lambda x: x[0],
+                        self.cursor.fetchall()))
 
-        SELECT author
-        FROM (
-            SELECT ra_answer_id AS id
-            FROM ra_question_answer
-            WHERE ra_question_id = {}
-        ) AS answers
-        JOIN ra_answers ON answers.id = ra_answers.id
-        """.format(question_id, question_id)
+    def questions_where_user_participated(self, user_id):
+        query = """
+        select distinct question_id
+        from ros_profiles_db.ros_question_participants
+        where user_id = {}
+        """.format(user_id)
 
         self.execute(query, [])
         return list(map(lambda x: x[0],

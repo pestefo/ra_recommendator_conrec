@@ -2,8 +2,8 @@
 # coding: utf-8
 
 import csv
-from utils import data_files as files
-from utils.db import Database
+import src.utils.data_files as files
+from src.utils.db import Database
 
 
 SCENARIOS = ('A', 'B', 'C', 'D')

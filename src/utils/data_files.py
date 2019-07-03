@@ -94,7 +94,7 @@ tags_file = dp + 'data/data_extracted_from_db/ros_tag.json'
 
 tables = dp + 'data/table_and_column_names.json'
 
-questions_sample = dp + 'data/list_of_questions_with_5_participants.json'
+questions_sample_100q_5p = dp + 'data/list_of_questions_with_5_participants.json'
 
 """
 Stopwords for ExtendedTagExtractor

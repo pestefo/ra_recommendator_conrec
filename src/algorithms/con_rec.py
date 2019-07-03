@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 from operator import itemgetter
-import json
-import utils.data_files as files
+import src.utils.data_files as files
 '''
 NOTES:
 Be careful because some WCFAlgorithm's functions return dataframes as output
