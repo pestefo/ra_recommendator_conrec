@@ -7,6 +7,7 @@ name = "pypi"
 pandas = "*"
 jupyter = "*"
 mysql-connector = "*"
+tqdm = "*"
 
 [dev-packages]
 
