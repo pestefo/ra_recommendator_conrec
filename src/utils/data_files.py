@@ -57,7 +57,9 @@ user_tags = dp + 'data/data_extracted_from_db/ros_user_tag.json'
  Extracted from the questions in which the user has participated
  and the extended tag description
 """
-user_tags_extended = 'data/data_extracted_from_db/ros_user_tag_extended.json'
+user_tags_extended_old = dp + 'data/data_extracted_from_db/ros_user_tag_extended-old.json'
+user_full_extended_tags = dp + 'data/user_full_extended_tags.json'
+
 
 """
  Question ID - User ID - R_uq calculation

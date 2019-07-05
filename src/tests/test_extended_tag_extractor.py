@@ -21,7 +21,7 @@ class TestExtendedTagExtractor(unittest.TestCase):
     def test_question_to_tag_mapping(self):
         for q_id in self.questions:
             with self.subTest(q_id=q_id):
-                self.assertEqual(set(self.tags_for(q_id)), set(self.e.tags_for(q_id)), "Tags should be the same")
+                self.assertEqual(set(self.tags_for(q_id)), set(self.e.ros_answers_tags_for(q_id)), "Tags should be the same")
 
     def test_question_to_extended_tag_mapping(self):
         for q_id in self.questions:
@@ -29,10 +29,10 @@ class TestExtendedTagExtractor(unittest.TestCase):
                 with self.subTest(q_id=q_id):
                     print("From JSON:\t {}".format(sorted(self.extended_tags_for(q_id))))
                     print("")
-                    print("From DB:\t {}".format(sorted(self.e.extended_tags_for(q_id))))
+                    print("From DB:\t {}".format(sorted(self.e.extracted_tags_for(q_id))))
                     print("")
 
-                    self.assertEqual(set(self.extended_tags_for(q_id)), set(self.e.extended_tags_for(q_id)),
+                    self.assertEqual(set(self.extended_tags_for(q_id)), set(self.e.extracted_tags_for(q_id)),
                                      "Tags should be the same")
 
 

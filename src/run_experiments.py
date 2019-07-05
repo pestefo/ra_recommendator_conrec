@@ -6,15 +6,14 @@ from algorithms.weighted_collaborative_filtering_algorithm import WCFAlgorithm
 from algorithms.tag_map_based_algorithm import TMBAlgorithm
 from algorithms.closeness_to_asker_algorithm import C2AAlgorithm
 '''
+import datetime
+import json
 import sys
+import time
 
 from src.algorithms.tag_map_based_algorithm import TMBAlgorithm
-from src.algorithms.mock_ranking import MockRanking
 from src.utils import data_files as files
 from src.utils.db import Database
-import json
-import datetime
-import time
 
 # path_to_results = 'data/tmba_100q_5p'
 
@@ -70,7 +69,7 @@ def get_sample(nb_of_participants, limit_size=None, dummy_sample=None):
         return sample_100q_5p ()
 
     db = Database ('A')  # we don't really make use of scenarios-specific methods
-    sample = db.questions_with_n_participants(nb_of_participants)
+    sample = db.questions_with_n_participants (nb_of_participants)
 
     if limit_size:
         return sample[:limit_size]
@@ -98,7 +97,6 @@ def main():
     # specifying sample from command line
     if sys.argv[1]:
         spec['NB_OF_PARTICIPANTS'] = sys.argv[1]
-
 
     # Get sample of questions
     spec['SAMPLE'] = get_sample (spec['NB_OF_PARTICIPANTS'], dummy_sample=True)  # 100q_5p sample

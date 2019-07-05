@@ -4,17 +4,33 @@ import re
 import sqlite3
 from sqlite3 import Error
 import src.utils.data_files as files
+from src.utils.db import Database
 
 class ExtendedTagExtractor:
 
     # private - initialization
 
     def __init__(self):
-        self.__database = files.db
-        self.__conn = self.__create_connection()
+        self.__mysqldb = Database('A')
+        self.__sqlite3db_conn = self.__create_connection ()
         self.__initialize_tags()
         self.__initialize_tag_pattern()
         self.__initialize_stopwords()
+
+    def __create_connection(self):
+        """ create a database connection to the SQLite database
+            specified by the db_file
+        :return: Connection object or None
+        """
+
+        try:
+            self.__sqlite3db_conn = sqlite3.connect (files.db)
+            return self.__sqlite3db_conn
+
+        except Error as e:
+            print (e)
+
+        return None
 
     def __initialize_tag_pattern(self):
         self.tag_pattern = '\\b(' + \
@@ -32,32 +48,15 @@ class ExtendedTagExtractor:
         self.__stopwords = stopwords
 
     def __initialize_tags(self):
-        query = "select name from ros_tag"
-        self.__all_tags = list(
-            map(lambda x: x[0], self.__execute_query(query)))
+        self.__all_tags = self.__mysqldb.all_tag_names()
 
-    def __create_connection(self):
-        """ create a database connection to the SQLite database
-            specified by the db_file
-        :return: Connection object or None
-        """
+    # private - Sqlite3 db
 
-        try:
-            self.__conn = sqlite3.connect(self.__database)
-            return self.__conn
-
-        except Error as e:
-            print(e)
-
-        return None
-
-    # private - db
-
-    def __execute_query(self, query):
-        if not self.__conn:
+    def __execute_sqlite3_query(self, query):
+        if not self.__sqlite3db_conn:
             self.__create_connection()
 
-        cur = self.__conn.cursor()
+        cur = self.__sqlite3db_conn.cursor()
         cur.execute(query)
 
         return cur.fetchall()
@@ -84,25 +83,51 @@ class ExtendedTagExtractor:
 
     # public methods
 
-    # Returns the user entered tags
-    def tags_for(self, question_id):
-        # Returns the tags that were entered by the authors of the question
-        query = """
-            select ros_tag.name
-            from ros_question_tag
-            left join ros_tag on ros_question_tag.ros_tag_id = ros_tag.id
-            where ros_question_tag.ros_question_id = {}""".format(question_id)
-        tags = self.__execute_query(query)
+    def ros_answers_tags_for(self, question_id):
+        """
+        Returns the tags that were entered by the authors of the question
 
-        return list(map(lambda x: x[0], tags))
+        :param question_id: the id of a question
+        :type int
+        :return: a list of tag names obtained from the ROS Answers' website
+        :type list of str
+        """
 
-    # Returns only the extracted extended tags
-    def extended_tags_for(self, question_id):
+        return self.__mysqldb.ros_answers_tags_for(question_id)
+
+    def ros_answers_tag_ids_for(self,question_id):
+        return self.__mysqldb.ros_answers_tag_ids_for(question_id)
+
+    def extracted_tags_for(self, question_id):
+        """
+        Returns both Extended Tags and User entered tags
+
+        :param question_id: the id of a question
+        :type int
+        :return: a list of tag names obtained from the extended tags and the user entered tags
+        :type list of str
+        """
         return list(self.count_of_tags_for(question_id).keys())
 
-    # Returns both Extended Tags and User entered tags
+    def extracted_tag_ids_for(self, question_id):
+        return self.tag_names_to_ids(self.extracted_tags_for(question_id))
+
     def full_extended_tags_for(self,question_id):
-        return list(set(self.tags_for(question_id)).union(set(self.extended_tags_for(question_id))))
+        """
+        Returns both Extended Tags and User entered tags
+
+        :param question_id: the id of a question
+        :type int
+        :return: a list of tag names obtained from the extended tags and the user entered tags
+        :type list of str
+        """
+        return list(set(self.ros_answers_tags_for(question_id)).union(set(self.extracted_tags_for(question_id))))
+
+    def full_extended_tag_ids_for (self, question_id):
+
+        return set(self.ros_answers_tag_ids_for(question_id)).union(self.extracted_tag_ids_for(question_id))
+
+
 
     def count_of_tags_for(self, question_id):
         title, body = self.get_title_and_body(question_id)
@@ -112,13 +137,27 @@ class ExtendedTagExtractor:
         return tags_found
 
     def get_title_and_body(self, question_id):
+        """
+
+        :param question_id: id of a question
+        :type int
+        :return: a tuple containing the title and body string of the question
+        :type (str, str)
+        """
         query = "select title,summary from ros_question where id={}".format (
             question_id)
-        title, body = self.__execute_query (query)[0]
+        title, body = self.__execute_sqlite3_query (query)[0]
         body = self.__cleanhtml (body)
         return title, body
 
     def body_extended_tags_for(self, question_id):
+        """
+
+        :param question_id: id of a question
+        :type int
+        :return: list of tags found in the question's body
+        :type list of str
+        """
         title, body = self.get_title_and_body(question_id)
 
         tags_found = self.__extract_tags(body.lower())
@@ -128,6 +167,13 @@ class ExtendedTagExtractor:
         return tags_found
 
     def title_extended_tags_for(self, question_id):
+        """
+
+        :param question_id: id of a question
+        :type int
+        :return: list of tags found in the question's title
+        :type list of str
+        """
         title, body = self.get_title_and_body(question_id)
 
         tags_found = self.__extract_tags(title.lower())
@@ -135,3 +181,14 @@ class ExtendedTagExtractor:
         sorted(tags_found)
 
         return tags_found
+
+
+    def tag_names_to_ids(self, list_of_tag_names):
+        """
+
+        :param list_of_tag_names: list of tag names
+        :type list of str
+        :return: list of tag ids
+        :type list of int
+        """
+        return self.__mysqldb.tag_names_to_ids(list_of_tag_names)
