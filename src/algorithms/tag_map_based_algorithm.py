@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 import src.algorithms.con_rec
-import src.utils.data_files as files
-from src.utils.db import Database
+from src.algorithms.scenarios import *
 
 
 ###
@@ -12,16 +11,14 @@ from src.utils.db import Database
 
 class TMBAlgorithm (src.algorithms.con_rec.AbstractConRecAlgorithm):
 
-    def __init__(self, scenario):
+    def __init__(self, scenario: Scenario):
 
         src.algorithms.con_rec.AbstractConRecAlgorithm.__init__ (self)
 
-        self.R_UT_TABLE = files.get_data (files.r_ut_table_scenario[scenario])
-        self.db = Database (scenario)
-        self.scenario = scenario
-
-    def get_scenario(self):
-        return self.scenario
+        self.R_UT_TABLE = files.get_data (scenario.r_ut_table ())
+        self.db = Database ()
+        self.user_tags = scenario.user_tag_container ()
+        self.question_tags = scenario.question_tag_container ()
 
     def all_users(self):
         return self.db.all_users ()
@@ -30,13 +27,14 @@ class TMBAlgorithm (src.algorithms.con_rec.AbstractConRecAlgorithm):
         return self.db.all_questions ()
 
     def tags_of_user(self, user_id):
-        return self.db.tags_of_user (user_id)
+        return self.user_tags.tag_ids_for (user_id)
 
     def tags_of_question(self, question_id):
-        return self.db.tags_of_question (question_id)
+        return self.question_tags.tag_ids_for (question_id)
 
     def questions_with_tag(self, tag_id):
-        return self.db.questions_with_tag (tag_id)
+        return self.question_tags.questions_with_tag (tag_id)
+        # return self.db.questions_with_tag (tag_id)
 
     def nb_of_tags(self):
         return self.db.nb_of_tags

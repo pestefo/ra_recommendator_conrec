@@ -59,7 +59,7 @@ def main():
     sample = files.get_data(files.questions_sample)[:100]
 
     for scenario in SCENARIOS[0]:
-        db = Database(scenario)
+        db = Database ()
         # Read results, get coverage and print it
         filename = files.results_dir(
             scenario) + '/results_scenario_' + scenario + '.csv'

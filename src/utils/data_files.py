@@ -58,9 +58,10 @@ user_tags = dp + 'data/data_extracted_from_db/ros_user_tag.json'
  and the extended tag description
 """
 user_tags_extended_old = dp + 'data/data_extracted_from_db/ros_user_tag_extended-old.json'
-user_full_extended_tags = dp + 'data/user_full_extended_tags.json'
+user_full_extended_tags = dp + 'data/tag_extensions/user_full_extended_tags.json'
 
-
+question_full_extended_tags = dp + 'data/tag_extensions/question_full_extended_tags.json'
+full_extended_tags_to_questions = dp + 'data/tag_extensions/full_extended_tags_to_questions.json'
 """
  Question ID - User ID - R_uq calculation
  {"question_id": [ {u": user_id, "r": r_uq_value}, ... ],

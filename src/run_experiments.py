@@ -1,19 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-'''
-from algorithms.weighted_collaborative_filtering_algorithm import WCFAlgorithm
-from algorithms.tag_map_based_algorithm import TMBAlgorithm
-from algorithms.closeness_to_asker_algorithm import C2AAlgorithm
-'''
 import datetime
-import json
 import sys
 import time
+from tqdm import tqdm
 
 from src.algorithms.tag_map_based_algorithm import TMBAlgorithm
-from src.utils import data_files as files
-from src.utils.db import Database
+from src.algorithms.scenarios import *
 
 # path_to_results = 'data/tmba_100q_5p'
 
@@ -29,7 +23,7 @@ spec = {
     "SAMPLE_SIZE": 100,
     "NB_OF_PARTICIPANTS": 5,
     "NB_OF_RESULTS": 100,
-    "SCENARIOS": ('A', 'B', 'C', 'D'),
+    "SCENARIOS": (ScenarioA, ScenarioD, ScenarioC, ScenarioD),
 }
 
 """
@@ -37,10 +31,9 @@ Utils
 """
 
 
-def print_header(question_id, scenario):
+def print_header(scenario):
     global spec
-    print ("------- start (Scenario {} - {} participants ) -------".format (scenario, spec['NB_OF_PARTICIPANTS']))
-    print ("question: " + str (question_id))
+    print ("------- start (Scenario {} - {} participants ) -------".format (scenario.name(), spec['NB_OF_PARTICIPANTS']))
     now = datetime.datetime.now ()
     print (now.strftime ('%d-%m-%Y %H:%M:%S'))
     return now
@@ -68,7 +61,7 @@ def get_sample(nb_of_participants, limit_size=None, dummy_sample=None):
     if dummy_sample:
         return sample_100q_5p ()
 
-    db = Database ('A')  # we don't really make use of scenarios-specific methods
+    db = Database ()  # we don't really make use of scenarios-specific methods
     sample = db.questions_with_n_participants (nb_of_participants)
 
     if limit_size:
@@ -94,10 +87,6 @@ sample (described by number of participants), number of results.
 def main():
     global spec
 
-    # specifying sample from command line
-    if sys.argv[1]:
-        spec['NB_OF_PARTICIPANTS'] = sys.argv[1]
-
     # Get sample of questions
     spec['SAMPLE'] = get_sample (spec['NB_OF_PARTICIPANTS'], dummy_sample=True)  # 100q_5p sample
     # spec['SAMPLE'] = get_sample (spec['NB_OF_PARTICIPANTS'])
@@ -107,19 +96,19 @@ def main():
 
     # for scenario in SCENARIOS:
     for scenario in spec['SCENARIOS']:
-        spec['ALGORITHM'] = TMBAlgorithm (scenario)
+        spec['ALGORITHM'] = TMBAlgorithm (scenario())
         # spec['ALGORITHM'] = MockRanking ()
-
+        now = print_header (scenario)
         # Run experiment for each question in the sample
-        for question_id in spec['SAMPLE'][: spec['SAMPLE_SIZE']]:
-            now = print_header (question_id, scenario)
+        for question_id in tqdm(spec['SAMPLE'][: spec['SAMPLE_SIZE']]):
+            # now = print_header (question_id, scenario)
 
             filename = files.results_file (question_id, scenario, spec['NB_OF_PARTICIPANTS'])
 
             # Process and write results
             run_experiment (question_id, filename)
 
-            print_footer (start_time, now)
+            # print_footer (start_time, now)
 
 
 if __name__ == '__main__':

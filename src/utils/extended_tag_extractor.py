@@ -1,4 +1,4 @@
-
+import json
 from collections import Counter
 import re
 import sqlite3
@@ -6,12 +6,12 @@ from sqlite3 import Error
 import src.utils.data_files as files
 from src.utils.db import Database
 
-class ExtendedTagExtractor:
+class QuestionTagExtractor:
 
     # private - initialization
 
     def __init__(self):
-        self.__mysqldb = Database('A')
+        self.__mysqldb = Database ()
         self.__sqlite3db_conn = self.__create_connection ()
         self.__initialize_tags()
         self.__initialize_tag_pattern()
@@ -93,10 +93,10 @@ class ExtendedTagExtractor:
         :type list of str
         """
 
-        return self.__mysqldb.ros_answers_tags_for(question_id)
+        return self.__mysqldb.ros_answers_tag_names_for_question(question_id)
 
     def ros_answers_tag_ids_for(self,question_id):
-        return self.__mysqldb.ros_answers_tag_ids_for(question_id)
+        return self.__mysqldb.ros_answers_tag_ids_for_question(question_id)
 
     def extracted_tags_for(self, question_id):
         """
@@ -182,6 +182,16 @@ class ExtendedTagExtractor:
 
         return tags_found
 
+    def tag_ids_to_names(self, list_of_tag_ids):
+        """
+
+        :param list_of_tag_ids: list of tag ids
+        :type list of int
+        :return: list of tag names
+        :type list of str
+        """
+        return self.__mysqldb.tag_ids_to_names(list_of_tag_ids)
+
 
     def tag_names_to_ids(self, list_of_tag_names):
         """
@@ -192,3 +202,8 @@ class ExtendedTagExtractor:
         :type list of int
         """
         return self.__mysqldb.tag_names_to_ids(list_of_tag_names)
+
+
+
+
+

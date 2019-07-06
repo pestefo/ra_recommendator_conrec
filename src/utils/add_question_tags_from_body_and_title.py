@@ -7,7 +7,7 @@ import sqlite3
 from collections import defaultdict, Counter
 from sqlite3 import Error
 
-from src.utils.extended_tag_extractor import ExtendedTagExtractor
+from src.utils.extended_tag_extractor import QuestionTagsContainer
 
 conn = None
 database = "data/v1.2.db"
@@ -139,7 +139,7 @@ def main():
     questions = get_question_ids ()
     extended_tags = defaultdict (list)
 
-    tag_extractor = ExtendedTagExtractor ()
+    tag_extractor = QuestionTagsContainer ()
 
     for q_id in questions[13:]:
         print ("Question {}".format (q_id))

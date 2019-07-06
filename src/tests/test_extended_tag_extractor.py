@@ -1,11 +1,11 @@
 import unittest
-from src.utils.extended_tag_extractor import ExtendedTagExtractor
+from src.utils.extended_tag_extractor import QuestionTagsContainer
 import src.utils.data_files as files
 
 
 class TestExtendedTagExtractor(unittest.TestCase):
 
-    e = ExtendedTagExtractor()
+    e = QuestionTagsContainer()
     tags = files.tag_data_for_testing
     questions = list(tags.keys())
 
@@ -21,7 +21,7 @@ class TestExtendedTagExtractor(unittest.TestCase):
     def test_question_to_tag_mapping(self):
         for q_id in self.questions:
             with self.subTest(q_id=q_id):
-                self.assertEqual(set(self.tags_for(q_id)), set(self.e.ros_answers_tags_for(q_id)), "Tags should be the same")
+                self.assertEqual(set(self.tags_for(q_id)), set(self.e.ros_answers_tag_names_for_question(q_id)), "Tags should be the same")
 
     def test_question_to_extended_tag_mapping(self):
         for q_id in self.questions:
