@@ -37,16 +37,16 @@ class Database:
             self.connection.rollback()
 
     def all_questions(self):
-        if self.QUESTIONS_CACHE:
-            return self.QUESTIONS_CACHE
+        if not self.QUESTIONS_CACHE:
+            query = """
+            SELECT distinct question_id
+            from ra_question_tag"""
 
-        query = """
-        SELECT distinct question_id
-        from ra_question_tag"""
+            self.execute(query, [])
+            self.QUESTIONS_CACHE = list(map(lambda x: x[0],
+                                            self.cursor.fetchall()))
 
-        self.execute(query, [])
-        self.QUESTIONS_CACHE = list(map(lambda x: x[0],
-                                        self.cursor.fetchall()))
+        return self.QUESTIONS_CACHE
 
     def questions_with_n_participants(self, nb_of_participants):
         query = """
@@ -71,11 +71,12 @@ class Database:
         return len(self.all_questions())
 
     def all_users(self):
-        query = """
-        SELECT distinct user_id
-        from ra_user_tag"""
 
         if not self.USERS_CACHE:
+            query = """
+            SELECT distinct user_id
+            from ra_user_tag"""
+
             self.execute(query, [])
             self.USERS_CACHE = list(map(lambda x: x[0],
                                         self.cursor.fetchall()))
@@ -91,19 +92,18 @@ class Database:
         :type dict of int -> str
         """
 
-        if self.TAGS_CACHE:
-            return self.TAGS_CACHE
+        if not self.TAGS_CACHE:
 
-        query = """
-        SELECT *
-        from ra_tag"""
+            query = """
+            SELECT *
+            from ra_tag"""
 
-        self.execute(query, [])
-        result = self.cursor.fetchall()
-        self.TAGS_CACHE = dict()
-        for pair in result:
-            # tag_name : tag_id
-            self.TAGS_CACHE[pair[1]] = pair[0]
+            self.execute(query, [])
+            result = self.cursor.fetchall()
+            self.TAGS_CACHE = dict()
+            for pair in result:
+                # tag_name : tag_id
+                self.TAGS_CACHE[pair[1]] = pair[0]
 
         return self.TAGS_CACHE
 
