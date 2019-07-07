@@ -1,11 +1,11 @@
 import unittest
-from src.utils.extended_tag_extractor import QuestionTagsContainer
+from src.utils.extended_tag_extractor import QuestionTagExtractor
 import src.utils.data_files as files
 
 
 class TestExtendedTagExtractor(unittest.TestCase):
 
-    e = QuestionTagsContainer()
+    e = QuestionTagExtractor()
     tags = files.tag_data_for_testing
     questions = list(tags.keys())
 

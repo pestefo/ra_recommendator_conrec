@@ -36,15 +36,15 @@ It also contains one file of a summary of the whole experiment with the **recall
 
 
 
-##  Table of values for $R_{uq}$ (WCFA/C2AA)
+##  Table of values for <img src="/data/tex/ea37d88a00ab281cc5cbb427cdd39647.svg?invert_in_darkmode&sanitize=true" align=middle width=26.69146424999999pt height=22.465723500000017pt/> (WCFA/C2AA)
 
-For running the experiment calculating the scores with WCFA, it is needed to caculate the value of $$R_{uq}$$ between a ROS Answers' *user* and a *question*. 
+For running the experiment calculating the scores with WCFA, it is needed to caculate the value of <p align="center"><img src="/data/tex/0027739b80f8037af689cdd8a47b0197.svg?invert_in_darkmode&sanitize=true" align=middle width=26.69146425pt height=15.936036599999998pt/></p> between a ROS Answers' *user* and a *question*. 
 
 The formula for it is:
 
-$$ R_{uq}(u,q) = \dfrac{Activity(u,q)}{\sum_{i=1}^{|U_q|} Activity(U_q[i],q)}, \quad U_q = \{u \in U, Activity(u,q)>0\} $$ 
+<p align="center"><img src="/data/tex/e3ce2458de5775d451aea4363c4a132c.svg?invert_in_darkmode&sanitize=true" align=middle width=512.15675115pt height=43.8784632pt/></p> 
 
-We calculated the values of $$R_{uq}$$ for all questions and their participants each question and stored them into two files: ``r_uq.json`` and ``r_uq_compact.json``
+We calculated the values of <p align="center"><img src="/data/tex/0027739b80f8037af689cdd8a47b0197.svg?invert_in_darkmode&sanitize=true" align=middle width=26.69146425pt height=15.936036599999998pt/></p> for all questions and their participants each question and stored them into two files: ``r_uq.json`` and ``r_uq_compact.json``
 
 #### ``r_uq.json``
 
@@ -83,15 +83,15 @@ We calculated the values of $$R_{uq}$$ for all questions and their participants 
 
 
 
-## Table of values for $R_{ut}$ (TMBA) 
+## Table of values for <img src="/data/tex/0e2de7efc5cf2a727a377bd5aea6eddd.svg?invert_in_darkmode&sanitize=true" align=middle width=25.219418399999988pt height=22.465723500000017pt/> (TMBA) 
 
-For running the experiment calculating the scores with TMBA, it is needed to caculate the value of $$R_{ut}$$ between a ROS Answers' *user* and a *tag*. 
+For running the experiment calculating the scores with TMBA, it is needed to caculate the value of <p align="center"><img src="/data/tex/eb36e2faf8f8d9d8b7bf70f6f127df7b.svg?invert_in_darkmode&sanitize=true" align=middle width=25.2194184pt height=13.698590399999999pt/></p> between a ROS Answers' *user* and a *tag*. 
 
 The formula for it is:
 
-$$ R_{ut}(u,t) = \sum_{q \in Q_t} R_{uq}(u,q) \cdot log \dfrac{|\bigcup_{x \in T} Q_x|}{|Q_t|} $$
+<p align="center"><img src="/data/tex/5d0a65fc96e4aa5abc98b8b858aaa1ba.svg?invert_in_darkmode&sanitize=true" align=middle width=293.9047419pt height=46.423454549999995pt/></p>
 
-We calculated the values of $$R_{ut}$$ for all questions and their participants each question and stored them into two files: ``r_ut.json``, ``r_ut_compact.json`` and ``r_ut.csv``
+We calculated the values of <p align="center"><img src="/data/tex/eb36e2faf8f8d9d8b7bf70f6f127df7b.svg?invert_in_darkmode&sanitize=true" align=middle width=25.2194184pt height=13.698590399999999pt/></p> for all questions and their participants each question and stored them into two files: ``r_ut.json``, ``r_ut_compact.json`` and ``r_ut.csv``
 
 #### ``r_ut.json``
 

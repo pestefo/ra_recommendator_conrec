@@ -8,66 +8,76 @@ class Scenario:
     def question_tag_container(self):
         pass
 
-    def r_ut_table(self):
+    def id(self) -> str:
         pass
 
+    def name(self):
+        return 'Scenario ' + self.id()
 
-class ScenarioA (Scenario):
+    def r_ut_table(self):
+        return files.r_ut_table_scenario[self.id()]
+
+    @staticmethod
+    def all_scenarios():
+        return [ScenarioA(), ScenarioB(), ScenarioC(), ScenarioD()]
+
+
+class ScenarioA(Scenario):
 
     def user_tag_container(self):
-        return UserRATagsContainer ()
+        return UserRATagsContainer()
 
     def question_tag_container(self):
-        return QuestionRATagsContainer ()
+        return QuestionRATagsContainer()
 
     def r_ut_table(self):
         return files.r_ut_table_scenario['A']
 
-    @staticmethod
-    def name():
-        return 'Scenario A'
+    def id(self):
+        return 'A'
 
-class ScenarioB (Scenario):
+
+class ScenarioB(Scenario):
 
     def user_tag_container(self):
-        return UserRATagsContainer ()
+        return UserRATagsContainer()
 
     def question_tag_container(self):
-        return QuestionExtendedTagsContainer ()
+        return QuestionExtendedTagsContainer()
 
     def r_ut_table(self):
         return files.r_ut_table_scenario['B']
 
-    @staticmethod
-    def name():
-        return 'Scenario B'
+    def id(self):
+        return 'B'
 
-class ScenarioC (Scenario):
+
+class ScenarioC(Scenario):
 
     def user_tag_container(self):
-        return UserExtendedTagsContainer ()
+        return UserExtendedTagsContainer()
 
     def question_tag_container(self):
-        return QuestionRATagsContainer ()
+        return QuestionRATagsContainer()
 
     def r_ut_table(self):
         return files.r_ut_table_scenario['C']
 
-    @staticmethod
-    def name():
-        return 'Scenario C'
+    def id(self):
+        return 'C'
 
-class ScenarioD (Scenario):
+
+class ScenarioD(Scenario):
 
     def user_tag_container(self):
-        return UserExtendedTagsContainer ()
+        return UserExtendedTagsContainer()
 
     def question_tag_container(self):
-        return UserExtendedTagsContainer ()
+        return UserExtendedTagsContainer()
 
     def r_ut_table(self):
         return files.r_ut_table_scenario['D']
 
     @staticmethod
-    def name():
-        return 'Scenario D'
+    def id(self):
+        return 'D'

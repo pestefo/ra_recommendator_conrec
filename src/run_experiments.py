@@ -96,7 +96,7 @@ def main():
 
     # for scenario in SCENARIOS:
     for scenario in spec['SCENARIOS']:
-        spec['ALGORITHM'] = TMBAlgorithm (scenario())
+        spec['ALGORITHM'] = TMBAlgorithm (scenario)
         # spec['ALGORITHM'] = MockRanking ()
         now = print_header (scenario)
         # Run experiment for each question in the sample

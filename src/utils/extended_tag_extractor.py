@@ -6,13 +6,14 @@ from sqlite3 import Error
 import src.utils.data_files as files
 from src.utils.db import Database
 
+
 class QuestionTagExtractor:
 
     # private - initialization
 
     def __init__(self):
-        self.__mysqldb = Database ()
-        self.__sqlite3db_conn = self.__create_connection ()
+        self.__mysqldb = Database()
+        self.__sqlite3db_conn = self.__create_connection()
         self.__initialize_tags()
         self.__initialize_tag_pattern()
         self.__initialize_stopwords()
@@ -24,26 +25,26 @@ class QuestionTagExtractor:
         """
 
         try:
-            self.__sqlite3db_conn = sqlite3.connect (files.db)
+            self.__sqlite3db_conn = sqlite3.connect(files.db)
             return self.__sqlite3db_conn
 
         except Error as e:
-            print (e)
+            print(e)
 
         return None
 
     def __initialize_tag_pattern(self):
         self.tag_pattern = '\\b(' + \
-            '|'.join(list(map(lambda x: re.escape(x),
-                              self.__all_tags))) + ')\\b'
+                           '|'.join(list(map(lambda x: re.escape(x),
+                                             self.__all_tags))) + ')\\b'
 
     def __initialize_stopwords(self):
         stopwords = list()
         # Stopwords from https://gist.github.com/sebleier/554280
         for f in files.stopwords:
-            with open (f, 'r') as fp:
+            with open(f, 'r') as fp:
                 for line in fp:
-                    stopwords.append (line.rstrip ())
+                    stopwords.append(line.rstrip())
 
         self.__stopwords = stopwords
 
@@ -95,7 +96,7 @@ class QuestionTagExtractor:
 
         return self.__mysqldb.ros_answers_tag_names_for_question(question_id)
 
-    def ros_answers_tag_ids_for(self,question_id):
+    def ros_answers_tag_ids_for(self, question_id):
         return self.__mysqldb.ros_answers_tag_ids_for_question(question_id)
 
     def extracted_tags_for(self, question_id):
@@ -112,7 +113,7 @@ class QuestionTagExtractor:
     def extracted_tag_ids_for(self, question_id):
         return self.tag_names_to_ids(self.extracted_tags_for(question_id))
 
-    def full_extended_tags_for(self,question_id):
+    def full_extended_tags_for(self, question_id):
         """
         Returns both Extended Tags and User entered tags
 
@@ -123,11 +124,9 @@ class QuestionTagExtractor:
         """
         return list(set(self.ros_answers_tags_for(question_id)).union(set(self.extracted_tags_for(question_id))))
 
-    def full_extended_tag_ids_for (self, question_id):
+    def full_extended_tag_ids_for(self, question_id):
 
         return set(self.ros_answers_tag_ids_for(question_id)).union(self.extracted_tag_ids_for(question_id))
-
-
 
     def count_of_tags_for(self, question_id):
         title, body = self.get_title_and_body(question_id)
@@ -144,10 +143,10 @@ class QuestionTagExtractor:
         :return: a tuple containing the title and body string of the question
         :type (str, str)
         """
-        query = "select title,summary from ros_question where id={}".format (
+        query = "select title,summary from ros_question where id={}".format(
             question_id)
-        title, body = self.__execute_sqlite3_query (query)[0]
-        body = self.__cleanhtml (body)
+        title, body = self.__execute_sqlite3_query(query)[0]
+        body = self.__cleanhtml(body)
         return title, body
 
     def body_extended_tags_for(self, question_id):
@@ -192,7 +191,6 @@ class QuestionTagExtractor:
         """
         return self.__mysqldb.tag_ids_to_names(list_of_tag_ids)
 
-
     def tag_names_to_ids(self, list_of_tag_names):
         """
 
@@ -202,8 +200,3 @@ class QuestionTagExtractor:
         :type list of int
         """
         return self.__mysqldb.tag_names_to_ids(list_of_tag_names)
-
-
-
-
-

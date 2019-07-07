@@ -74,10 +74,10 @@ r_uq_table = dp + 'data/r_uq.json'
 """
 r_ut_table = dp + 'data/r_ut.json'
 r_ut_table_scenario = {
-    'A': dp + 'data/r_ut.json',
-    'B': dp + 'data/r_ut_scenario_b.json',
-    'C': dp + 'data/r_ut_scenario_c.json',
-    'D': dp + 'data/r_ut_scenario_d.json'
+    'A': dp + 'data/r_ut/scenario_a.json',
+    'B': dp + 'data/r_ut/scenario_b.json',
+    'C': dp + 'data/r_ut/scenario_c.json',
+    'D': dp + 'data/r_ut/scenario_d.json'
 }
 
 """
@@ -107,4 +107,4 @@ stopwords = [dp + 'src/utils/stopwords.txt', dp + 'src/utils/stopwords-complemen
 """
 Data for testing
 """
-tag_data_for_testing = get_data (dp + 'data/test_data/tags_data.json')
+# tag_data_for_testing = get_data (dp + 'data/test_data/tags_data.json')
