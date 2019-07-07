@@ -40,6 +40,7 @@ def main():
         tmba = TMBAlgorithm(scenario)
         users = db.all_users()
 
+        print("\n\n--- Starting R_ut Calculations for {} ---\n".format(scenario.name()))
         for user_id in tqdm(users):
 
             r_ut[user_id] = []
