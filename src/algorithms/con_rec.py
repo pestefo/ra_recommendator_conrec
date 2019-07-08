@@ -33,8 +33,8 @@ class AbstractConRecAlgorithm:
         #                   user_id) & (r_uq_table['q'] == question)]['r']
         try:
             return AbstractConRecAlgorithm.r_uq_table[
-                str(question_id)][
-                str(user_id)]
+                question_id][
+                user_id]
 
         except KeyError:
             # WE SUPPOSE THAT user_id and question_id are valid ids

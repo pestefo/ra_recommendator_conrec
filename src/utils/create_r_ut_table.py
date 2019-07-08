@@ -36,21 +36,23 @@ def main():
     r_ut = {}
     db = Database()
 
-    for scenario in Scenario.all_scenarios():
+    for scenario in Scenario.all_scenarios ()[:1]:
         tmba = TMBAlgorithm(scenario)
         users = db.all_users()
 
         print("\n\n--- Starting R_ut Calculations for {} ---\n".format(scenario.name()))
-        for user_id in tqdm(users):
+        for user_id in tqdm (users[:20]):
 
             r_ut[user_id] = []
 
             for tag_id in tmba.tags_of_user(user_id):
 
                 score = tmba.calculate_r_ut(user_id, tag_id)
+                if score > 0.0:
+                    print ("{}\t{}\t{}".format (user_id, tag_id, score))
                 r_ut[user_id].append({"t": tag_id, "r": score})
 
-        with open(files.r_ut_table_scenario[scenario.name()], 'w') as outfile:
+        with open (files.r_ut_table_scenario[scenario.id ()], 'w') as outfile:
             json.dump(r_ut, outfile)
 
 

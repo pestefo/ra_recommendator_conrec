@@ -16,10 +16,17 @@ class TMBAlgorithm(src.algorithms.con_rec.AbstractConRecAlgorithm):
 
         src.algorithms.con_rec.AbstractConRecAlgorithm.__init__(self)
 
-        self.R_UT_TABLE = files.get_data(scenario.r_ut_table())
+        self.scenario = scenario
         self.db = Database()
         self.user_tags = scenario.user_tag_container()
         self.question_tags = scenario.question_tag_container()
+
+    def r_ut_table(self):
+        if not self.R_UT_TABLE:
+            self.R_UT_TABLE = files.get_data (self.scenario.r_ut_table ())
+
+        return self.R_UT_TABLE
+
 
     def all_users(self):
         return self.db.all_users()
@@ -47,7 +54,7 @@ class TMBAlgorithm(src.algorithms.con_rec.AbstractConRecAlgorithm):
 
     def r_ut(self, user_id, tag_id):
         try:
-            for pair in self.R_UT_TABLE[str(user_id)]:
+            for pair in self.r_ut_table ()[str (user_id)]:
                 if pair['t'] == int(tag_id):
                     return pair['r']
 
@@ -82,5 +89,6 @@ class TMBAlgorithm(src.algorithms.con_rec.AbstractConRecAlgorithm):
             return 0
 
         log_of_ratio = log(self.nb_of_questions() / len(questions))
+        print (list (map (lambda q: self.r_uq (user_id, q), questions)))
         return log_of_ratio * sum(map(lambda q: self.r_uq(user_id, q),
                                       questions))
