@@ -11,11 +11,13 @@ GitHub repositories description of users,
 
 '''
 import json
+
+from tqdm import tqdm
+
 import src.utils.data_files as files
 from src.algorithms.scenarios import Scenario
 from src.algorithms.tag_map_based_algorithm import TMBAlgorithm
 from src.utils.db import Database
-from tqdm import tqdm
 
 """
 From
@@ -31,28 +33,27 @@ To:
 4:[(5,6).(6,7)],...
 """
 
-def main():
 
+def main():
     r_ut = {}
     db = Database()
 
-    for scenario in Scenario.all_scenarios ()[:1]:
+    for scenario in Scenario.all_scenarios():
         tmba = TMBAlgorithm(scenario)
         users = db.all_users()
 
         print("\n\n--- Starting R_ut Calculations for {} ---\n".format(scenario.name()))
-        for user_id in tqdm (users[:20]):
+        for user_id in tqdm(users, desc='users'):
 
-            r_ut[user_id] = []
+            r_ut[user_id] = {}
 
-            for tag_id in tmba.tags_of_user(user_id):
-
+            for tag_id in tqdm(tmba.tags_of_user(user_id), desc='tags '):
                 score = tmba.calculate_r_ut(user_id, tag_id)
-                if score > 0.0:
-                    print ("{}\t{}\t{}".format (user_id, tag_id, score))
-                r_ut[user_id].append({"t": tag_id, "r": score})
+                # print("u: {}\tt: {}\tr: {}".format(user_id, tag_id, score))
+                # r_ut[user_id].append({"t": tag_id, "r": score})
+                r_ut[user_id][tag_id] = score
 
-        with open (files.r_ut_table_scenario[scenario.id ()], 'w') as outfile:
+        with open(files.r_ut_table_scenario[scenario.id()], 'w') as outfile:
             json.dump(r_ut, outfile)
 
 

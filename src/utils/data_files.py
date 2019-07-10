@@ -66,7 +66,8 @@ full_extended_tags_to_questions = dp + 'data/tag_extensions/full_extended_tags_t
  Question ID - User ID - R_uq calculation
  {"question_id": [ {u": user_id, "r": r_uq_value}, ... ],
 """
-r_uq_table = dp + 'data/r_uq.json'
+r_uq_table_old = dp + 'data/r_uq.json'  # bad format ['question_id' : {'u':user_id, 'r': score} ...
+r_uq_table = dp + 'data/r_uq_compact.json'      # good format ['question_id': {'user_id':score, ...}
 
 """
  User ID - Tag ID - R_ut calculation

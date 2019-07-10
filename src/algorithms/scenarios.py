@@ -73,11 +73,10 @@ class ScenarioD(Scenario):
         return UserExtendedTagsContainer()
 
     def question_tag_container(self):
-        return UserExtendedTagsContainer()
+        return QuestionExtendedTagsContainer()
 
     def r_ut_table(self):
         return files.r_ut_table_scenario['D']
 
-    @staticmethod
     def id(self):
         return 'D'
