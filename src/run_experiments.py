@@ -1,13 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import datetime
-import sys
-import time
 from tqdm import tqdm
-
 from src.algorithms.tag_map_based_algorithm import TMBAlgorithm
 from src.algorithms.scenarios import *
+import json
 
 # path_to_results = 'data/tmba_100q_5p'
 
