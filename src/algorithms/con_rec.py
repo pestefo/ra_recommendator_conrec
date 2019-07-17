@@ -46,6 +46,15 @@ class AbstractConRecAlgorithm:
     # Ranking
     # Top 15 candidates over 300 users
     def ranking_for_question(self, question, limit_of_results=150):
+        """
+
+        :param question: id of a question
+        :type question: int
+        :param limit_of_results: maximum amount of results to be returned
+        :type limit_of_results:  int
+        :return: a sorted list of pairs [user_id, score] from higher to lower score
+        :rtype: list[list[int,float]]
+        """
         results = map(lambda u: self.score(
             u, question), self.all_users())
 
