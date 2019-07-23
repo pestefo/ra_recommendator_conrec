@@ -32,6 +32,14 @@
 |     [10323](https://answers.ros.org/question/10323) | 0.4  | 0.4  |  -   | 0.6  |  -   | 0.4  |   -   |
 |     [10342](https://answers.ros.org/question/10342) | 0.8  | 0.8  |  -   | 0.4  |  ⬇⬇  | 0.2  |  ⬇⬇⬇  |
 
+Union of all questions in which any of the scenarios performed poorly, ie. Recall@60 <= 0.2
+
+- "q_id": Id of the question.
+- Columns A, B, C, D: Value of Recall@60 for that scenario.
+- Columns Q+/U+/Q+U+: Effect of the addition of more tags from questions/users compared against baseline
+  - ⬆/⬇:  "number of arrows" times improvement/decay
+  - "\-" : null effect in the performance against the baseline
+
 ## Summary of bad results: Questions with Recall@60 <= 0.2 in at least one for each scenario 
 
 Union of all questions in which any of the scenarios performed poorly, ie. Recall@60 <= 0.2
