@@ -10,31 +10,31 @@ class Database:
         self.password = 'buenacabr0s'
         self.db_name = 'ros_profiles_db'
 
-        self.connection = mysql.connector.connect (
-            user=self.user,
-            password=self.password,
-            host=self.host,
-            database=self.db_name,
-            auth_plugin='mysql_native_password',
-            use_unicode=True)
+        self.connection = mysql.connector.connect(
+                user=self.user,
+                password=self.password,
+                host=self.host,
+                database=self.db_name,
+                auth_plugin='mysql_native_password',
+                use_unicode=True)
 
-        self.cursor = self.connection.cursor ()
-        self.cursor.execute ('SET NAMES utf8mb4')
-        self.cursor.execute ("SET CHARACTER SET utf8mb4")
-        self.cursor.execute ("SET character_set_connection=utf8mb4")
+        self.cursor = self.connection.cursor()
+        self.cursor.execute('SET NAMES utf8mb4')
+        self.cursor.execute("SET CHARACTER SET utf8mb4")
+        self.cursor.execute("SET character_set_connection=utf8mb4")
 
         self.QUESTIONS_CACHE = None
         self.USERS_CACHE = None
         self.TAGS_CACHE = None
 
     def execute(self, query, data):
-        self.cursor.execute (query, data)
+        self.cursor.execute(query, data)
 
     def commit(self):
         try:
-            self.connection.commit ()
+            self.connection.commit()
         except Exception:
-            self.connection.rollback ()
+            self.connection.rollback()
 
     def all_questions(self):
         if not self.QUESTIONS_CACHE:
@@ -42,9 +42,9 @@ class Database:
             SELECT distinct question_id
             from ra_question_tag"""
 
-            self.execute (query, [])
-            self.QUESTIONS_CACHE = list (map (lambda x: x[0],
-                                              self.cursor.fetchall ()))
+            self.execute(query, [])
+            self.QUESTIONS_CACHE = list(map(lambda x: x[0],
+                                            self.cursor.fetchall()))
 
         return self.QUESTIONS_CACHE
 
@@ -62,13 +62,13 @@ class Database:
                  question_id
            )
            as summarized 
-        where summarized.nb_of_participants = {}""".format (nb_of_participants)
+        where summarized.nb_of_participants = {}""".format(nb_of_participants)
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0], self.cursor.fetchall ()))
+        self.execute(query, [])
+        return list(map(lambda x: x[0], self.cursor.fetchall()))
 
     def nb_of_questions(self):
-        return len (self.all_questions ())
+        return len(self.all_questions())
 
     def all_users(self):
 
@@ -77,9 +77,9 @@ class Database:
             SELECT distinct user_id
             from ra_user_tag"""
 
-            self.execute (query, [])
-            self.USERS_CACHE = list (map (lambda x: x[0],
-                                          self.cursor.fetchall ()))
+            self.execute(query, [])
+            self.USERS_CACHE = list(map(lambda x: x[0],
+                                        self.cursor.fetchall()))
 
         return self.USERS_CACHE
 
@@ -89,7 +89,7 @@ class Database:
         """
 
         :return: dictionary with tag ids and their names
-        :type dict of int -> str
+        :rtype dict[int] -> str
         """
 
         if not self.TAGS_CACHE:
@@ -98,9 +98,9 @@ class Database:
             SELECT *
             from ra_tag"""
 
-            self.execute (query, [])
-            result = self.cursor.fetchall ()
-            self.TAGS_CACHE = dict ()
+            self.execute(query, [])
+            result = self.cursor.fetchall()
+            self.TAGS_CACHE = dict()
 
             for pair in result:
                 # tag_name : tag_id
@@ -112,20 +112,20 @@ class Database:
         """
 
         :return: list of all tag names
-        :type list of str
+        :rtype list[str]
         """
-        return list (self.all_tags ().keys ())
+        return list(self.all_tags().keys())
 
     def all_tag_ids(self):
         """
 
         :return: list of all tag ids
-        :type list of int
+        :rtype list[int]
         """
-        return list (self.all_tags ().values ())
+        return list(self.all_tags().values())
 
     def nb_of_tags(self):
-        return len (self.all_tags ())
+        return len(self.all_tags())
 
     # TAGS and QUESTIONS
 
@@ -134,20 +134,20 @@ class Database:
             select ra_tag.name
             from ra_question_tag
             left join ra_tag on ra_question_tag.tag_id = ra_tag.id
-            where ra_question_tag.question_id = {}""".format (question_id)
+            where ra_question_tag.question_id = {}""".format(question_id)
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0], self.cursor.fetchall ()))
+        self.execute(query, [])
+        return list(map(lambda x: x[0], self.cursor.fetchall()))
 
     def ros_answers_tag_ids_for_question(self, question_id):
         query = """
             select ra_tag.id
             from ra_question_tag
             left join ra_tag on ra_question_tag.tag_id = ra_tag.id
-            where ra_question_tag.question_id = {}""".format (question_id)
+            where ra_question_tag.question_id = {}""".format(question_id)
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0], self.cursor.fetchall ()))
+        self.execute(query, [])
+        return list(map(lambda x: x[0], self.cursor.fetchall()))
 
     # TAGS and USERS
 
@@ -156,20 +156,20 @@ class Database:
             select ra_tag.name
             from ra_user_tag
             left join ra_tag on ra_user_tag.tag_id = ra_tag.id
-            where ra_user_tag.user_id = {}""".format (user_id)
+            where ra_user_tag.user_id = {}""".format(user_id)
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0], self.cursor.fetchall ()))
+        self.execute(query, [])
+        return list(map(lambda x: x[0], self.cursor.fetchall()))
 
     def ros_answers_tag_ids_for_user(self, user_id):
         query = """
             select ra_tag.id
             from ra_user_tag
             left join ra_tag on ra_user_tag.tag_id = ra_tag.id
-            where ra_user_tag.user_id = {}""".format (user_id)
+            where ra_user_tag.user_id = {}""".format(user_id)
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0], self.cursor.fetchall ()))
+        self.execute(query, [])
+        return list(map(lambda x: x[0], self.cursor.fetchall()))
 
     # TAG Converters: id -> name | name -> id
 
@@ -192,39 +192,50 @@ class Database:
         # return list (map (lambda x: x[0],
         #                   self.cursor.fetchall ()))
 
-        return list (map (lambda tag_name: self.TAGS_CACHE[tag_name], list_of_tag_names))
+        return list(map(lambda tag_name: self.TAGS_CACHE[tag_name], list_of_tag_names))
 
     def tag_ids_to_names(self, list_of_tag_ids):
         """
         It converts a list of taq ids to a list of names of those tags
 
-        :param list_of_tag_ids: list of tag ids
-        :type list of int
+        :param list_of_tag_ids: list_of_tag_ids: list of tag ids
+        :type list_of_tag_ids: list[int]
         :return: list of tag names
-        :type list of str
+        :rtype list[str]
         """
         query = """
         SELECT name
         FROM ros_profiles_db.ra_tag
         WHERE id in ({})
-        """.format ('\"' + '\",\"'.join (list_of_tag_ids) + '\"')
+        """.format('\"' + '\",\"'.join(list_of_tag_ids) + '\"')
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0],
-                          self.cursor.fetchall ()))
+        self.execute(query, [])
+        return list(map(lambda x: x[0],
+                        self.cursor.fetchall()))
 
         # public - participation of users in questions (asking, answering or commenting)
 
     def participants_of_question(self, question_id):
+        """
+
+        :param question_id: id of a question
+        :type question_id: int
+        :return: list with the user_ids that have participated in that question (asking, commenting or answering)
+        :rtype: list[int]
+        """
         query = """
         select user_id
         from ros_question_participants
         where question_id={}   
-        """.format (question_id)
+        """.format(question_id)
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0],
-                          self.cursor.fetchall ()))
+        try:
+            self.execute(query, [])
+            return list(map(lambda x: x[0],
+                            self.cursor.fetchall()))
+        except mysql.connector.errors.ProgrammingError:
+            print("Error in participants_of_question with question: {}".format(question_id))
+            print("Query: \n{}".format(query))
 
     def questions_where_user_participated(self, user_id: int):
         """
@@ -238,19 +249,19 @@ class Database:
         select distinct question_id
         from ros_profiles_db.ros_question_participants
         where user_id = {}
-        """.format (user_id)
+        """.format(user_id)
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0],
-                          self.cursor.fetchall ()))
+        self.execute(query, [])
+        return list(map(lambda x: x[0],
+                        self.cursor.fetchall()))
 
     def questions_described_using_the_ros_answers_tag_id(self, tag_id):
         query = """
         select question_id
         from ra_question_tag
         where tag_id = {}
-        """.format (tag_id)
+        """.format(tag_id)
 
-        self.execute (query, [])
-        return list (map (lambda x: x[0],
-                          self.cursor.fetchall ()))
+        self.execute(query, [])
+        return list(map(lambda x: x[0],
+                        self.cursor.fetchall()))

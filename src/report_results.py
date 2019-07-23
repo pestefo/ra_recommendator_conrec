@@ -9,13 +9,15 @@ from src.algorithms.scenarios import *
 
 
 def data_from_results_directory(s):
-    return s[:13], int(s[-2:-1])
+    # date_and_time, nb_of_participants
+    return s[:13], int(s[14:-1])
 
 
 """
 IMPORTANT!!! Give the correct results_directory!
 """
-results_directory = '20190717_1108_5p'
+
+results_directory = '20190714_1235_4p'
 
 date_and_time, nb_of_participants = data_from_results_directory(results_directory)
 db = Database()
@@ -61,7 +63,17 @@ def recall(question_id, ranking_of_users):
 
 
 def main():
-    global db, breaks, date_and_time, nb_of_participants
+    import sys
+    global db, breaks, date_and_time, nb_of_participants, results_directory
+
+    if not sys.argv[1]:
+        print('Please, specify name of run, eg. "20190714_1234_3p"')
+        return
+    else:
+        results_directory = sys.argv[1]
+        date_and_time, nb_of_participants = data_from_results_directory(results_directory)
+        print(date_and_time)
+        print(nb_of_participants)
 
     print("\n\n--- Sample: {}_{}p---\n\n\n".format(date_and_time, nb_of_participants))
 

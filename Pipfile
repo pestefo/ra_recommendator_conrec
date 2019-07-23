@@ -9,6 +9,9 @@ jupyter = "*"
 mysql-connector = "*"
 tqdm = "*"
 plotly = "==4.0.0"
+psutil = "*"
+requests = "*"
+orca = "*"
 
 [dev-packages]
 
