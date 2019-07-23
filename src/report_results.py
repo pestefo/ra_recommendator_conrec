@@ -1,5 +1,15 @@
 #!/usr/bin/env python
 # coding: utf-8
+"""
+Running example:
+# At $HOME/projects/ra_recommendator_conrec/
+$ pipenv shell
+$ python -m src.report_results 20190714_1236_2p
+
+# 20190714_1236_2p is the name of the folder for the
+# experiment with sample 2p run on 14/07/2019 at 12:36
+"""
+
 
 import csv
 
