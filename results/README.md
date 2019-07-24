@@ -1,8 +1,15 @@
 # Results
 
-## Summary of bad results [Updated]
+## Summary of bad results *[Updated]*
 
+Union of all questions in which any of the scenarios performed poorly, ie. Recall@60 <= 0.2 - ***[Updated]***
 
+- "q_id": Id of the question.
+- Columns A, B, C, D: Value of Recall@60 for that scenario.
+- Columns Q+/U+: Effect of the addition of more tags from questions/users compared against baseline
+  - ⬆/⬇ : minor improvement/decay in the performance against the baseline ( Recall(B/C/D) - Recall(A) <= 0.4 )
+  - ⬆⬆/⬇⬇ : major improvement/decay in the performance against the baseline ( Recall(B/C/D) - Recall(A) > 0.4 )
+  - "\-" : null effect in the performance against the baseline
 
 |                        q_id                         | A - Base | B - Q+ | C - U+ | D - Q+ U+ |  Q+  |  U+  |
 | :-------------------------------------------------: | :------: | :----: | :----: | :-------: | :--: | :--: |
