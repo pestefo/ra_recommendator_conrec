@@ -175,12 +175,12 @@ class Database:
 
     def tag_names_to_ids(self, list_of_tag_names):
         """
-        It converts a list of taqs to a list of ids of those tags
+        It converts a list of taq names to a list of tag ids
 
         :param list_of_tag_names: list of tag strings
-        :type list of str
+        :type list_of_tag_names: list[str]
         :return: list of tag ids
-        :type list of int
+        :rtype list[int]
         """
         # query = """
         # SELECT id
@@ -191,6 +191,8 @@ class Database:
         # self.execute (query, [])
         # return list (map (lambda x: x[0],
         #                   self.cursor.fetchall ()))
+        if not list_of_tag_names:
+            return []
 
         return list(map(lambda tag_name: self.TAGS_CACHE[tag_name], list_of_tag_names))
 
@@ -203,17 +205,21 @@ class Database:
         :return: list of tag names
         :rtype list[str]
         """
+        # string_list_of_tag_ids = ','.join(list(map(lambda i: str(i), list_of_tag_ids)))
+
+        if not list_of_tag_ids:
+            return []
+
         query = """
         SELECT name
         FROM ros_profiles_db.ra_tag
-        WHERE id in ({})
-        """.format('\"' + '\",\"'.join(list_of_tag_ids) + '\"')
+        WHERE ra_tag.id in ({})""".format(','.join(str(v) for v in list_of_tag_ids))
 
         self.execute(query, [])
         return list(map(lambda x: x[0],
                         self.cursor.fetchall()))
 
-        # public - participation of users in questions (asking, answering or commenting)
+
 
     def participants_of_question(self, question_id):
         """

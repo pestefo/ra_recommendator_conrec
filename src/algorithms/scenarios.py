@@ -9,13 +9,16 @@ class Scenario:
         pass
 
     def id(self) -> str:
-        pass
+        return 'Not-A-Valid-Scenario'
 
     def name(self):
         return 'Scenario ' + self.id()
 
     def r_ut_table(self):
         return files.r_ut_table_scenario[self.id()]
+
+    def __repr__(self):
+        return '<Scenario {}>'.format(self.id)
 
     @staticmethod
     def all_scenarios():
@@ -35,7 +38,6 @@ class ScenarioA(Scenario):
 
     def id(self):
         return 'A'
-
 
 class ScenarioB(Scenario):
 

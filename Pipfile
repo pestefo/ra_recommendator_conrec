@@ -12,6 +12,8 @@ plotly = "==4.0.0"
 psutil = "*"
 requests = "*"
 orca = "*"
+wordcloud = "*"
+matplotlib = "*"
 
 [dev-packages]
 
