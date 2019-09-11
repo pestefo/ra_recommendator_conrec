@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ra_recommendator_conrec.iml" filepath="$PROJECT_DIR$/.idea/ra_recommendator_conrec.iml" />
+      <module fileurl="file://$USER_HOME$/work/terradata_sandbox/.idea/terradata_sandbox.iml" filepath="$USER_HOME$/work/terradata_sandbox/.idea/terradata_sandbox.iml" />
     </modules>
   </component>
 </project>
