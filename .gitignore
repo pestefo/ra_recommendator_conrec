@@ -1,5 +1,8 @@
 .idea/*
 
+# Data
+comparison_vs_karma20200114_1631.csv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
