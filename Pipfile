@@ -4,18 +4,20 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+setuptools = "*"
+numpy = "*"
+Cython = "*"
+wheel = "*"
 pandas = "*"
 jupyter = "*"
-mysql-connector = "*"
 tqdm = "*"
-plotly = "==4.0.0"
+plotly = "*"
 psutil = "*"
-requests = "*"
-orca = "*"
-wordcloud = "*"
 matplotlib = "*"
+kaleido = "*"
+wordcloud = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.9"
